@@ -34,6 +34,12 @@ const resolvers = {
             const token = signToken(user);
             return { token, user };
         },
+        editUser: async (parent, args, context) => {
+            if(context.user) {
+                return await User.findByIdAndUpdate(context.user._id, args, {new: true});
+            }
+            throw new AuthenticationError("Not logged in");
+        },
         // you have to be signed in as this user in order to delete them
         deleteUser: async (parent, args, context) => {
             if(context.user) {
