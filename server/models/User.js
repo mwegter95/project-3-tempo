@@ -26,7 +26,30 @@ const userSchema = new Schema(
         biography: {
             type: String,
             maxlength: 280
-        }
+        },
+        type: {
+            type: String,
+            enum: ["Band", "Musician"],
+            required: true
+        },
+        music: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Music"
+            }
+        ],
+        reviews: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Review"
+            }
+        ],
+        messages: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "Message"
+            }
+        ]
     }
 );
 
