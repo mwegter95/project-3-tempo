@@ -32,7 +32,8 @@ const typeDefs = gql`
     type Message {
         _id: ID
         message_text: String
-        username: String
+        sender: String
+        receiver: String
         created_at: String
     }
 
@@ -52,6 +53,7 @@ const typeDefs = gql`
         addMusic(genre: String!, instruments: [String!], media: String): Music
         addReview(review_text: String!, rating: Int): Review
         addMessage(message_text: String!): Message
+        
     }
 
     type Auth {
