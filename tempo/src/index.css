@@ -1,13 +1,92 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Our Colors */
+:root {
+  --tempo-gold: #FDBE00;
+  --light-yellow: #E8CC88;
+  --faded-gray: #808080;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* General Styling */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+h1 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Our Adobe Fonts */
+.serif {
+  font-family: playfair-display, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 28px;
+}
+
+.sans-serif {
+  font-family: neue-haas-unica, sans-serif;
+  font-style: normal;
+}
+
+.title {
+  font-size: 86px;
+  font-weight: 800;
+}
+
+.subtitle {
+  font-size: 74px;
+}
+
+.para {
+  font-size: 56px;
+  font-weight: 500;
+}
+
+.subpara {
+  font-size: 36px;
+  font-weight: 300;
+}
+
+/* Component: Header */
+header {
+  margin: 0px 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a:first-of-type {
+  margin-right: 50px;
+}
+
+header a {
+  transition: .3s ease;
+}
+
+header a:hover {
+  color: var(--faded-gray);
+}
+
+/* Component: Footer */
+footer {
+  background-color: var(--tempo-gold);
+  text-align: center;
+  width: 100%;
+  padding: 30px 0px;
 }
