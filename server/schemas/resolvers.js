@@ -1,4 +1,4 @@
-const { User } = require("../models");
+const { User, Music, Review, Message } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
@@ -7,15 +7,46 @@ const resolvers = {
         users: async() => {
             return User.find()
                 .select("-_v -password")
+                .populate("music")
+                .populate("reviews")
         },
-        user: async(parent, { username }) => {
+        user: async (parent, { username }) => {
             return User.findOne({ username })
                 .select("-_v -password")
+                .populate("music")
+                .populate("reviews")
+        },
+        reviews: async() => {
+            return Review.find()
+        },
+        music: async (parent, args) => {
+            if (args.genre && args.instrument) {
+                return Music.find({
+                    genre: args.genre,
+                    instrument: args.instrument
+                });
+            }
+            else if (args.genre && !args.instrument) {
+                return Music.find({
+                    genre: args.genre
+                });
+            }
+            else if (!args.genre && args.instrument) {
+                return Music.find({
+                    instrument: args.instrument
+                });
+            }
+            else {
+                return Music.find();
+            }
+        },
+        messages: async() => {
+            return Message.find();
         }
     },
 
     Mutation: {
-        addUser: async(parent, args) => {
+        addUser: async (parent, args) => {
             const user = await User.create(args);
             const token = signToken(user);
             return { token, user };
@@ -47,6 +78,42 @@ const resolvers = {
                     { _id: context.user._id }
                 )
                 return removeUser;
+            }
+            throw new AuthenticationError("You need to be logged in!");
+        },
+        addMusic: async (parent, args, context) => {
+            if (context.user) {
+                const music =  await Music.create(args);
+                await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { music: music._id }},
+                    { new: true}
+                );
+                return music;
+            }
+            throw new AuthenticationError("You need to be logged in!");
+        },
+        addReview: async (parent, args, context) => {
+            if (context.user) {
+                const review = await Review.create({...args, username: context.user.username});
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { reviews: review._id }},
+                    { new: true }
+                );
+                return review;
+            }
+            throw new AuthenticationError("You need to be logged in!");
+        },
+        addMessage: async (parent, args, context) => {
+            if (context.user) {
+                const message = await Message.create({...args, username: context.user.username});
+                await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { messages: message._id }},
+                    { new: true }
+                );
+                return message;
             }
             throw new AuthenticationError("You need to be logged in!");
         }
