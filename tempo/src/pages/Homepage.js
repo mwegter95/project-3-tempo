@@ -1,11 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Auth from "../utils/auth";
+import Auth from "../utils/auth";
 
 const Homepage = () => {
+    const loggedIn = Auth.loggedIn();
 
     return (
         <main>
+
             <section>
                 <h1 className="sans-serif subtitle white">You are what you listen to.</h1>
                 <h1 className="sans-serif subtitle white">Find others through your music.</h1>

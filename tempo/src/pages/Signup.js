@@ -40,19 +40,19 @@ const Signup = () => {
         setRadio2State(choice);
     };
 
-    const handleUserSignup = async event => {
+    const handleUserSignup = async (event) => {
         event.preventDefault();
         if(radio1State) {
-            formState.type = "musician"
+            formState.type = "Musician"
         } else if(radio2State) {
-            formState.type = "band"
+            formState.type = "Band"
         }
         
         try {
             const { data } = await addUser({
                 variables: {...formState}
             });
-            Auth.loggedIn(data.addUser.token);
+            Auth.login(data.addUser.token);
         } catch(e) {
             console.error(e);
         }

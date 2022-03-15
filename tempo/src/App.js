@@ -5,6 +5,7 @@ import {
   InMemoryCache,  // enables Apollo Client instance to cache API response data - perform requests more efficiently
   createHttpLink  // allows us control over how the Apollo Client makes a request
 } from "@apollo/client";
+
 import { setContext } from "@apollo/client/link/context";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
