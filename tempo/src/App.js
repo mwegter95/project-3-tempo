@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Homepage from "./pages/Homepage";
 import Signup from "./pages/Signup";
+import Login from './pages/Login';
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -46,6 +47,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Homepage} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path="/login" component={Login} />
           </Switch>
         </div>
         <Footer />

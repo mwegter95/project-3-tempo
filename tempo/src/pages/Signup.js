@@ -104,7 +104,7 @@ const Signup = () => {
 
             {pageState === 2 && radio1State && 
                 <form onSubmit={handleUserUpdate}>
-                    <h1 className="sans-serif white para">Tell us about you, a musician.</h1>
+                    <h1 className="sans-serif white para">Tell us about you.</h1>
 
                     <label htmlFor="username" className="sans-serif white subpara">Your stage name:</label>
                     <input name="username" type="username" className="sans-serif sm" onChange={handleChange} />
@@ -113,7 +113,7 @@ const Signup = () => {
                     <textarea name="biography" type="biography" className="sans-serif sm" maxLength="280" onChange={handleChange}></textarea>
 
                     <label htmlFor="status" className="sans-serif white subpara">What's your current status?:</label>
-                    <select name="status" onChange={handleChange}>
+                    <select name="status" onChange={handleChange} className="sans-serif sm">
                         <option hidden disabled selected defaultValue> -- select an option -- </option>
                         <option value="Looking for collaborations">Looking for collaborations.</option>
                         <option value="Wanting to join a band">Wanting to join a band.</option>
@@ -128,7 +128,7 @@ const Signup = () => {
 
             {pageState === 2 && radio2State && 
                 <form onSubmit={handleUserUpdate}>
-                    <h1 className="sans-serif white para">Tell us about you, a band.</h1>
+                    <h1 className="sans-serif white para">Tell us about you.</h1>
                     
                     <label htmlFor="username" className="sans-serif white subpara">Your band name:</label>
                     <input name="username" type="username" className="sans-serif sm" onChange={handleChange} />
@@ -137,7 +137,7 @@ const Signup = () => {
                     <textarea name="biography" type="biography" className="sans-serif sm" maxLength="280" onChange={handleChange}></textarea>
 
                     <label htmlFor="status" className="sans-serif white subpara">What's your current status?:</label>
-                    <select name="status" className="sans-serif sm">
+                    <select name="status" onChange={handleChange} className="sans-serif sm">
                         <option hidden disabled selected defaultValue> -- select an option -- </option>
                         <option value="Open for a new member">Open for a new member.</option>
                         <option value="Wanting to network with other bands">Wanting to network with other bands.</option>
