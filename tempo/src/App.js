@@ -4,6 +4,7 @@ import { setContext } from "@apollo/client/link/context";
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Homepage from "./pages/Homepage";
+import Signup from './pages/Signup';
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -37,6 +38,7 @@ function App() {
         <div>
           <Switch>
             <Route exact path="/" component={Homepage} />
+            <Route exact path="/signup" component={Signup} />
           </Switch>
         </div>
         <Footer />
