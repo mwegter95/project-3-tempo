@@ -201,7 +201,7 @@ main section:last-of-type {
   width: 100%;
 }
 
-.sign-on form h1, .sign-on form div:first-of-type, .sign-on form input {
+.sign-on form h1, .sign-on form div:first-of-type, .sign-on form input, .sign-on form textarea {
   margin-bottom: 20px;
 }
 

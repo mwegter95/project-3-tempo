@@ -6,8 +6,8 @@ const expiration = "2h";
 module.exports = {
     // only the user id will be readable from the jsonwebtoken
     // use context.user._id to search for user in resolvers when needed
-    signToken: function({ username, email, _id }) {
-        const payload = { username, email, _id };
+    signToken: function({  _id }) {
+        const payload = { _id };
         return jwt.sign({ data: payload}, secret, { expiresIn: expiration });
     },
     authMiddleware: function({ req }) {

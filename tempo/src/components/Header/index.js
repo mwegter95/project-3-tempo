@@ -1,8 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import Auth from "../../utils/auth";
+import Auth from "../../utils/auth";
 
 const Header = () => {
+    const logout = event => {
+        event.preventDefault();
+        Auth.logout();
+    };
+
     return (
         <header>
             <Link to="/">
@@ -10,8 +15,17 @@ const Header = () => {
             </Link>
 
             <nav>
-                <Link to="/signup" className="sans-serif subpara">Sign Up</Link>
-                <Link to="/login" className="sans-serif subpara">Log In</Link>
+                {Auth.loggedIn() ? (
+                    <>
+                        <Link to="/profile" className="sans-serif subpara">My Dashboard</Link>
+                        <a href="/" className="sans-serif subpara" onClick={logout}>Logout</a>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/signup" className="sans-serif subpara">Sign Up</Link>
+                        <Link to="/login" className="sans-serif subpara">Log In</Link>
+                    </>
+                )}
             </nav>
         </header>
     )
