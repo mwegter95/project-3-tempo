@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
-// import Auth from "../utils/auth";
+import Auth from "../utils/auth";
 
 const Signup = () => {
     const [formState, setFormState] = useState(
@@ -14,8 +14,11 @@ const Signup = () => {
             type: ""
         }
     );
-    const [typeState, setTypeState] = useState("");
+    const [addUser, { error }] = useMutation(ADD_USER);
+
     const [pageState, setPageState] = useState(1);
+    const [radio1State, setRadio1State] = useState(false);
+    const [radio2State, setRadio2State] = useState(false);
 
     // update state based on form input changes
     const handleChange = event => {
@@ -27,19 +30,33 @@ const Signup = () => {
         });
     };
 
-    const handleTypeChange = event => {
-        const chosenType = event.target.value;
-        console.log(chosenType);
+    const handleRadio1Change = event => {
+        const choice = event.target.checked;
+        setRadio1State(choice);
+    };
 
-        setTypeState(chosenType);
-        console.log(typeState);
-    }
+    const handleRadio2Change = event => {
+        const choice = event.target.checked;
+        setRadio2State(choice);
+    };
 
     const handleUserSignup = async event => {
         event.preventDefault();
-        console.log(formState);
-
-    }
+        if(radio1State) {
+            formState.type = "musician"
+        } else if(radio2State) {
+            formState.type = "band"
+        }
+        
+        try {
+            const { data } = await addUser({
+                variables: {...formState}
+            });
+            Auth.loggedIn(data.addUser.token);
+        } catch(e) {
+            console.error(e);
+        }
+    };
 
     const handleUserUpdate = async event => {
         event.preventDefault();
@@ -66,12 +83,12 @@ const Signup = () => {
 
 
                     <div className="radio-div">
-                        <input type="radio" name="type"  value="musician" checked={typeState === "musician"} onChange={handleTypeChange} />
+                        <input type="radio" name="type"  value="musician" checked={radio1State} onChange={handleRadio1Change} />
                         <label htmlFor="musician" className="sans-serif white subpara">Musician</label>
                     </div>
                     
                     <div className="radio-div">
-                        <input type="radio" name="type"  value="musician" checked={typeState === "band"} onChange={handleTypeChange} />
+                        <input type="radio" name="type"  value="musician" checked={radio2State} onChange={handleRadio2Change} />
                         <label htmlFor="band" className="sans-serif white subpara">Band</label>
                     </div>
  
