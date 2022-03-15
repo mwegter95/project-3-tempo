@@ -6,13 +6,18 @@
 }
 
 /* General Styling */
-html, body {
+html, body, #root {
   height: 100%;
 }
 
 body {
   margin: 0;
   padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
 }
 
 h1, p {
@@ -70,6 +75,11 @@ button:hover {
   font-weight: 200;
 }
 
+.sm {
+  font-size: 28px;
+  font-weight: 200;
+}
+
 .white {
   color: white;
 }
@@ -104,6 +114,11 @@ footer {
   text-align: center;
   width: 100%;
   padding: 30px 0px;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
 }
 
 /* Page: Homepage */
@@ -157,4 +172,53 @@ main section:last-of-type p {
 
 main section:last-of-type {
   padding: 85px 0px;
+}
+
+/* Pages: Signup */
+.sign-on {
+  height: 1000px;
+  background-image: url("./assets/sign-on-hero.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.sign-on form {
+  margin-left: 75px;
+  padding: 50px;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 35%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 10px 20px 20px 10px rgba(0, 0, 0, 0.6);
+}
+
+.sign-on form div:first-of-type input {
+  width: 100%;
+}
+
+.sign-on form h1, .sign-on form div:first-of-type, .sign-on form input, .sign-on form textarea {
+  margin-bottom: 20px;
+}
+
+.sign-on form div:last-of-type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sign-on form .radio-div input {
+  margin-bottom: 0px;
+  margin-right: 25px;
+  height: 25px;
+  width: 25px;
+}
+
+.sign-on form button {
+  margin-top: 50px;
+  width: 35%
 }
