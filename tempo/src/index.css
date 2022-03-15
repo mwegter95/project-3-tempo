@@ -84,6 +84,10 @@ button:hover {
   color: white;
 }
 
+.gold {
+  color: var(--tempo-gold);
+}
+
 /* Component: Header */
 header {
   margin: 0px 140px;
