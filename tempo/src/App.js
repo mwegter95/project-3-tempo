@@ -1,10 +1,16 @@
-import './App.css';
-import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client"
+import React from 'react';
+import { 
+  ApolloProvider, // React component to provide data to other components
+  ApolloClient,  // constructor function to help initialize the connection to the GraphQL API server
+  InMemoryCache,  // enables Apollo Client instance to cache API response data - perform requests more efficiently
+  createHttpLink  // allows us control over how the Apollo Client makes a request
+} from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Homepage from "./pages/Homepage";
-import Signup from './pages/Signup';
+import Signup from "./pages/Signup";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -23,8 +29,8 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-// link authLink and httpLink so every request retrieves the token
-// and sets the request headers before making the request to the API.
+//link authLink and httpLink so every request retrieves the token
+//and sets the request headers before making the request to the API.
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),

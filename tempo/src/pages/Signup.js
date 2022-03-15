@@ -94,6 +94,7 @@ const Signup = () => {
  
 
                     <button type="submit" className="sans-serif sm">Sign Up</button>
+                    {error && <div>Sign up failed.</div>}
                 </form>
             }
 
