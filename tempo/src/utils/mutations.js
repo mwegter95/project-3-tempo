@@ -1,17 +1,17 @@
 import { gql } from "@apollo/client";
 
 
-export const LOGIN = gql`
+export const LOGIN_USER = gql`
 mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
         token
         user {
-            _id: ID
-            username: String
-            email: String
-            biography: String
-            status: String
-            type: String
+            _id
+            username
+            email
+            biography
+            status
+            type
         }
     }
 }
@@ -53,7 +53,7 @@ mutation editUser($username: String, $status: String, $biography: String) {
 `;
 
 export const ADD_MUSIC = gql`
-mutation addMusic($genre: String!, $instruments: [String!], media: String) {
+mutation addMusic($genre: String!, $instruments: [String!], $media: String) {
     addMusic(genre: $genre, instruments: $instruments, media: $media) {
         _id
         genre
@@ -64,7 +64,7 @@ mutation addMusic($genre: String!, $instruments: [String!], media: String) {
 `;
 
 export const ADD_REVIEW = gql`
-mutation addReview($review_text: String!, rating: Int) {
+mutation addReview($review_text: String!, $rating: Int) {
     addReview(review_text: $review_text, rating: $rating) {
         _id: ID
         review_text: String
