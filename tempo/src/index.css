@@ -1,13 +1,160 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Our Colors */
+:root {
+  --tempo-gold: #FDBE00;
+  --light-yellow: #E8CC88;
+  --faded-gray: #808080;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* General Styling */
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1, p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  transition: .5s ease;
+}
+
+button:hover {
+  background-color: var(--light-yellow);
+  cursor: pointer
+}
+
+/* Our Adobe Fonts */
+.serif {
+  font-family: playfair-display, serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 28px;
+}
+
+.sans-serif {
+  font-family: neue-haas-unica, sans-serif;
+  font-style: normal;
+}
+
+.title {
+  font-size: 86px;
+  font-weight: 800;
+}
+
+.subtitle {
+  font-size: 74px;
+  font-weight: 600;
+}
+
+.para {
+  font-size: 56px;
+  font-weight: 500;
+}
+
+.subpara {
+  font-size: 36px;
+  font-weight: 200;
+}
+
+.white {
+  color: white;
+}
+
+/* Component: Header */
+header {
+  margin: 0px 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a:first-of-type {
+  margin-right: 50px;
+}
+
+header a, header h1 {
+  transition: .3s ease;
+}
+
+header a:hover {
+  color: var(--faded-gray);
+}
+
+header h1:hover {
+  color: var(--light-yellow);
+}
+
+/* Component: Footer */
+footer {
+  background-color: var(--tempo-gold);
+  text-align: center;
+  width: 100%;
+  padding: 30px 0px;
+}
+
+/* Page: Homepage */
+main {
+  text-align: center;
+}
+
+main section:first-of-type {
+  padding: 250px 0px;
+  background-image: url("./assets/music-pile-hero.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+main section:first-of-type h1:first-of-type {
+  margin-right: auto;
+  margin-left: auto;
+  border-bottom: 5px solid var(--tempo-gold);
+  width: 70%;
+}
+
+main .welcome {
+  padding: 100px 0px;
+  background: var(--tempo-gold);
+}
+
+main .welcome p {
+  margin-top: 75px;
+}
+
+main div:first-of-type {
+  height: 800px;
+  background-image: url("./assets/concert-scene.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+main div:last-of-type {
+  height: 800px;
+  background-image: url("./assets/band-room.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main section:last-of-type p {
+  margin-bottom: 30px;
+}
+
+main section:last-of-type {
+  padding: 85px 0px;
 }
