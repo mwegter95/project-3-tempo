@@ -1,4 +1,4 @@
-const { User, Music, Review, Message } = require("../models");
+const { User, Music, Review, Message, MetaData } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
@@ -42,6 +42,15 @@ const resolvers = {
         },
         messages: async() => {
             return Message.find();
+        },
+        metaData: async (parent, args) => {
+            if (args.type) {
+                return MetaData.find({
+                    type: { $in: [
+                        args.type
+                    ]}
+                })
+            }
         }
     },
 

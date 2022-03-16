@@ -49,6 +49,7 @@ const typeDefs = gql`
         reviews: [Review]
         music(genre: String, instrument: String): [Music]
         messages: [Message]
+        metaData(type: [String!]): [MetaData]
     }
 
     type Mutation {
