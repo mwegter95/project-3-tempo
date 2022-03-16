@@ -11,13 +11,19 @@ const typeDefs = gql`
         music: [Music]
         reviews: [Review]
         messages: [Message]
+        meta: [MetaData]
     }
 
     type Music {
         _id: ID
-        genre: String
         media: String
-        instruments: [String]
+        meta: [MetaData]
+    }
+
+    type MetaData {
+        _id: ID
+        value: String
+        type: String        
     }
 
     type Review {
