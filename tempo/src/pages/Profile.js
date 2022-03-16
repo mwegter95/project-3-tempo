@@ -7,7 +7,7 @@ import { ADD_REVIEW } from "../utils/mutations";
 const Profile = () => {
     const [ formState, setFormState ] = useState({
         myId: "",
-        userId: "",
+        userId: userId,
         rating: "",
         reviewText: "",
     });
@@ -45,8 +45,7 @@ const Profile = () => {
         event.preventDefault();
         setFormState({
             ...formState,
-            myId: userData.me._id,
-            userId: userId,
+            myId: userData.me._id
         });
         
         console.log(formState);
