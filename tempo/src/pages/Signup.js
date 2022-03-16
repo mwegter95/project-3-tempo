@@ -58,8 +58,7 @@ const Signup = () => {
     const changePage = () => {
         const email = document.getElementById("email").value;
         const isValid = validateEmail(email);
-
-        // validate user email
+        // validate user email with a query
         if(!isValid) {
             setErrorMessage("Please enter a valid email.");
             // check if email exists
