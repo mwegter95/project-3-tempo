@@ -5,7 +5,7 @@ const metaDataSchema = require('./MetaData');
 const musicSchema = new Schema (
     {
         media: {
-            type: String
+            type: String,
             required: true,
         },
         meta: [metaDataSchema],
