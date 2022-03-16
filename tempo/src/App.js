@@ -5,14 +5,14 @@ import {
   InMemoryCache,  // enables Apollo Client instance to cache API response data - perform requests more efficiently
   createHttpLink  // allows us control over how the Apollo Client makes a request
 } from "@apollo/client";
-
 import { setContext } from "@apollo/client/link/context";
-
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Homepage from "./pages/Homepage";
 import Signup from "./pages/Signup";
 import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import MyReviews from './pages/MyReviews';
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -48,7 +48,9 @@ function App() {
             <Route exact path="/" component={Homepage} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
-          </Switch>
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/dashboard/myreviews" component={MyReviews} />
+          </Switch> 
         </div>
         <Footer />
       </Router>
