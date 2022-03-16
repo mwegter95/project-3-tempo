@@ -1,15 +1,14 @@
 const { Schema, model } = require("mongoose");
 
+const metaDataSchema = require('./MetaData');
+
 const musicSchema = new Schema (
     {
-        genre: {
-            type: String,
-            required: true,
-        },
         media: {
             type: String
+            required: true,
         },
-        instruments: [String]
+        meta: [metaDataSchema],
     },
     {
         toJSON: {

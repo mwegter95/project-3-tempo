@@ -1,6 +1,8 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
+const metaDataSchema = require('./MetaData');
+
 const userSchema = new Schema(
     {
         username: {
@@ -49,7 +51,8 @@ const userSchema = new Schema(
                 type: Schema.Types.ObjectId,
                 ref: "Message"
             }
-        ]
+        ],
+        meta: [metaDataSchema]
     }
 );
 
