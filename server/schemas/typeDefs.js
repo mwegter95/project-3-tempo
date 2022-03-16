@@ -24,8 +24,8 @@ const typeDefs = gql`
         _id: ID
         review_text: String
         rating: Int
-        username: String
-        aboutUser: String
+        myId: ID
+        theirId: ID
         created_at: String
     }
 
@@ -51,7 +51,7 @@ const typeDefs = gql`
         deleteUser: User
         editUser(username: String, status: String, biography: String, type: String): User
         addMusic(genre: String!, instruments: [String!], media: String): Music
-        addReview(review_text: String!, rating: Int): Review
+        addReview(myId: ID!, theirId: ID!, review_text: String!, rating: Int): Review
         addMessage(message_text: String!): Message
         
     }

@@ -11,11 +11,11 @@ const reviewSchema = new Schema(
             min: 0,
             max: 10
         },
-        username: {
+        myId: {
             type: String,
             required: true
         },
-        aboutUser: {
+        theirId: {
             type: String
             //should be required, need to think about how to do this
             // maybe grab from URL
