@@ -13,6 +13,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import Signup from "./pages/Signup";
 import Login from './pages/Login';
+import UploadMedia from "./pages/UploadMedia";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -48,6 +49,7 @@ function App() {
             <Route exact path="/" component={Homepage} />
             <Route exact path="/signup" component={Signup} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/media" component={UploadMedia} />
           </Switch>
         </div>
         <Footer />

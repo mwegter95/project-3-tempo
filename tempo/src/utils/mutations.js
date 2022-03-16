@@ -32,9 +32,9 @@ mutation addUser($username: String!, $password: String!, $email: String!, $type:
 export const DELETE_USER = gql`
 {
     deleteUser {
-        _id: ID
-        username: String
-        email: String
+        _id
+        username
+        email
     }
 }
 `;
@@ -43,11 +43,11 @@ export const EDIT_USER = gql`
 mutation editUser($username: String, $status: String, $biography: String) {
     editUser(username: $username, status: $status, biography: $biography) {
         _id: ID
-        username: String
-        email: String
-        biography: String
-        status: String
-        type: String
+        username
+        email
+        biography
+        status
+        type
     }
 }
 `;
@@ -66,12 +66,12 @@ mutation addMusic($genre: String!, $instruments: [String!], $media: String) {
 export const ADD_REVIEW = gql`
 mutation addReview($review_text: String!, $rating: Int) {
     addReview(review_text: $review_text, rating: $rating) {
-        _id: ID
-        review_text: String
-        rating: Int
-        username: String
-        aboutUser: String
-        created_at: String
+        _id
+        review_text
+        rating
+        username
+        aboutUser
+        created_at
     }
 }
 `;
@@ -79,11 +79,11 @@ mutation addReview($review_text: String!, $rating: Int) {
 export const ADD_MESSAGE = gql`
 mutation addMessage($message_text: String!) {
     addMessage(message_text: $message_text) {
-        _id: ID
-        message_text: String
-        sender: String
-        receiver: String
-        created_at: String
+        _id
+        message_text
+        sender
+        receiver
+        created_at
     }
 }
 `;

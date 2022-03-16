@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_MUSIC } from "../utils/mutations";
+import InstrumentListArray from "../utils/InstrumentList";
 
-const importMedia = () => {
+const UploadMedia = () => {
     const [musicState, setMusicState] = useState(
         {
             genre: "",
@@ -22,6 +23,29 @@ const importMedia = () => {
         });
     };
 
+    const validateInstruments = (instruments) => {
+        if (instruments.length === 0) {
+            return false;
+        }
+
+        const instrumentString = instruments[0];
+        const instrumentArr = instrumentString.split(",");
+
+        setMusicState({
+            ...musicState,
+            instruments: instrumentArr
+        });
+
+        var instrumentCheck = false;
+        for (var i = 0; i < instrumentArr.length; i++) {
+            instrumentCheck = InstrumentListArray.includes(instruments[i]);
+            if (instrumentCheck === false) {
+                return false;
+            }
+        }
+        return true;
+    };
+
     const handleAddMusic = async (event) => {
         event.preventDefault();
 
@@ -29,6 +53,8 @@ const importMedia = () => {
             await addMusic({
                 variables: {...musicState}
             });
+
+            console.log("Created!: " + musicState);
         } catch(e) {
             console.error(e);
         }
@@ -44,18 +70,20 @@ const importMedia = () => {
                     <label htmlFor="genre" className="sans-serif white subpara">Genre:</label>
                     <input name="genre" type="text" className="sans-serif sm" onChange={handleChange} />
 
-                    <label htmlFor="intruments" className="sans-serif white subpara">Instrument(s)</label>
+                    <label htmlFor="intruments" className="sans-serif white subpara">Instrument(s). Separate each with a comma.</label>
                     <input name="instruments" type="text" className="sans-serif sm" onChange={handleChange} />
 
                     <h2 className="sans-serif white para">Upload an Audio or Video File to Showcase your skills!</h2>
 
                     <label htmlFor="media" className="sans-serif white subpara">Media File:</label>
-                    <input name="media" type="file" className="sans-serif sm" onChange={handleChange} />
+                    <input name="media" type="file" accept=".mp3,.mp4" className="sans-serif sm" onChange={handleChange} />
 
-                    <button className="sans-serif sm">Submit</button>
+                    <button disabled={!(musicState.genre && validateInstruments(musicState.instruments))} className="sans-serif sm">Submit</button>
 
                 </div>
             </form>
         </section>
     );
 };
+
+export default UploadMedia;
