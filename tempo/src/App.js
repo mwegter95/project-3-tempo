@@ -13,6 +13,8 @@ import Signup from "./pages/Signup";
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import MyReviews from './pages/MyReviews';
+import Discover from './pages/Discover';
+import Profile from "./pages/Profile";
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -50,6 +52,8 @@ function App() {
             <Route exact path="/login" component={Login} />
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/dashboard/myreviews" component={MyReviews} />
+            <Route exact path="/discover" component={Discover} />
+            <Route exact path="/profile/:id" component={Profile} />
           </Switch> 
         </div>
         <Footer />

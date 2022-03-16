@@ -4,7 +4,8 @@ const reviewSchema = new Schema(
     {
         review_text: {
             type: String,
-            required: true
+            required: true,
+            maxlength: 500
         },
         rating: {
             type: Number,
@@ -15,8 +16,9 @@ const reviewSchema = new Schema(
             type: String,
             required: true
         },
-        theirId: {
-            type: String
+        userId: {
+            type: String,
+            required: true
             //should be required, need to think about how to do this
             // maybe grab from URL
         },
