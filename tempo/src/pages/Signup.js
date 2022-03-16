@@ -17,10 +17,16 @@ const Signup = () => {
     );
     const [addUser, { error }] = useMutation(ADD_USER);
     const [errorMessage, setErrorMessage] = useState("");
+    const [messageState, setMessageState] = useState(280);
 
     const [pageState, setPageState] = useState(1);
     const [radio1State, setRadio1State] = useState(false);
     const [radio2State, setRadio2State] = useState(false);
+
+    const messageLimit = (event) => {
+        let currentLength = event.target.value.length;
+        setMessageState(280 - currentLength);
+    };
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -139,7 +145,8 @@ const Signup = () => {
                     
                     {radio1State && <label htmlFor="biography" className="sans-serif white subpara">Create your own bio:</label>}
                     {radio2State && <label htmlFor="biography" className="sans-serif white subpara">Create your band's bio:</label>}
-                    <textarea name="biography" type="biography" className="sans-serif sm" maxLength="280" onBlur={handleChange}></textarea>
+                    <textarea name="biography" type="biography" className="sans-serif sm" maxLength="280" onChange={messageLimit} onBlur={handleChange}></textarea>
+                    <p className="serif gold message-limit">{messageState} characters left.</p>
 
                     <label htmlFor="status" className="sans-serif white subpara">What's your current status?:</label>
                     <select name="status" onBlur={handleChange} className="sans-serif sm" defaultValue="-- select an option --">
