@@ -5,38 +5,51 @@ import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import { ADD_REVIEW } from "../utils/mutations";
 
 const Profile = () => {
+    const [ formState, setFormState ] = useState({
+        myId: "",
+        userId: "",
+        rating: "",
+        reviewText: "",
+    });
+
     const { id: userId } = useParams();
     const { data: userData } = useQuery(QUERY_ME);
     const { loading, data } = useQuery(QUERY_USER, {
         variables: { _id: userId }
     });
+
     const user = data?.user || {};
 
     const [addReview, { error }] = useMutation(ADD_REVIEW);
-    const [ formState, setFormState ] = useState({
-        myId: "",
-        userId: userId,
-        rating: "",
-        reviewText: "",
-    });
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+        if(name === "rating") {
+            let newValue = parseInt(value);
 
-        setFormState({
-            ...formState,
-            [name]: value
-        });
+            setFormState({
+                ...formState,
+                [name]: newValue
+            });
+            console.log(formState);
+        } else {
+            setFormState({
+                ...formState,
+                [name]: value
+            });
+            console.log(formState);
+        }
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log(userData);
-
         setFormState({
             ...formState,
-            myId: userData.me._id
+            myId: userData.me._id,
+            userId: userId,
         });
+        
+        console.log(formState);
 
         try {
             const { data } = await addReview({
@@ -45,7 +58,7 @@ const Profile = () => {
         } catch(e) {
             console.log(e);
         }
-    } ;
+    };
 
     if(loading) {
         return <div className="serif para">loading...</div>

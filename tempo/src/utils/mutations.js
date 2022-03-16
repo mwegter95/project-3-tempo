@@ -64,7 +64,7 @@ mutation addMusic($genre: String!, $instruments: [String!], $media: String) {
 `;
 
 export const ADD_REVIEW = gql`
-mutation addReview($myId: ID!, $userId: ID!, $review_text: String, $rating: Int) {
+mutation addReview($myId: ID!, $userId: ID!, $review_text: String!, $rating: Int) {
     addReview(myId: $myId, userId: $userId, review_text: $review_text, rating: $rating) {
         _id
         review_text

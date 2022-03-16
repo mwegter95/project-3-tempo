@@ -11,7 +11,7 @@ const UserList = ({ users }) => {
         <div>
             {users.length && 
                 users.map(user => (
-                    <article key="user._id">
+                    <article key={user._id}>
                         <p className="sans-serif para">
                             <Link to={`/profile/${user._id}`}>{user.username}</Link>
                         </p>
