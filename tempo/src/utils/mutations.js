@@ -32,9 +32,9 @@ mutation addUser($username: String!, $password: String!, $email: String!, $type:
 export const DELETE_USER = gql`
 {
     deleteUser {
-        _id: ID
-        username: String
-        email: String
+        _id
+        username
+        email
     }
 }
 `;
@@ -43,11 +43,11 @@ export const EDIT_USER = gql`
 mutation editUser($username: String, $status: String, $biography: String) {
     editUser(username: $username, status: $status, biography: $biography) {
         _id: ID
-        username: String
-        email: String
-        biography: String
-        status: String
-        type: String
+        username
+        email
+        biography
+        status
+        type
     }
 }
 `;
