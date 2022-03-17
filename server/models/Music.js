@@ -15,7 +15,10 @@ const musicSchema = new Schema (
         description: {
             type: String,
         }, 
-        meta: [metaDataSchema]
+        meta: [metaDataSchema],
+        userLink: {
+            type: String,
+        }
     },
     {
         toJSON: {

@@ -8,7 +8,6 @@ const typeDefs = gql`
         biography: String
         status: String
         type: String
-        music: [Music]
         reviews: [Review]
         messages: [Message]
         meta: [MetaData]        
@@ -18,6 +17,7 @@ const typeDefs = gql`
         _id: ID
         media: String
         meta: [MetaData]
+        userLink: String
     }
 
     type MetaData {
@@ -54,16 +54,18 @@ const typeDefs = gql`
         users: [User]
         user(username: String): User
         reviews: [Review]
-        music(metaData: [InputMeta]): [Music]
+        feedMusic(metaData: [InputMeta]): [Music]
+        userMusic(username: String): [Music]
+        music: [music]
         messages: [Message]
     }
 
     type Mutation {
-        login(email: String!, password: String!): Auth
-        addUser(username: String!, email: String!, password: String!, type: String!, biography: String, status: String): Auth
+        login(email: String, password: String): Auth
+        addUser(username: String, email: String, password: String, type: String, biography: String, status: String): Auth
         deleteUser: User
         editUser(username: String, status: String, biography: String, type: String, meta: [InputMeta]): User
-        addMusic(genre: String!, instruments: [String], media: String, meta: [InputMeta]): Music
+        addMusic(genre: String, instruments: [String], media: String, meta: [InputMeta], userLink: String): Music
         addReview(review_text: String, rating: Int): Review
         addMessage(message_text: String): Message        
     }

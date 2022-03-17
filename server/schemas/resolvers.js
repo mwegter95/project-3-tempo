@@ -3,39 +3,24 @@ const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
 
-const getUserMeta = new Promise(userID, (resolve, reject) => {
-    resolve( MetaData.find({
-        userLink: userID,
-    }));
-})
-
-
 const resolvers = {
     Query: {
         users: async() => {
-            const userList = await User.find()
-                .select("-_v -password")
-                .populate("music")
+            return User.find()
+                .select("-_v -password")                
                 .populate("reviews")
-            userList.foreach(element => {
-                const elementMeta = await getUserMeta(element._id);
-                element.meta.push(...elementMeta);
-            });
-            return userList;
+                .populate("meta")
         },
         user: async (parent, { username }) => {
-            const returnUser = await User.findOne({ username })
-                .select("-_v -password")
-                .populate("music")
+            return User.findOne({ username })
+                .select("-_v -password")                
                 .populate("reviews")
-            const userMeta = await getUserMeta(User._id);
-            returnUser.meta.push(...userMeta);
-            return returnUser;
+                .populate("meta")
         },
         reviews: async() => {
             return Review.find()
         },
-        music: async (parent, args) => {
+        feedMusic: async (parent, args) => {
 
             const valueSearch = [];
             const typeSearch =[];
@@ -45,22 +30,28 @@ const resolvers = {
                 typeSearch.push(element.type);
             });
             
-           
-            musicMatch = MetaData.Find ({
-                value: { $in: valueSearch},
-                type: { $in: typeSearch},
-            });
-
-            const musicSearch = [];
-
-            musicMatch.foreach (element => {
-                musicSearch = element.musicLink
-            });
-
-            return Music.Find ({
-                _id: { $in: musicSearch},
-            });
+           return Music.find({
+               meta: {
+                   $elemMatch : {
+                       value : { $in : valueSearch}
+                   }
+               },
+               meta: {
+                    $elemMatch : {
+                        type : { $in : typeSearch}
+                    }
+                }
+            })
         },
+        userMusic: async (parent, { username }) => {
+            return Music.find({
+                userLink: username
+            })
+
+        },
+        music: async (parent, args) => {
+            return Music.find()
+        },      
         messages: async() => {
             return Message.find();
         },
@@ -72,8 +63,8 @@ const resolvers = {
                     ]}
                 })
             }
-        }
-    },
+        },
+    }, 
 
     Mutation: {
         addUser: async (parent, args) => {
@@ -113,13 +104,7 @@ const resolvers = {
         },
         addMusic: async (parent, args, context) => {
             if (context.user) {
-                const music =  await Music.create(args);
-                await User.findOneAndUpdate(
-                    { _id: context.user._id },
-                    { $push: { music: music._id }},
-                    { new: true}
-                );
-                return music;
+                return await Music.create(args)                
             }
             throw new AuthenticationError("You need to be logged in!");
         },

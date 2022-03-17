@@ -34,12 +34,6 @@ const userSchema = new Schema(
             enum: ["Band", "Musician"],
             required: true
         },
-        music: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "Music"
-            }
-        ],
         reviews: [
             {
                 type: Schema.Types.ObjectId,
