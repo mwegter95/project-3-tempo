@@ -42,7 +42,7 @@ const Login = () => {
 
     return (
         <section className="sign-on">
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleLogin} autoComplete="off">
                 <h1 className="sans-serif white para">Welcome back.</h1>
                 {errorMessage && <p className="serif sm gold">{errorMessage}</p>}
                 
