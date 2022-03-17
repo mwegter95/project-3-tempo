@@ -111,7 +111,6 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in!");
         },
         addReview: async (parent, args, context) => {
-            console.log("args", args);
             if (context.user) {
                 const review = await Review.create({...args, reviewBy: context.user._id});
                 await User.findByIdAndUpdate(
