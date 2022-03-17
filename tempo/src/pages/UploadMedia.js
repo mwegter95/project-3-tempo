@@ -8,7 +8,7 @@ const UploadMedia = () => {
         {
             genre: "",
             media: "",
-            instruments: []
+            instruments: ""
         }
     );
 
@@ -21,23 +21,26 @@ const UploadMedia = () => {
             ...musicState,
             [name]: value
         });
+
+        console.log(musicState);
     };
 
     const validateInstruments = (instruments) => {
-        if (instruments.length === 0) {
+        if (!instruments) {
             return false;
         }
 
-        const instrumentString = instruments[0];
-        const instrumentArr = instrumentString.split(",");
+        let instrumentArr = [];
+        instrumentArr.push(instruments);
 
+        let newArr = instrumentArr[0].split(",");
         setMusicState({
             ...musicState,
-            instruments: instrumentArr
+            instruments: newArr
         });
 
         var instrumentCheck = false;
-        for (var i = 0; i < instrumentArr.length; i++) {
+        for (var i = 0; i < newArr.length; i++) {
             instrumentCheck = InstrumentListArray.includes(instruments[i]);
             if (instrumentCheck === false) {
                 return false;
@@ -54,31 +57,37 @@ const UploadMedia = () => {
                 variables: {...musicState}
             });
 
-            console.log("Created!: " + musicState);
         } catch(e) {
             console.error(e);
         }
+
+        setMusicState({
+            genre: "",
+            music: "",
+            instruments: ""
+        });
+
     };
 
     return (
         <section className="import-media">
             <form onSubmit={handleAddMusic}>
                 <div>
-                    <h1 className="sans-serif white para">Add Music Data to your Profile</h1>
-                    <h2 className="sans-serif white para">Allow others to search for you by your music abilities!</h2>
+                    <h1 className="sans-serif para">Add Music Data to your Profile</h1>
+                    <h2 className="sans-serif para">Allow others to search for you by your music abilities!</h2>
 
-                    <label htmlFor="genre" className="sans-serif white subpara">Genre:</label>
-                    <input name="genre" type="text" className="sans-serif sm" onChange={handleChange} />
+                    <label htmlFor="genre" className="sans-serif subpara">Genre:</label>
+                    <input name="genre" type="text" className="sans-serif sm" value={musicState.genre || ""} onChange={handleChange} />
 
-                    <label htmlFor="intruments" className="sans-serif white subpara">Instrument(s). Separate each with a comma.</label>
-                    <input name="instruments" type="text" className="sans-serif sm" onChange={handleChange} />
+                    <label htmlFor="instruments" className="sans-serif subpara">Instrument(s). Separate each with a comma.</label>
+                    <input name="instruments" type="text" className="sans-serif sm" value={musicState.instruments || ""} onChange={handleChange} />
 
-                    <h2 className="sans-serif white para">Upload an Audio or Video File to Showcase your skills!</h2>
+                    <h2 className="sans-serif para">Upload an Audio or Video File to Showcase your skills!</h2>
 
-                    <label htmlFor="media" className="sans-serif white subpara">Media File:</label>
-                    <input name="media" type="file" accept=".mp3,.mp4" className="sans-serif sm" onChange={handleChange} />
+                    <label htmlFor="media" className="sans-serif subpara">Media File:</label>
+                    <input name="media" type="file" accept=".mp3,.mp4" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
 
-                    <button disabled={!(musicState.genre && validateInstruments(musicState.instruments))} className="sans-serif sm">Submit</button>
+                    <button onClick={() => validateInstruments(musicState.instruments)} className="sans-serif sm">Submit</button>
 
                 </div>
             </form>
