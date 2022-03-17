@@ -19,60 +19,54 @@ const Dashboard = (props) => {
     
 
     const user = data?.me.username;
-
-    // redirect to personal page if username is yours
-    // this part is not necessary if we have separate pages for dashboard (logged in user) and profile (viewing other user). 
-    if (Auth.loggedIn() && Auth.getProfile().data.username === user) {
-        return <Redirect to="/dashboard" />;
-    }
+ 
+    
 
     if (loading) {
         return <div>Loading...</div>
     }
 
-    
+        return (
+            <> 
+            {user ? 
+                <section className="user-dashboard">
+                    {/* make a dashboard that is a mix of components */}
+                    {/* div for stagename 
+                        the div does not have an edit feature
 
-    return (
-        <> 
-        {user === "Oil Refinery" ? 
-            <section className="user-dashboard">
-                {/* make a dashboard that is a mix of components */}
-                {/* div for stagename 
-                    the div does not have an edit feature
+                        div for bio with an editable text box.
 
-                    div for bio with an editable text box.
+                        div for location that has edit button, location can be any parameters, required either city, state, or zip, but only one  of those is required
 
-                    div for location that has edit button, location can be any parameters, required either city, state, or zip, but only one  of those is required
+                        div for conversations
 
-                    div for conversations
+                        div for selecting instruments they play and genres they play
 
-                    div for selecting instruments they play and genres they play
+                        optional: div for social media links
 
-                    optional: div for social media links
-
-                */}
-                
-                <form >
-                    <h1 className="sans-serif para">This is the dashboard placeholder page. You'll notice it's the same as the login right now</h1>
+                    */}
                     
-                    <label htmlFor="email" className="sans-serif subpara">Email:</label>
-                    <input name="email" type="email" className="sans-serif sm"/>
-                    
-                    <label htmlFor="password" className="sans-serif subpara">Password:</label>
-                    <input name="password" type="password" className="sans-serif sm" />
+                    <form >
+                        <h1 className="sans-serif para">This is the dashboard placeholder page. You'll notice it's the same as the login right now</h1>
+                        
+                        <label htmlFor="email" className="sans-serif subpara">Email:</label>
+                        <input name="email" type="email" className="sans-serif sm"/>
+                        
+                        <label htmlFor="password" className="sans-serif subpara">Password:</label>
+                        <input name="password" type="password" className="sans-serif sm" />
 
-                    <button type="submit" className="sans-serif sm">Submit</button>
+                        <button type="submit" className="sans-serif sm">Submit</button>
 
-                    <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
+                        <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
 
-                    
-                </form>
-            </section>
-            :  <h4>
-                    You need to be logged in to see this. Sign up or log in using the navigation above!
-                </h4> }
-        </>
-    )
+                        
+                    </form>
+                </section>
+                :  <h4>
+                        You need to be logged in to see this. Sign up or log in using the navigation above!
+                    </h4> }
+            </>
+        )
 }
 
 export default Dashboard;
