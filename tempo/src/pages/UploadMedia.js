@@ -12,6 +12,8 @@ const UploadMedia = () => {
         }
     );
 
+    const [errorState, setErrorState] = useState("");
+
     const [addMusic, { error }] = useMutation(ADD_MUSIC);
 
     const handleChange = (event) => {
@@ -26,22 +28,32 @@ const UploadMedia = () => {
     };
 
     const validateInstruments = (instruments) => {
-        if (!instruments) {
+        if (typeof instruments === "undefined") {
             return false;
         }
 
         let instrumentArr = [];
+        let newArr;
         instrumentArr.push(instruments);
 
-        let newArr = instrumentArr[0].split(",");
-        setMusicState({
-            ...musicState,
-            instruments: newArr
+        if (instrumentArr[0].indexOf(",") === -1) {
+            newArr = instrumentArr;
+        } else {
+            newArr = instrumentArr[0].split(",");
+        }
+
+        newArr = newArr.map((instrument) => {
+            return instrument.toLowerCase().trim();
         });
+
+        // setMusicState({
+        //     ...musicState,
+        //     instruments: newArr
+        // });
 
         var instrumentCheck = false;
         for (var i = 0; i < newArr.length; i++) {
-            instrumentCheck = InstrumentListArray.includes(instruments[i]);
+            instrumentCheck = InstrumentListArray.includes(newArr[i]);
             if (instrumentCheck === false) {
                 return false;
             }
@@ -52,13 +64,18 @@ const UploadMedia = () => {
     const handleAddMusic = async (event) => {
         event.preventDefault();
 
-        try {
-            await addMusic({
-                variables: {...musicState}
-            });
-
-        } catch(e) {
-            console.error(e);
+        if (validateInstruments(musicState.instruments)) {
+            try {
+                await addMusic({
+                    variables: {...musicState}
+                });
+    
+            } catch(e) {
+                console.error(e);
+                setErrorState("There was an issue creating this data");
+            }
+        } else {
+            setErrorState("Your Instrument List is not valid");
         }
 
         setMusicState({
@@ -87,10 +104,10 @@ const UploadMedia = () => {
                     <label htmlFor="media" className="sans-serif subpara">Media File:</label>
                     <input name="media" type="file" accept=".mp3,.mp4" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
 
-                    <button onClick={() => validateInstruments(musicState.instruments)} className="sans-serif sm">Submit</button>
-
+                    <button className="sans-serif sm">Submit</button>
                 </div>
             </form>
+            {errorState && <div>{errorState}</div>}
         </section>
     );
 };
