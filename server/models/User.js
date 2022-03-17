@@ -52,7 +52,7 @@ const userSchema = new Schema(
                 ref: "Message"
             }
         ],
-        meta: [metaDataSchema]
+        metaLinks: [String]
     }
 );
 

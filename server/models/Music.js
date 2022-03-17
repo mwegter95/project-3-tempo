@@ -8,7 +8,7 @@ const musicSchema = new Schema (
             type: String,
             required: true,
         },
-        meta: [metaDataSchema],
+        metaLinks: [String],
     },
     {
         toJSON: {

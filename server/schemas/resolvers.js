@@ -2,43 +2,63 @@ const { User, Music, Review, Message, MetaData } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
+
+const getUserMeta = function(userID) {
+    return MetaData.find({
+        userLink: userID,
+        })
+};
+
 const resolvers = {
     Query: {
         users: async() => {
-            return User.find()
+            const userList = await User.find()
                 .select("-_v -password")
                 .populate("music")
                 .populate("reviews")
+            userList.foreach(element => {
+                const elementMeta = await getUserMeta(element._id);
+                element.meta.push(...elementMeta);
+            });
+            return userList;
         },
         user: async (parent, { username }) => {
-            return User.findOne({ username })
+            const returnUser = await User.findOne({ username })
                 .select("-_v -password")
                 .populate("music")
                 .populate("reviews")
+            const userMeta = await getUserMeta(User._id);
+            returnUser.meta.push(...userMeta);
+            return returnUser;
         },
         reviews: async() => {
             return Review.find()
         },
         music: async (parent, args) => {
-            if (args.genre && args.instrument) {
-                return Music.find({
-                    genre: args.genre,
-                    instrument: args.instrument
-                });
-            }
-            else if (args.genre && !args.instrument) {
-                return Music.find({
-                    genre: args.genre
-                });
-            }
-            else if (!args.genre && args.instrument) {
-                return Music.find({
-                    instrument: args.instrument
-                });
-            }
-            else {
-                return Music.find();
-            }
+
+            const valueSearch = [];
+            const typeSearch =[];
+            
+            args.metaData.foreach (element => {
+                valueSearch.push(element.value);
+                typeSearch.push(element.type);
+            });
+            
+           
+            musicMatch = MetaData.Find ({
+                value: { $in: valueSearch},
+                type: { $in: typeSearch},
+            });
+
+            const musicSearch = [];
+
+            musicMatch.foreach (element => {
+                musicSearch = element.musicLink
+            });
+
+            return Music.Find ({
+                _id: { $in: musicSearch},
+            });
         },
         messages: async() => {
             return Message.find();

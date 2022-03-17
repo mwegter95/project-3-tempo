@@ -23,7 +23,9 @@ const typeDefs = gql`
     type MetaData {
         _id: ID
         value: String
-        type: String        
+        type: String
+        musicLink: String
+        userLink: String    
     }
 
     type Review {
@@ -43,11 +45,16 @@ const typeDefs = gql`
         created_at: String
     }
 
+    input InputMeta {
+        value: String    
+        type: String       
+      }
+
     type Query {
         users: [User]
-        user(username: String!): User
+        user(username: String): User
         reviews: [Review]
-        music(genre: String, instrument: String): [Music]
+        music(metaData: [InputMeta]): [Music]
         messages: [Message]
         metaData(type: [String!]): [MetaData]
     }
