@@ -29,11 +29,10 @@ const resolvers = {
         reviews: async() => {
             return Review.find()
         },
-        myReviews: async(parent, context) => {
+        myReviews: async(parent, args, context) => {
             if(context.user) {
-                return Review.find({
-                    myId: context.user._id
-                });
+                const myReview = await Review.find({ reviewBy: context.user._id });
+                return myReview;
             }
         },
         music: async (parent, args) => {
@@ -111,8 +110,9 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in!");
         },
         addReview: async (parent, args, context) => {
+            console.log(args);
             if (context.user) {
-                const review = await Review.create({...args, myId: context.user._id});
+                const review = await Review.create({...args, reviewBy: context.user._id});
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { reviews: review._id }},

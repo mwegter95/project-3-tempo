@@ -12,16 +12,14 @@ const reviewSchema = new Schema(
             min: 0,
             max: 10
         },
-        myId: {
+        reviewBy: {
             type: String,
             required: true
         },
-        userId: {
-            type: String,
-            required: true
-            //should be required, need to think about how to do this
-            // maybe grab from URL
-        },
+        reviewOf: [{
+            type: Schema.Types.ObjectId,
+            ref: "User"
+        }],
         created_at: {
             type: Date,
             default: Date.now,

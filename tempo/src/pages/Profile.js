@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_USER, QUERY_ME } from "../utils/queries";
+import { QUERY_USER } from "../utils/queries";
 import { ADD_REVIEW } from "../utils/mutations";
 
 const Profile = () => {
     const { id: userId } = useParams();
-    const { data: userData } = useQuery(QUERY_ME);
     const { loading, data } = useQuery(QUERY_USER, {
         variables: { _id: userId }
     });
@@ -15,8 +14,8 @@ const Profile = () => {
 
     const [addReview, { error }] = useMutation(ADD_REVIEW);
     const [ formState, setFormState ] = useState({
-        myId: "",
-        userId: userId,
+        reviewBy: "",
+        reviewOf: userId,
         rating: "",
         review_text: "",
     });
@@ -40,16 +39,12 @@ const Profile = () => {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        // set users _id to `myId` once it has loaded
-        setFormState({
-            ...formState,
-            myId: userData.me._id
-        });
 
         try {
             const { data } = await addReview({
                 variables: { ...formState }
             });
+            //window.location.assign("/dashboard/myreviews");
         } catch(e) {
             console.log(e);
         }

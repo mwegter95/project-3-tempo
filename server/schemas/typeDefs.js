@@ -24,8 +24,8 @@ const typeDefs = gql`
         _id: ID
         review_text: String
         rating: Int
-        myId: ID
-        userId: ID
+        reviewBy: ID
+        reviewOf: User
         created_at: String
     }
 
@@ -42,7 +42,7 @@ const typeDefs = gql`
         users: [User]
         user(_id: ID!): User
         reviews: [Review]
-        myReviews(myId: ID!): [Review]
+        myReviews: [Review]
         music(genre: String, instrument: String): [Music]
         messages: [Message]
     }
@@ -53,7 +53,7 @@ const typeDefs = gql`
         deleteUser: User
         editUser(username: String, status: String, biography: String, type: String): User
         addMusic(genre: String!, instruments: [String!], media: String): Music
-        addReview(myId: ID!, userId: ID!, review_text: String!, rating: Int): Review
+        addReview(reviewBy: ID!, reviewOf: ID! review_text: String!, rating: Int): Review
         addMessage(message_text: String!): Message
         
     }

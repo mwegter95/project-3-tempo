@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
@@ -14,10 +14,7 @@ import InstrumentList from "../components/InstrumentList"
 import Auth from "../utils/auth";
 
 const Dashboard = (props) => {
-
     const { loading, data } = useQuery(QUERY_ME);
-    
-
     const user = data?.me.username;
 
     // redirect to personal page if username is yours
@@ -28,9 +25,7 @@ const Dashboard = (props) => {
 
     if (loading) {
         return <div>Loading...</div>
-    }
-
-    
+    } 
 
     return (
         <> 
@@ -68,9 +63,11 @@ const Dashboard = (props) => {
                     
                 </form>
             </section>
-            :  <h4>
-                    You need to be logged in to see this. Sign up or log in using the navigation above!
-                </h4> }
+            :   <div>
+                    <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
+                    <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
+                </div>
+        }
         </>
     )
 }
