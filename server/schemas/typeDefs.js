@@ -32,8 +32,8 @@ const typeDefs = gql`
         _id: ID
         review_text: String
         rating: Int
-        username: String
-        aboutUser: String
+        reviewBy: ID
+        reviewOf: User
         created_at: String
     }
 
@@ -51,6 +51,7 @@ const typeDefs = gql`
       }
 
     type Query {
+        me: User
         users: [User]
         user(username: String): User
         reviews: [Review]

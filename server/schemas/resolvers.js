@@ -5,6 +5,16 @@ const { signToken } = require("../utils/auth");
 
 const resolvers = {
     Query: {
+        me: async(parent, args, context) => {
+            // check for existence of user - if none, throw AuthenticationError
+            if(context.user) {
+                const userData = await User.findOne({_id: context.user._id})
+                    .select("-_v -password");
+
+                return userData;
+            }
+            throw new AuthenticationError("Not logged in");
+        },
         users: async() => {
             return User.find()
                 .select("-_v -password")                
@@ -110,7 +120,7 @@ const resolvers = {
         },
         addReview: async (parent, args, context) => {
             if (context.user) {
-                const review = await Review.create({...args, username: context.user.username});
+                const review = await Review.create({...args, reviewBy: context.user._id});
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { reviews: review._id }},
@@ -122,7 +132,7 @@ const resolvers = {
         },
         addMessage: async (parent, args, context) => {
             if (context.user) {
-                const message = await Message.create({...args, username: context.user.username});
+                const message = await Message.create({...args, myId: context.user._id});
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { messages: message._id }},
