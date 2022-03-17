@@ -62,10 +62,10 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!, type: String!, biography: String, status: String): Auth
         deleteUser: User
-        editUser(username: String, status: String, biography: String, type: String): User
-        addMusic(genre: String!, instruments: [String!], media: String): Music
-        addReview(review_text: String!, rating: Int): Review
-        addMessage(message_text: String!): Message        
+        editUser(username: String, status: String, biography: String, type: String, meta: [InputMeta]): User
+        addMusic(genre: String!, instruments: [String], media: String, meta: [InputMeta]): Music
+        addReview(review_text: String, rating: Int): Review
+        addMessage(message_text: String): Message        
     }
 
     type Auth {
