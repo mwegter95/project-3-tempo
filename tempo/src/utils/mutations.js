@@ -64,14 +64,14 @@ mutation addMusic($genre: String!, $instruments: [String!], $media: String) {
 `;
 
 export const ADD_REVIEW = gql`
-mutation addReview($review_text: String!, $rating: Int) {
-    addReview(review_text: $review_text, rating: $rating) {
-        _id: ID
-        review_text: String
-        rating: Int
-        username: String
-        aboutUser: String
-        created_at: String
+mutation addReview($myId: ID!, $userId: ID!, $review_text: String!, $rating: Int) {
+    addReview(myId: $myId, userId: $userId, review_text: $review_text, rating: $rating) {
+        _id
+        review_text
+        rating
+        myId
+        userId
+        created_at
     }
 }
 `;
@@ -79,11 +79,11 @@ mutation addReview($review_text: String!, $rating: Int) {
 export const ADD_MESSAGE = gql`
 mutation addMessage($message_text: String!) {
     addMessage(message_text: $message_text) {
-        _id: ID
-        message_text: String
-        sender: String
-        receiver: String
-        created_at: String
+        _id
+        message_text
+        sender
+        receiver
+        created_at
     }
 }
 `;

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect, useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { EDIT_USER } from "../utils/mutations";
@@ -61,6 +62,8 @@ const Dashboard = (props) => {
                     <input name="password" type="password" className="sans-serif sm" />
 
                     <button type="submit" className="sans-serif sm">Submit</button>
+
+                    <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
 
                     
                 </form>

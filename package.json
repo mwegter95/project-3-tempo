@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "develop": "concurrently \"cd server && npm run dev\" \"cd tempo && npm run start \""
+    "develop": "concurrently \"cd server && npm run dev\" \"cd tempo && npm run start \"",
+    "seed": "cd server && npm run seed"
   },
   "repository": {
     "type": "git",

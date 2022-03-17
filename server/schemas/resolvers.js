@@ -20,8 +20,8 @@ const resolvers = {
                 .populate("music")
                 .populate("reviews")
         },
-        user: async (parent, { username }) => {
-            return User.findOne({ username })
+        user: async (parent, { _id }) => {
+            return User.findOne({ _id })
                 .select("-_v -password")
                 .populate("music")
                 .populate("reviews")
@@ -105,7 +105,7 @@ const resolvers = {
         },
         addReview: async (parent, args, context) => {
             if (context.user) {
-                const review = await Review.create({...args, username: context.user.username});
+                const review = await Review.create({...args, myId: context.user._id});
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { reviews: review._id }},
@@ -117,7 +117,7 @@ const resolvers = {
         },
         addMessage: async (parent, args, context) => {
             if (context.user) {
-                const message = await Message.create({...args, username: context.user.username});
+                const message = await Message.create({...args, myId: context.user._id});
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
                     { $push: { messages: message._id }},
