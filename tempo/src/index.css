@@ -80,7 +80,7 @@ button:hover {
   font-weight: 200;
 }
 
-.message-limit {
+.regular {
   font-size: 16px;
   align-self: flex-end;
 }
