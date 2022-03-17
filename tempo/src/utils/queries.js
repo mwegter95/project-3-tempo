@@ -19,8 +19,12 @@ export const QUERY_USERS = gql`
             _id
             review_text
             rating
-            myId
-            userId
+            reviewBy
+            reviewOf {
+                _id
+                username
+                email
+            }
             created_at
         }
         messages {
@@ -53,8 +57,12 @@ query user($_id: ID!) {
             _id
             review_text
             rating
-            myId
-            userId
+            reviewBy
+            reviewOf {
+                _id
+                username
+                email
+            }
         }
         messages {
             _id
@@ -73,8 +81,12 @@ export const QUERY_REVIEWS = gql`
         _id
         review_text
         rating
-        userId
-        myId
+        reviewBy
+        reviewOf {
+            _id
+            username
+            email
+        }
         created_at
     }
 }
@@ -86,8 +98,12 @@ query myReviews {
         _id
         review_text
         rating
-        userId
-        myId
+        reviewBy
+        reviewOf {
+            _id
+            username
+            email
+        }
         created_at
     }
 }
@@ -126,8 +142,12 @@ export const QUERY_ME = gql`
         _id
         review_text
         rating
-        userId
-        myId
+        reviewOf {
+            _id
+            username
+            email
+        }
+        reviewBy
         created_at
     }
     }

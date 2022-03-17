@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { QUERY_MY_REVIEWS } from "../utils/queries";
+import { QUERY_MY_REVIEWS, QUERY_REVIEWS } from "../utils/queries";
 import ReviewList from "../components/ReviewList";
 
 const MyReviews = () => {
+    const { data: allReviews } = useQuery(QUERY_REVIEWS); //
+    console.log("all reviews", allReviews); //
     // create state for reviews
     const [ myReviews, setMyReviews ] = useState(null)
     const getMyReviews = (data) => {
