@@ -27,13 +27,12 @@ const resolvers = {
                 .populate("reviews")
         },
         reviews: async() => {
-            return Review.find()
+            return Review.find();
         },
-        myReviews: async(parent, context) => {
+        myReviews: async(parent, args, context) => {
             if(context.user) {
-                return Review.find({
-                    myId: context.user._id
-                });
+                const myReview = await Review.find({ myId: context.user._id });
+                return myReview;
             }
         },
         music: async (parent, args) => {

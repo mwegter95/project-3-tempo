@@ -67,16 +67,6 @@ query user($_id: ID!) {
 }
 `;
 
-export const QUERY_ME = gql`
-  {
-    me {
-      _id
-      username
-      email
-    }
-  }
-`;
-
 export const QUERY_REVIEWS = gql`
 {
     reviews {
@@ -91,8 +81,8 @@ export const QUERY_REVIEWS = gql`
 `;
 
 export const QUERY_MY_REVIEWS = gql`
-query myReviews($myId: ID!) {
-    myReviews(myId: $myId) {
+query myReviews {
+    myReviews {
         _id
         review_text
         rating
@@ -132,6 +122,14 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      reviews {
+        _id
+        review_text
+        rating
+        userId
+        myId
+        created_at
+    }
     }
   }
 `;

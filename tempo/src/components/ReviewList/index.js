@@ -1,6 +1,7 @@
 import React from "react";
 
 const ReviewList = ({ reviews }) => {
+    console.log(reviews);
     if(!reviews.length) {
         return <p className="serif sm gold">You haven't posted any reviews yet.</p>
     }
