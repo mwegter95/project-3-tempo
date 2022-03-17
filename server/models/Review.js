@@ -4,21 +4,21 @@ const reviewSchema = new Schema(
     {
         review_text: {
             type: String,
-            required: true
+            required: true,
+            maxlength: 500
         },
         rating: {
             type: Number,
             min: 0,
             max: 10
         },
-        username: {
+        reviewBy: {
             type: String,
             required: true
         },
-        aboutUser: {
-            type: String
-            //should be required, need to think about how to do this
-            // maybe grab from URL
+        reviewOf: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
         },
         created_at: {
             type: Date,

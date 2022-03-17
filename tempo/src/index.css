@@ -80,8 +80,17 @@ button:hover {
   font-weight: 200;
 }
 
+.regular {
+  font-size: 16px;
+  align-self: flex-end;
+}
+
 .white {
   color: white;
+}
+
+.gold {
+  color: var(--tempo-gold);
 }
 
 /* Component: Header */
