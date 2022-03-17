@@ -29,6 +29,13 @@ const resolvers = {
         reviews: async() => {
             return Review.find()
         },
+        myReviews: async(parent, context) => {
+            if(context.user) {
+                return Review.find({
+                    myId: context.user._id
+                });
+            }
+        },
         music: async (parent, args) => {
             if (args.genre && args.instrument) {
                 return Music.find({

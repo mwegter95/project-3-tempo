@@ -90,6 +90,19 @@ export const QUERY_REVIEWS = gql`
 }
 `;
 
+export const QUERY_MY_REVIEWS = gql`
+query myReviews($myId: ID!) {
+    myReviews(myId: $myId) {
+        _id
+        review_text
+        rating
+        userId
+        myId
+        created_at
+    }
+}
+`;
+
 export const QUERY_MUSIC = gql`
 query music($genre: String, $instruments: [String]) {
     music(genre: $genre, instruments: $instruments) {

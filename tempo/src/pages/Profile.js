@@ -5,13 +5,6 @@ import { QUERY_USER, QUERY_ME } from "../utils/queries";
 import { ADD_REVIEW } from "../utils/mutations";
 
 const Profile = () => {
-    const [ formState, setFormState ] = useState({
-        myId: "",
-        userId: userId,
-        rating: "",
-        reviewText: "",
-    });
-
     const { id: userId } = useParams();
     const { data: userData } = useQuery(QUERY_ME);
     const { loading, data } = useQuery(QUERY_USER, {
@@ -21,6 +14,12 @@ const Profile = () => {
     const user = data?.user || {};
 
     const [addReview, { error }] = useMutation(ADD_REVIEW);
+    const [ formState, setFormState ] = useState({
+        myId: "",
+        userId: userId,
+        rating: "",
+        review_text: "",
+    });
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -31,24 +30,21 @@ const Profile = () => {
                 ...formState,
                 [name]: newValue
             });
-            console.log(formState);
         } else {
             setFormState({
                 ...formState,
                 [name]: value
             });
-            console.log(formState);
         }
     };
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        // set users _id to `myId` once it has loaded
         setFormState({
             ...formState,
             myId: userData.me._id
         });
-        
-        console.log(formState);
 
         try {
             const { data } = await addReview({
@@ -62,7 +58,7 @@ const Profile = () => {
     if(loading) {
         return <div className="serif para">loading...</div>
     };
-
+    // checks if the id in parameters is valid
     if(!data) {
         return <div className="serif para">This user does not exist.</div>
     };
@@ -71,14 +67,14 @@ const Profile = () => {
         <div>
             <h1 className="sans-serif subtitle">{user.username}'s Profile</h1>
             <form onSubmit={handleFormSubmit}>
-                <h1 className="sans-serif para">Write a review on {user.username}</h1>
+                <h1 className="sans-serif subpara">Write a review on {user.username}</h1>
                 <p className="serif sm">The reviews you write will only be seen by you.</p>
 
                 <label htmlFor="rating" className="sans-serif subpara">Rating:</label>
                 <input name="rating" type="number" className="sans-serif sm" onChange={handleChange} />
 
-                <label htmlFor="reviewText" className="sans-serif subpara">Review:</label>
-                <textarea name="reviewText" type="review" className="sans-serif sm" maxLength="500" onChange={handleChange}></textarea>
+                <label htmlFor="review_text" className="sans-serif subpara">Review:</label>
+                <textarea name="review_text" type="review" className="sans-serif sm" maxLength="500" onChange={handleChange}></textarea>
 
                 <button type="submit" className="sans-serif sm">Submit Review</button>
             </form>

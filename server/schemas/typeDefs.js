@@ -42,6 +42,7 @@ const typeDefs = gql`
         users: [User]
         user(_id: ID!): User
         reviews: [Review]
+        myReviews(myId: ID!): [Review]
         music(genre: String, instrument: String): [Music]
         messages: [Message]
     }
