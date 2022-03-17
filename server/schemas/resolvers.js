@@ -31,7 +31,8 @@ const resolvers = {
         },
         myReviews: async(parent, args, context) => {
             if(context.user) {
-                const myReview = await Review.find({ reviewBy: context.user._id });
+                const myReview = await Review.find({ reviewBy: context.user._id })
+                    .populate("reviewOf");
                 return myReview;
             }
         },
@@ -110,7 +111,6 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in!");
         },
         addReview: async (parent, args, context) => {
-            console.log(args);
             if (context.user) {
                 const review = await Review.create({...args, reviewBy: context.user._id});
                 await User.findByIdAndUpdate(

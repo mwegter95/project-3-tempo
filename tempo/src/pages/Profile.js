@@ -44,7 +44,7 @@ const Profile = () => {
             const { data } = await addReview({
                 variables: { ...formState }
             });
-            //window.location.assign("/dashboard/myreviews");
+            window.location.assign("/dashboard/myreviews");
         } catch(e) {
             console.log(e);
         }
