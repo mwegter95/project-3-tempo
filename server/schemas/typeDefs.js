@@ -11,7 +11,7 @@ const typeDefs = gql`
         music: [Music]
         reviews: [Review]
         messages: [Message]
-        meta: [MetaData]
+        meta: [MetaData]        
     }
 
     type Music {
@@ -56,7 +56,6 @@ const typeDefs = gql`
         reviews: [Review]
         music(metaData: [InputMeta]): [Music]
         messages: [Message]
-        metaData(type: [String!]): [MetaData]
     }
 
     type Mutation {
@@ -66,8 +65,7 @@ const typeDefs = gql`
         editUser(username: String, status: String, biography: String, type: String): User
         addMusic(genre: String!, instruments: [String!], media: String): Music
         addReview(review_text: String!, rating: Int): Review
-        addMessage(message_text: String!): Message
-        
+        addMessage(message_text: String!): Message        
     }
 
     type Auth {

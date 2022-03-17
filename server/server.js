@@ -1,6 +1,7 @@
 const path = require("path");
 const express = require("express");
 const { authMiddleware } = require("./utils/auth");
+const { seedData } = require("./utils/dataSeeder");
 const { ApolloServer } = require("apollo-server-express");
 
 const { typeDefs, resolvers } = require("./schemas");
@@ -21,6 +22,7 @@ const startServer = async() => {
     server.applyMiddleware({ app });
 
     console.log(`Use GraphQl at http://localhost:${PORT}${server.graphqlPath}`);
+    seedData();    
 };
 
 startServer();

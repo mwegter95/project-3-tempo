@@ -3,11 +3,12 @@ const { AuthenticationError } = require("apollo-server-express");
 const { signToken } = require("../utils/auth");
 
 
-const getUserMeta = function(userID) {
-    return MetaData.find({
+const getUserMeta = new Promise(userID, (resolve, reject) => {
+    resolve( MetaData.find({
         userLink: userID,
-        })
-};
+    }));
+})
+
 
 const resolvers = {
     Query: {

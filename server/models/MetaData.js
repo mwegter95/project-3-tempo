@@ -9,9 +9,7 @@ const metaDataSchema = new Schema (
         type: {
             type: String,
             required: true,
-        },
-        musicLink: String,
-        userLink: String        
+        }
     },
     {
         toJSON: {
