@@ -10,11 +10,10 @@ const ReviewList = ({ reviews }) => {
             {reviews.length && 
                 reviews.map(review => (
                     <article key={review._id}>
-                        <p className="sans-serif para">
+                        <a href={`/profile/${review.reviewOf._id}`} className="sans-serif subpara">Review for:{review.reviewOf.username}</a>
+                        <p className="sans-serif sm">
                             {review.review_text}
-                        </p>
-                        <p className="sans-serif para">
-                            {review.rating}
+                            {review.rating} / 10
                         </p>
                     </article>
                 ))

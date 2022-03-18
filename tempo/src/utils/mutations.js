@@ -32,9 +32,9 @@ mutation addUser($username: String!, $password: String!, $email: String!, $type:
 export const DELETE_USER = gql`
 {
     deleteUser {
-        _id: ID
-        username: String
-        email: String
+        _id
+        username
+        email
     }
 }
 `;
@@ -43,11 +43,11 @@ export const EDIT_USER = gql`
 mutation editUser($username: String, $status: String, $biography: String) {
     editUser(username: $username, status: $status, biography: $biography) {
         _id: ID
-        username: String
-        email: String
-        biography: String
-        status: String
-        type: String
+        username
+        email
+        biography
+        status
+        type
     }
 }
 `;
@@ -64,13 +64,17 @@ mutation addMusic($genre: String!, $instruments: [String!], $media: String) {
 `;
 
 export const ADD_REVIEW = gql`
-mutation addReview($myId: ID!, $userId: ID!, $review_text: String!, $rating: Int) {
-    addReview(myId: $myId, userId: $userId, review_text: $review_text, rating: $rating) {
+mutation addReview($reviewBy: ID!, $reviewOf: ID!, $review_text: String!, $rating: Int) {
+    addReview(reviewBy: $reviewBy, reviewOf: $reviewOf, review_text: $review_text, rating: $rating) {
         _id
         review_text
         rating
-        myId
-        userId
+        reviewBy
+        reviewOf {
+            _id
+            username
+            email
+        }
         created_at
     }
 }

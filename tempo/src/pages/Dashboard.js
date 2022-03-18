@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect, useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
@@ -14,10 +14,7 @@ import InstrumentList from "../components/InstrumentList"
 import Auth from "../utils/auth";
 
 const Dashboard = (props) => {
-
     const { loading, data } = useQuery(QUERY_ME);
-    
-
     const user = data?.me.username;
  
     
@@ -34,6 +31,7 @@ const Dashboard = (props) => {
                     {/* div for stagename 
                         the div does not have an edit feature
 
+
                         div for bio with an editable text box.
 
                         div for location that has edit button, location can be any parameters, required either city, state, or zip, but only one  of those is required
@@ -46,6 +44,7 @@ const Dashboard = (props) => {
 
                     */}
                     
+
                     <form >
                         <h1 className="sans-serif para">This is the dashboard placeholder page. You'll notice it's the same as the login right now</h1>
                         
@@ -61,12 +60,15 @@ const Dashboard = (props) => {
 
                         
                     </form>
-                </section>
-                :  <h4>
-                        You need to be logged in to see this. Sign up or log in using the navigation above!
-                    </h4> }
-            </>
-        )
+              </section>
+              :   <div>
+                      <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
+                      <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
+                  </div>
+          }
+          </>
+    )
+
 }
 
 export default Dashboard;
