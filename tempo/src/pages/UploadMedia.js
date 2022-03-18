@@ -24,7 +24,7 @@ const UploadMedia = () => {
             [name]: value
         });
     };
-
+    
     const validateInstruments = (instruments) => {
         if (typeof instruments === "undefined") {
             return false;
@@ -100,7 +100,7 @@ const UploadMedia = () => {
                     <h2 className="sans-serif para">Upload an Audio or Video File to Showcase your skills!</h2>
 
                     <label htmlFor="media" className="sans-serif subpara">Media File:</label>
-                    <input name="media" type="file" accept=".jpeg" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
+                    <input name="media" type="file" accept=".mp3" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
 
                     <button className="sans-serif sm">Submit</button>
                 </div>
