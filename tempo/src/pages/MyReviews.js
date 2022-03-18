@@ -11,7 +11,7 @@ const MyReviews = () => {
     };
 
     // query for reviews created by user
-    const { loading, data } = useQuery(QUERY_MY_REVIEWS, {
+    const { loading } = useQuery(QUERY_MY_REVIEWS, {
         onCompleted: (data) => setMyReviews(getMyReviews(data))
     });
 
@@ -22,8 +22,8 @@ const MyReviews = () => {
     }
 
     return (
-        <div>
-            <h1 className="sans-serif para">Your reviews</h1>
+        <div className="main myreviews">
+            <h1 className="sans-serif para white">Your Reviews.</h1>
             <ReviewList reviews={reviews} />
         </div>
     )

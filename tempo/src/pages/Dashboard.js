@@ -30,7 +30,7 @@ const Dashboard = (props) => {
     return (
         <> 
         {user === "Oil Refinery" ? 
-            <section className="user-dashboard">
+            <section className="main user-dashboard">
                 {/* make a dashboard that is a mix of components */}
                 {/* div for stagename 
                     the div does not have an edit feature
@@ -63,7 +63,7 @@ const Dashboard = (props) => {
                     
                 </form>
             </section>
-            :   <div>
+            :   <div className="main">
                     <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
                     <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
                 </div>

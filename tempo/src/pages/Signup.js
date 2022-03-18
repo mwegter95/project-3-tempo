@@ -107,7 +107,7 @@ const Signup = () => {
     };
 
     return (
-        <section className="sign-on">
+        <section className="sign-on main">
             {pageState === 1 && 
                 <form onSubmit={handleUserSignup} autoComplete="off">
                     <div>
