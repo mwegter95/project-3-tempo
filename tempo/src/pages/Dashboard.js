@@ -17,12 +17,9 @@ const Dashboard = (props) => {
     const { loading, data } = useQuery(QUERY_ME);
     const user = data?.me.username;
  
-    
-
     if (loading) {
         return <div>Loading...</div>
     }
-
 
         return (
             <> 
@@ -59,12 +56,10 @@ const Dashboard = (props) => {
               </section>
               :   <div className="main">
                       <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
-                      <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
                   </div>
           }
           </>
     )
-
 }
 
 export default Dashboard;
