@@ -146,7 +146,7 @@ const Signup = () => {
                     {radio1State && <label htmlFor="biography" className="sans-serif white subpara">Create your own bio:</label>}
                     {radio2State && <label htmlFor="biography" className="sans-serif white subpara">Create your band's bio:</label>}
                     <textarea name="biography" type="biography" className="sans-serif sm" maxLength="280" onChange={messageLimit} onBlur={handleChange}></textarea>
-                    <p className="serif gold message-limit">{messageState} characters left.</p>
+                    <p className="serif gold regular">{messageState} characters left.</p>
 
                     <label htmlFor="status" className="sans-serif white subpara">What's your current status?:</label>
                     <select name="status" onBlur={handleChange} className="sans-serif sm" defaultValue="-- select an option --">
