@@ -8,7 +8,8 @@ const resolvers = {
             // check for existence of user - if none, throw AuthenticationError
             if(context.user) {
                 const userData = await User.findOne({_id: context.user._id})
-                    .select("-_v -password");
+                    .select("-__v -password")
+                    .populate("music");
 
                 return userData;
             }
@@ -18,13 +19,13 @@ const resolvers = {
             return User.find()
                 .select("-_v -password")
                 .populate("music")
-                .populate("reviews")
+                .populate("reviews");
         },
         user: async (parent, { _id }) => {
             return User.findOne({ _id })
                 .select("-_v -password")
                 .populate("music")
-                .populate("reviews")
+                .populate("reviews");
         },
         reviews: async() => {
             return Review.find()

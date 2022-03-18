@@ -10,12 +10,24 @@ import { QUERY_ME } from "../utils/queries";
 
 import GenreList from "../components/GenreList"
 import InstrumentList from "../components/InstrumentList"
+import MediaList from "../components/MediaList";
 
 import Auth from "../utils/auth";
 
 const Dashboard = (props) => {
-    const { loading, data } = useQuery(QUERY_ME);
-    const user = data?.me.username;
+    const [myMedia, setMyMedia] = useState(null);
+    const getMyMedia = (data) => {
+        return data?.me.music;
+    }
+    //const { loading, data } = useQuery(QUERY_ME);
+    const { loading, data } = useQuery(QUERY_ME, {
+        onCompleted: (data) => setMyMedia(getMyMedia(data))
+    });
+    //const user = data?.me._id;
+    const user = 'max';
+
+    let media = myMedia || [];
+    console.log(media);
 
     // redirect to personal page if username is yours
     // this part is not necessary if we have separate pages for dashboard (logged in user) and profile (viewing other user). 
@@ -66,6 +78,11 @@ const Dashboard = (props) => {
             :   <div>
                     <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
                     <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
+                    <Link className="serif sm" to="/media">Add to your Profile!</Link>
+
+                    <div>
+                        <MediaList media={media}></MediaList>
+                    </div>
                 </div>
         }
         </>
