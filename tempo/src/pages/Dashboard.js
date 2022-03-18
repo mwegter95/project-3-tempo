@@ -15,33 +15,31 @@ import MediaList from "../components/MediaList";
 import Auth from "../utils/auth";
 
 const Dashboard = (props) => {
+    // check that a user is logged in, then set user = logged in user's id
     const { loading: loadingMe, data: dataMe } = useQuery(QUERY_ME);
-    
-
     const user = dataMe?.me._id;
-
+    // console log the logged in user's id
     console.log(user);
 
-
+    // query the logged in user's data, then set userData = their data
     const { loading, data } = useQuery(QUERY_USER, {
         variables: {_id: user },
     });
-
     const userData = data;
-
+    // console log their data
     console.log(userData);
  
     const [myMedia, setMyMedia] = useState(null);
-    const getMyMedia = (data) => {
-        return data?.me.music;
+    const getMyMedia = (userToGetMediaOf) => {
+        return userToGetMediaOf?.me.music;
     };
     const { loading: mediaLoading } = useQuery(QUERY_ME, {
-        onCompleted: (data) => setMyMedia(getMyMedia(data))
+        onCompleted: (response) => setMyMedia(getMyMedia(response))
     });
 
     let media = myMedia || [];
 
-    if (loadingMe || loading) {
+    if (loadingMe || loading || mediaLoading) {
         return <div>Loading...</div>
     }
 
@@ -75,12 +73,13 @@ const Dashboard = (props) => {
                         <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
                         <Link className="serif sm" to="/media">Add to your Profile!</Link>
 
-                    
+                        <div>
+                            <MediaList media={media}></MediaList>
+                        </div>
                     </form>
                 </section>
-                :   <div>
-                        <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
-                        <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
+                :   <div className="main">
+                      <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
                     </div>
             }
             </>
