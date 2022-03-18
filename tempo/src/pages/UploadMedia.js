@@ -23,8 +23,6 @@ const UploadMedia = () => {
             ...musicState,
             [name]: value
         });
-
-        console.log(musicState);
     };
 
     const validateInstruments = (instruments) => {
@@ -46,10 +44,10 @@ const UploadMedia = () => {
             return instrument.toLowerCase().trim();
         });
 
-        // setMusicState({
-        //     ...musicState,
-        //     instruments: newArr
-        // });
+        setMusicState({
+            ...musicState,
+            instruments: newArr
+        });
 
         var instrumentCheck = false;
         for (var i = 0; i < newArr.length; i++) {
@@ -102,7 +100,7 @@ const UploadMedia = () => {
                     <h2 className="sans-serif para">Upload an Audio or Video File to Showcase your skills!</h2>
 
                     <label htmlFor="media" className="sans-serif subpara">Media File:</label>
-                    <input name="media" type="file" accept=".mp3,.mp4" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
+                    <input name="media" type="file" accept=".jpeg" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
 
                     <button className="sans-serif sm">Submit</button>
                 </div>
