@@ -132,6 +132,7 @@ export const QUERY_MESSAGES = gql`
 }
 `;
 
+
 export const QUERY_ME = gql`
   {
     me {
@@ -159,3 +160,4 @@ export const QUERY_ME = gql`
     }
   }
 `;
+

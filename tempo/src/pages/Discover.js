@@ -12,7 +12,7 @@ const Discover = () => {
     };
 
     return (
-        <div>
+        <div className="main">
             <h1 className="sans-serif para">Discover Page</h1>
             <div>
                 <UserList users={users} />

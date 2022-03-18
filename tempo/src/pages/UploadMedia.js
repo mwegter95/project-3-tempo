@@ -86,7 +86,7 @@ const UploadMedia = () => {
     };
 
     return (
-        <section className="import-media">
+        <section className="import-media main">
             <form onSubmit={handleAddMusic}>
                 <div>
                     <h1 className="sans-serif para">Add Music Data to your Profile</h1>
