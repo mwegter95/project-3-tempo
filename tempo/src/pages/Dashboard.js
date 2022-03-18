@@ -14,12 +14,25 @@ import InstrumentList from "../components/InstrumentList"
 import Auth from "../utils/auth";
 
 const Dashboard = (props) => {
-    const { loading, data } = useQuery(QUERY_ME);
-    const user = data?.me.username;
+    const { loading: loadingMe, data: dataMe } = useQuery(QUERY_ME);
+    
+
+    const user = dataMe?.me._id;
+
+    console.log(user);
+
+
+    const { loading, data } = useQuery(QUERY_USER, {
+        variables: {_id: user },
+    });
+
+    const userData = data;
+
+    console.log(userData);
  
     
 
-    if (loading) {
+    if (loadingMe || loading) {
         return <div>Loading...</div>
     }
 
@@ -44,15 +57,12 @@ const Dashboard = (props) => {
                     */}
                     
                     <form >
-                        <h1 className="sans-serif para">This is the dashboard placeholder page. You'll notice it's the same as the login right now</h1>
+                        <h1 className="sans-serif para">Your Dashboard</h1>
                         
-                        <label htmlFor="email" className="sans-serif subpara">Email:</label>
-                        <input name="email" type="email" className="sans-serif sm"/>
-                        
-                        <label htmlFor="password" className="sans-serif subpara">Password:</label>
-                        <input name="password" type="password" className="sans-serif sm" />
-
-                        <button type="submit" className="sans-serif sm">Submit</button>
+                        <div className="sans-serif para">
+                            <GenreList genres={userData.user.music}/>
+                            
+                        </div>
 
                         <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
 
