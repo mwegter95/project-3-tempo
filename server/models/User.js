@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const metaDataSchema = require('./MetaData');
+const { MetaData, metaDataSchema }= require('./MetaData');
 
 const userSchema = new Schema(
     {
@@ -31,7 +31,7 @@ const userSchema = new Schema(
         },
         type: {
             type: String,
-            enum: ["Band", "Musician"],
+            enum: ['Band', 'Musician'],
             required: true
         },
         reviews: [

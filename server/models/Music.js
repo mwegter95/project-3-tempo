@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-const metaDataSchema = require('./MetaData');
+const { MetaData, metaDataSchema } = require('./MetaData');
 
 const musicSchema = new Schema (
     {

@@ -57,7 +57,7 @@ const typeDefs = gql`
         reviews: [Review]
         feedMusic(metaData: [InputMeta]): [Music]
         userMusic(username: String): [Music]
-        music: [music]
+        music: [Music]
         messages: [Message]
     }
 

@@ -19,4 +19,4 @@ const metaDataSchema = new Schema (
 );
 
 const MetaData = model("MetaData", metaDataSchema);
-module.exports = MetaData;
+module.exports = { MetaData, metaDataSchema };

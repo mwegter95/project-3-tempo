@@ -9,8 +9,9 @@ const resolvers = {
             // check for existence of user - if none, throw AuthenticationError
             if(context.user) {
                 const userData = await User.findOne({_id: context.user._id})
-                    .select("-_v -password");
-
+                    .select("-_v -password")
+                    .populate("reviews")
+                    .populate("meta");
                 return userData;
             }
             throw new AuthenticationError("Not logged in");
@@ -65,15 +66,15 @@ const resolvers = {
         messages: async() => {
             return Message.find();
         },
-        metaData: async (parent, args) => {
-            if (args.type) {
-                return MetaData.find({
-                    type: { $in: [
-                        args.type
-                    ]}
-                })
-            }
-        },
+        // metaData: async (parent, args) => {
+        //     if (args.type) {
+        //         return MetaData.find({
+        //             type: { $in: [
+        //                 args.type
+        //             ]}
+        //         })
+        //     }
+        // },
     }, 
 
     Mutation: {

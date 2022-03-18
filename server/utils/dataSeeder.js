@@ -5,7 +5,7 @@ const newUsers = [
         username: 'ringo',
         email: 'r@s.com',
         password: 'Asdf123$',
-        type: 'musician',
+        type: 'Musician',
         biography: 'More then a drummer, a rocker in his own right',
         status: 'active'
     },
@@ -13,7 +13,7 @@ const newUsers = [
         username: 'Paul',
         email: 'p@m.com',
         password: 'Asdf123$',
-        type: 'musician',
+        type: 'Musician',
         biography: 'The only one that still matters',
         status: 'active'
     },
@@ -21,7 +21,7 @@ const newUsers = [
         username: 'The Beetuls',
         email: 'b@b.com',
         password: 'Asdf123$',
-        type: 'musician',
+        type: 'Musician',
         biography: 'More then a drummer, a rocker in his own right',
         status: 'active'
     }
