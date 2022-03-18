@@ -23,8 +23,6 @@ const UploadMedia = () => {
             ...musicState,
             [name]: value
         });
-
-        console.log(musicState);
     };
 
     const validateInstruments = (instruments) => {
@@ -46,10 +44,10 @@ const UploadMedia = () => {
             return instrument.toLowerCase().trim();
         });
 
-        // setMusicState({
-        //     ...musicState,
-        //     instruments: newArr
-        // });
+        setMusicState({
+            ...musicState,
+            instruments: newArr
+        });
 
         var instrumentCheck = false;
         for (var i = 0; i < newArr.length; i++) {
@@ -65,11 +63,12 @@ const UploadMedia = () => {
         event.preventDefault();
 
         if (validateInstruments(musicState.instruments)) {
+            console.log(musicState);
             try {
                 await addMusic({
                     variables: {...musicState}
                 });
-    
+                window.location.assign("/dashboard");
             } catch(e) {
                 console.error(e);
                 setErrorState("There was an issue creating this data");
@@ -87,7 +86,7 @@ const UploadMedia = () => {
     };
 
     return (
-        <section className="import-media">
+        <section className="import-media main">
             <form onSubmit={handleAddMusic}>
                 <div>
                     <h1 className="sans-serif para">Add Music Data to your Profile</h1>
@@ -101,8 +100,8 @@ const UploadMedia = () => {
 
                     <h2 className="sans-serif para">Upload an Audio or Video File to Showcase your skills!</h2>
 
-                    <label htmlFor="media" className="sans-serif subpara">Media File:</label>
-                    <input name="media" type="file" accept=".mp3,.mp4" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
+                    <label htmlFor="media" className="sans-serif subpara">Media File Link:</label>
+                    <input name="media" type="text" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
 
                     <button className="sans-serif sm">Submit</button>
                 </div>

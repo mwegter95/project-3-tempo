@@ -12,12 +12,14 @@ const UserList = ({ users }) => {
             {users.length && 
                 users.map(user => (
                     <article key={user._id}>
-                        <p className="sans-serif para">
+                        <p className="sans-serif subpara">
                             <Link to={`/profile/${user._id}`}>{user.username}</Link>
                         </p>
-                        <p className="sans-serif sm">
-                            {user.bio}
+                        <p className="sans-serif grey regular">
                             {user.status}
+                        </p>
+                        <p className="sans-serif sm">
+                            {user.biography}
                         </p>
                     </article>
                 ))

@@ -51,13 +51,16 @@ const Signup = () => {
     const checkRadios = (event) => {
         event.preventDefault();
 
-        if(radio1State) {
-            formState.type = "Musician"
-        } else if(radio2State) {
-            formState.type = "Band"
+        if(!radio1State && !radio2State) {
+            setErrorMessage("Please choose an account type.")
+        } else {
+            if(radio1State) {
+                formState.type = "Musician"
+            } else if(radio2State) {
+                formState.type = "Band"
+            }
+            changePage();
         }
-
-        changePage();
     };
 
     // validate user input before changing page
@@ -104,7 +107,7 @@ const Signup = () => {
     };
 
     return (
-        <section className="sign-on">
+        <section className="sign-on main">
             {pageState === 1 && 
                 <form onSubmit={handleUserSignup} autoComplete="off">
                     <div>
