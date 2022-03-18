@@ -23,14 +23,14 @@ const Dashboard = (props) => {
         return <div>Loading...</div>
     }
 
+
         return (
             <> 
             {user ? 
-                <section className="user-dashboard">
+                <section className="user-dashboard main">
                     {/* make a dashboard that is a mix of components */}
                     {/* div for stagename 
                         the div does not have an edit feature
-
 
                         div for bio with an editable text box.
 
@@ -43,8 +43,6 @@ const Dashboard = (props) => {
                         optional: div for social media links
 
                     */}
-                    
-
                     <form >
                         <h1 className="sans-serif para">This is the dashboard placeholder page. You'll notice it's the same as the login right now</h1>
                         
@@ -57,11 +55,9 @@ const Dashboard = (props) => {
                         <button type="submit" className="sans-serif sm">Submit</button>
 
                         <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
-
-                        
                     </form>
               </section>
-              :   <div>
+              :   <div className="main">
                       <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
                       <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
                   </div>
