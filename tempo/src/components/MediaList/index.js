@@ -4,7 +4,7 @@ import { QUERY_MUSIC } from "../../utils/queries";
 
 const MediaList = ({ media }) => {
     if (!media.length) {
-        return <p className="serif sm gold">{media.genre} You haven't added any music traits to your profile yet!</p>
+        return <p className="serif sm gold">You haven't added any music traits to your profile yet!</p>
     }
 
 

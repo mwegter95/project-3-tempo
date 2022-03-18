@@ -63,6 +63,7 @@ const UploadMedia = () => {
         event.preventDefault();
 
         if (validateInstruments(musicState.instruments)) {
+            console.log(musicState);
             try {
                 await addMusic({
                     variables: {...musicState}
