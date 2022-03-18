@@ -10,13 +10,25 @@ import { QUERY_ME } from "../utils/queries";
 
 import GenreList from "../components/GenreList"
 import InstrumentList from "../components/InstrumentList"
+import MediaList from "../components/MediaList";
 
 import Auth from "../utils/auth";
 
 const Dashboard = (props) => {
+  
     const { loading, data } = useQuery(QUERY_ME);
     const user = data?.me.username;
  
+    const [myMedia, setMyMedia] = useState(null);
+    const getMyMedia = (data) => {
+        return data?.me.music;
+    };
+    const { loading: mediaLoading } = useQuery(QUERY_ME, {
+        onCompleted: (data) => setMyMedia(getMyMedia(data))
+    });
+
+    let media = myMedia || [];
+
     if (loading) {
         return <div>Loading...</div>
     }
@@ -52,6 +64,11 @@ const Dashboard = (props) => {
                         <button type="submit" className="sans-serif sm">Submit</button>
 
                         <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
+                        <Link className="serif sm" to="/media">Add to your Profile!</Link>
+
+                        <div>
+                            <MediaList media={media}></MediaList>
+                        </div>
                     </form>
               </section>
               :   <div className="main">
@@ -59,6 +76,7 @@ const Dashboard = (props) => {
                   </div>
           }
           </>
+
     )
 }
 

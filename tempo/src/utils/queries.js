@@ -151,6 +151,12 @@ export const QUERY_ME = gql`
         reviewBy
         created_at
     }
+    music {
+        _id
+        genre
+        instruments
+        media
+    }
     }
   }
 `;
