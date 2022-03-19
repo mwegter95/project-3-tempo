@@ -9,11 +9,10 @@ export const QUERY_USERS = gql`
         biography
         status
         type
-        music {
+        meta {
             _id
-            genre
-            media
-            instruments
+            value
+            type            
         }
         reviews {
             _id
@@ -47,11 +46,10 @@ query user($_id: ID!) {
         biography
         status
         type
-        music {
+        meta {
             _id
-            genre
-            media
-            instruments
+            value
+            type            
         }
         reviews {
             _id
@@ -138,6 +136,8 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      biography
+      status
       reviews {
         _id
         review_text
@@ -149,13 +149,7 @@ export const QUERY_ME = gql`
         }
         reviewBy
         created_at
-    }
-    music {
-        _id
-        genre
-        instruments
-        media
-    }
+        }    
     }
   }
 `;

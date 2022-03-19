@@ -31,7 +31,7 @@ const Dashboard = (props) => {
  
     const [myMedia, setMyMedia] = useState(null);
     const getMyMedia = (userToGetMediaOf) => {
-        return userToGetMediaOf?.me.music;
+        return userToGetMediaOf?.me.meta;
     };
     const { loading: mediaLoading } = useQuery(QUERY_ME, {
         onCompleted: (response) => setMyMedia(getMyMedia(response))
@@ -66,10 +66,10 @@ const Dashboard = (props) => {
                         <h1 className="sans-serif para">{userData.user.username}</h1>
                         
                         <div className="list-border">
-                            <GenreList userMusic={userData.user.music}/>
+                            <GenreList userMusic={userData.user.meta}/>
                         </div>
                         <div className="list-border">
-                            <InstrumentList userMusic={userData.user.music}/>
+                            <InstrumentList userMusic={userData.user.meta}/>
                         </div>
 
                         <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>

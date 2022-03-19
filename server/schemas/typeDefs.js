@@ -17,7 +17,7 @@ const typeDefs = gql`
         _id: ID
         media: String
         meta: [MetaData]
-        userLink: String
+        userLink: ID
         title: String
         description: String
     }
@@ -53,7 +53,7 @@ const typeDefs = gql`
     type Query {
         me: User
         users: [User]
-        user(username: String): User
+        user(_id: ID): User
         metaUsers(metaData: [InputMeta]): [User]
         reviews: [Review]
         feedMusic(metaData: [InputMeta]): [Music]

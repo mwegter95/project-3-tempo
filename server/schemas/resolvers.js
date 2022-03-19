@@ -19,13 +19,13 @@ const resolvers = {
         users: async() => {
             return User.find()
                 .select("-_v -password")
-                .populate("music")
+                .populate("meta")
                 .populate("reviews");
         },
         user: async (parent, { _id }) => {
             return User.findOne({ _id })
                 .select("-_v -password")
-                .populate("music")
+                .populate("meta")
                 .populate("reviews");
         },
 
@@ -39,12 +39,37 @@ const resolvers = {
                 typeArray.push(element.type)
             });
             
-            return User.findOne({
+            //finds users that match meta data on user record
+            const matchingUsers = await User.find({
                 meta: { $elemMatch: {value: {$in: valueArray}}}
             })
                 .select("-_v -password")                
                 .populate("reviews")
                 .populate("meta")
+            
+            //find music that matches metadata on music record
+            const musicMatch = await Music.find({
+                meta: { $elemMatch: {value: {$in: valueArray}}}
+            }).populate("meta") 
+
+            musicMatchUsers = [];
+
+            //Build array of usernames from the matching music
+            musicMatch.forEach(element => {
+                musicMatchUsers.push(element.userLink);
+            });
+
+            //find user records that have matching metadata on related music records
+            const matchingMusicUsers = await User.find({
+                meta: { $elemMatch: {_id: {$in: musicMatchUsers}}}
+            })
+                .select("-_v -password")                
+                .populate("reviews")
+                .populate("meta")
+            
+            //TODO: merge matchingUsers & matchingMusicUsers
+            //TODO: Return unique values from above
+
         },
 
         reviews: async() => {
