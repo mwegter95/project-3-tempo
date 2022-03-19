@@ -52,12 +52,13 @@ mutation editUser($username: String, $status: String, $biography: String) {
 }
 `;
 export const ADD_MUSIC = gql`
-mutation addMusic($meta: [InputMeta], $userLink: ID, $media: String!, $title: String!, $description: String!) {
+mutation addMusic($meta: [InputMeta], $userLink: String, $media: String!, $title: String!, $description: String!) {
     addMusic(meta: $meta, userLink: $userLink, media: $media, title: $title, description: $description) {
         _id        
         media
         title
         description
+        userLink
         meta {
             _id
             type

@@ -97,7 +97,9 @@ const resolvers = {
             
         },
         music: async (parent, args) => {
-            return Music.find().populate("meta")
+            return Music.find(
+                { userLink: args }
+            ).populate("meta");
         },      
         messages: async() => {
             return Message.find();
@@ -143,7 +145,7 @@ const resolvers = {
         },
         addMusic: async (parent, args, context) => {
             if (context.user) {                
-                return await Music.create(args)                
+                return await Music.create({...args, userLink: context.user._id });                
             }
             throw new AuthenticationError("You need to be logged in!");
         },

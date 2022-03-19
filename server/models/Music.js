@@ -17,8 +17,8 @@ const musicSchema = new Schema (
         }, 
         meta: [metaDataSchema],        
         userLink: {
-            type: Schema.Types.ObjectId,
-            // required: true,
+            type: String,
+            required: true
         }
     },
     {
