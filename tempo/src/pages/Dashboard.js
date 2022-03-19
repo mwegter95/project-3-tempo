@@ -65,9 +65,11 @@ const Dashboard = (props) => {
                     <form >
                         <h1 className="sans-serif para">Your Dashboard</h1>
                         
-                        <div className="sans-serif para">
-                            <GenreList genres={userData.user.music}/>
-                            
+                        <div>
+                            <GenreList userMusic={userData.user.music}/>
+                        </div>
+                        <div>
+                            <InstrumentList userMusic={userData.user.music}/>
                         </div>
 
                         <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
