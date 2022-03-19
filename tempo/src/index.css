@@ -42,10 +42,16 @@ button:hover {
   cursor: pointer
 }
 
+textarea, input {
+  border-radius: 5px;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
 /* Our Adobe Fonts */
 .serif {
   font-family: playfair-display, serif;
-  font-weight: 400;
+  font-weight: 800 !important;
   font-style: italic;
   font-size: 28px;
 }
@@ -56,12 +62,12 @@ button:hover {
 }
 
 .title {
-  font-size: 86px;
+  font-size: 3vw;
   font-weight: 800;
 }
 
 .subtitle {
-  font-size: 74px;
+  font-size: 3.5vw;
   font-weight: 600;
 }
 
@@ -71,18 +77,17 @@ button:hover {
 }
 
 .subpara {
-  font-size: 36px;
+  font-size: 1.6vw;
   font-weight: 200;
 }
 
 .sm {
-  font-size: 28px;
+  font-size: 1.3vw;
   font-weight: 200;
 }
 
 .regular {
   font-size: 16px;
-  align-self: flex-end;
 }
 
 .white {
@@ -93,6 +98,15 @@ button:hover {
   color: var(--tempo-gold);
 }
 
+.grey {
+  color: var(--faded-gray);
+}
+
+.main {
+  padding: 20px 140px 40px;
+  min-height: 75vh;
+}
+
 /* Component: Header */
 header {
   margin: 0px 140px;
@@ -101,7 +115,7 @@ header {
   align-items: center;
 }
 
-header nav a:first-of-type {
+header nav a:not(:last-of-type) {
   margin-right: 50px;
 }
 
@@ -185,14 +199,13 @@ main section:last-of-type {
 
 /* Pages: Signup */
 .sign-on {
-  height: 1000px;
   background-image: url("./assets/sign-on-hero.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  padding: 20px 0px;
 }
 
 .sign-on form {
@@ -230,4 +243,80 @@ main section:last-of-type {
 .sign-on form button {
   margin-top: 50px;
   width: 35%
+}
+
+/* Page: My Reviews */
+.myreviews {
+  background-color: var(--tempo-gold);
+}
+
+.myreviews h1 {
+  margin-bottom: 30px;
+}
+
+.review-layout {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  padding: 40px 30px;
+}
+
+.review-layout div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-layout p {
+  margin-bottom: 10px;
+}
+
+.review-layout p a {
+  text-decoration: underline;
+}
+
+.createdAt {
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+/* Pages: Profile */
+.profile {
+  background-color: var(--tempo-gold);
+}
+
+.profile form {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  padding: 40px 30px;
+  width: 50%;
+}
+
+.profile input, .profile textarea {
+  margin-bottom: 15px;
+}
+
+.profile div {
+  display: flex;
+}
+
+.profile div input {
+  width: 10%;
+  text-align: right;
+  margin-right: 15px;
+}
+
+/* Pages: Dashboard */
+.list-border {
+  border-radius: 5px;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.7);
 }

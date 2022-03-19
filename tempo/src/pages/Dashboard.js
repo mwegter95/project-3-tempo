@@ -10,66 +10,82 @@ import { QUERY_ME } from "../utils/queries";
 
 import GenreList from "../components/GenreList"
 import InstrumentList from "../components/InstrumentList"
+import MediaList from "../components/MediaList";
 
 import Auth from "../utils/auth";
 
 const Dashboard = (props) => {
-    const { loading, data } = useQuery(QUERY_ME);
-    const user = data?.me.username;
+    // check that a user is logged in, then set user = logged in user's id
+    const { loading: loadingMe, data: dataMe } = useQuery(QUERY_ME);
+    const user = dataMe?.me._id;
+    // console log the logged in user's id
+    console.log(user);
 
-    // redirect to personal page if username is yours
-    // this part is not necessary if we have separate pages for dashboard (logged in user) and profile (viewing other user). 
-    if (Auth.loggedIn() && Auth.getProfile().data.username === user) {
-        return <Redirect to="/dashboard" />;
+    // query the logged in user's data, then set userData = their data
+    const { loading, data } = useQuery(QUERY_USER, {
+        variables: {_id: user },
+    });
+    const userData = data;
+    // console log their data
+    console.log(userData);
+ 
+    const [myMedia, setMyMedia] = useState(null);
+    const getMyMedia = (userToGetMediaOf) => {
+        return userToGetMediaOf?.me.music;
+    };
+    const { loading: mediaLoading } = useQuery(QUERY_ME, {
+        onCompleted: (response) => setMyMedia(getMyMedia(response))
+    });
+
+    let media = myMedia || [];
+
+    if (loadingMe || loading || mediaLoading) {
+        return <div>Loading...</div>
     }
 
-    if (loading) {
-        return <div>Loading...</div>
-    } 
+        return (
+            <> 
+            {user ? 
+                <section className="user-dashboard main">
+                    {/* make a dashboard that is a mix of components */}
+                    {/* div for stagename 
+                        the div does not have an edit feature
 
-    return (
-        <> 
-        {user === "Oil Refinery" ? 
-            <section className="user-dashboard">
-                {/* make a dashboard that is a mix of components */}
-                {/* div for stagename 
-                    the div does not have an edit feature
+                        div for bio with an editable text box.
 
-                    div for bio with an editable text box.
+                        div for location that has edit button, location can be any parameters, required either city, state, or zip, but only one  of those is required
 
-                    div for location that has edit button, location can be any parameters, required either city, state, or zip, but only one  of those is required
+                        div for conversations
 
-                    div for conversations
+                        div for selecting instruments they play and genres they play
 
-                    div for selecting instruments they play and genres they play
+                        optional: div for social media links
 
-                    optional: div for social media links
+                    */}
+                    <form >
+                        <h1 className="sans-serif para">{userData.user.username}</h1>
+                        
+                        <div className="list-border">
+                            <GenreList userMusic={userData.user.music}/>
+                        </div>
+                        <div className="list-border">
+                            <InstrumentList userMusic={userData.user.music}/>
+                        </div>
 
-                */}
-                
-                <form >
-                    <h1 className="sans-serif para">This is the dashboard placeholder page. You'll notice it's the same as the login right now</h1>
-                    
-                    <label htmlFor="email" className="sans-serif subpara">Email:</label>
-                    <input name="email" type="email" className="sans-serif sm"/>
-                    
-                    <label htmlFor="password" className="sans-serif subpara">Password:</label>
-                    <input name="password" type="password" className="sans-serif sm" />
+                        <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
+                        <Link className="serif sm" to="/media">Add to your Profile!</Link>
 
-                    <button type="submit" className="sans-serif sm">Submit</button>
-
-                    <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
-
-                    
-                </form>
-            </section>
-            :   <div>
-                    <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
-                    <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
-                </div>
-        }
-        </>
-    )
+                        <div>
+                            <MediaList media={media}></MediaList>
+                        </div>
+                    </form>
+                </section>
+                :   <div className="main">
+                      <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
+                    </div>
+            }
+            </>
+        )
 }
 
 export default Dashboard;

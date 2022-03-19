@@ -59,16 +59,21 @@ const Profile = () => {
     };
 
     return (
-        <div>
-            <h1 className="sans-serif subtitle">{user.username}'s Profile</h1>
-            <form onSubmit={handleFormSubmit}>
-                <h1 className="sans-serif subpara">Write a review on {user.username}</h1>
-                <p className="serif sm">The reviews you write will only be seen by you.</p>
+        <div className="main profile">
+            <h1 className="sans-serif white subtitle">{user.username}'s Profile</h1>
 
-                <label htmlFor="rating" className="sans-serif subpara">Rating:</label>
-                <input name="rating" type="number" className="sans-serif sm" onChange={handleChange} />
+            <form onSubmit={handleFormSubmit} className="profile-form">
+                <h1 className="sans-serif white subpara">Write a review on {user.username}</h1>
+                <p className="serif gold regular">The reviews you write will only be seen by you.</p>
 
-                <label htmlFor="review_text" className="sans-serif subpara">Review:</label>
+                
+                <label htmlFor="rating" className="sans-serif white subpara">Rating:</label>
+                <div>
+                    <input name="rating" type="number" className="sans-serif sm" onChange={handleChange} />
+                    <p className="sans-serif white subpara">/10</p>
+                </div>
+
+                <label htmlFor="review_text" className="sans-serif white subpara">Review:</label>
                 <textarea name="review_text" type="review" className="sans-serif sm" maxLength="500" onChange={handleChange}></textarea>
 
                 <button type="submit" className="sans-serif sm">Submit Review</button>

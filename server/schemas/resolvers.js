@@ -18,15 +18,15 @@ const resolvers = {
         },
         users: async() => {
             return User.find()
-                .select("-_v -password")                
-                .populate("reviews")
-                .populate("meta")
+                .select("-_v -password")
+                .populate("music")
+                .populate("reviews");
         },
-        user: async (parent, { username }) => {
-            return User.findOne({ username })
-                .select("-_v -password")                
-                .populate("reviews")
-                .populate("meta")
+        user: async (parent, { _id }) => {
+            return User.findOne({ _id })
+                .select("-_v -password")
+                .populate("music")
+                .populate("reviews");
         },
 
         metaUsers: async (parent, { metaData }) => {
