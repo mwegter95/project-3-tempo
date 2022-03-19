@@ -6,11 +6,11 @@ const musicSchema = new Schema (
     {
         media: {
             type: String,
-            required: true,
+            // required: true,
         },
         title: {
             type: String,
-            required: true,
+            // required: true,
         },
         description: {
             type: String,
@@ -18,14 +18,27 @@ const musicSchema = new Schema (
         meta: [metaDataSchema],
         userLink: {
             type: String,
+            // required: true,
         }
     },
     {
         toJSON: {
-            getters: true
+            getters: true,
+            virtuals: true
         }
     }
 );
+
+musicSchema.virtual('metaMatcher').get(function() {
+    
+    const returnArray = [];
+
+    this.meta.forEach(element => {
+        returnArray.push(`${element.value}-${element.type}`)
+    })
+    
+    return returnArray;
+  });
 
 const Music = model("Music", musicSchema);
 module.exports = Music;

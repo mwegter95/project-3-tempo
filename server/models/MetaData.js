@@ -4,11 +4,11 @@ const metaDataSchema = new Schema (
     {
         value: {
             type: String,
-            required: true,
+            // required: true,
         },
         type: {
             type: String,
-            required: true,
+            // required: true,
         }
     },
     {

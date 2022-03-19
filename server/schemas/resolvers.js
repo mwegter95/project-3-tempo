@@ -31,12 +31,13 @@ const resolvers = {
         reviews: async() => {
             return Review.find()
         },
-        feedMusic: async (parent, args) => {
+        feedMusic: async (parent, { metaData }) => {
 
             const valueSearch = [];
             const typeSearch =[];
             
-            args.metaData.foreach (element => {
+            
+            metaData.forEach (element => {
                 valueSearch.push(element.value);
                 typeSearch.push(element.type);
             });
