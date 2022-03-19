@@ -54,6 +54,7 @@ const typeDefs = gql`
         me: User
         users: [User]
         user(username: String): User
+        metaUsers(metaData: [InputMeta]): [User]
         reviews: [Review]
         feedMusic(metaData: [InputMeta]): [Music]
         userMusic(username: String): [Music]

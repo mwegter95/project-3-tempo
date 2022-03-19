@@ -28,12 +28,29 @@ const resolvers = {
                 .populate("reviews")
                 .populate("meta")
         },
+
+        metaUsers: async (parent, { metaData }) => {
+            
+            valueArray = [];
+            typeArray = [];
+
+            metaData.forEach(element => {
+                valueArray.push(element.value);
+                typeArray.push(element.type)
+            });
+            
+            return User.findOne({
+                meta: { $elemMatch: {value: {$in: valueArray}}}
+            })
+                .select("-_v -password")                
+                .populate("reviews")
+                .populate("meta")
+        },
+
         reviews: async() => {
             return Review.find()
         },
-        feedMusic: async (parent, { metaData }) => {
-           
-            console.log(metaData);
+        feedMusic: async (parent, { metaData }) => {       
 
             valueArray = [];
             typeArray = [];
@@ -45,30 +62,22 @@ const resolvers = {
 
            return Music.find({
                meta: { $elemMatch: {value: {$in: valueArray}}}
-           }) 
+           }).populate("meta") 
 
         },
         userMusic: async (parent, { username }) => {
             return Music.find({
                 userLink: username
-            })
+            }).populate("meta")
             
         },
         music: async (parent, args) => {
-            return Music.find()
+            return Music.find().populate("meta")
         },      
         messages: async() => {
             return Message.find();
         },
-        // metaData: async (parent, args) => {
-        //     if (args.type) {
-        //         return MetaData.find({
-        //             type: { $in: [
-        //                 args.type
-        //             ]}
-        //         })
-        //     }
-        // },
+
     }, 
 
     Mutation: {
@@ -108,10 +117,10 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in!");
         },
         addMusic: async (parent, args, context) => {
-            // if (context.user) {                
+            if (context.user) {                
                 return await Music.create(args)                
-            // }
-            // throw new AuthenticationError("You need to be logged in!");
+            }
+            throw new AuthenticationError("You need to be logged in!");
         },
         addReview: async (parent, args, context) => {
             if (context.user) {
