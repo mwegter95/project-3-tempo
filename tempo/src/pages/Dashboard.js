@@ -63,12 +63,12 @@ const Dashboard = (props) => {
 
                     */}
                     <form >
-                        <h1 className="sans-serif para">Your Dashboard</h1>
+                        <h1 className="sans-serif para">{userData.user.username}</h1>
                         
-                        <div>
+                        <div className="list-border">
                             <GenreList userMusic={userData.user.music}/>
                         </div>
-                        <div>
+                        <div className="list-border">
                             <InstrumentList userMusic={userData.user.music}/>
                         </div>
 
