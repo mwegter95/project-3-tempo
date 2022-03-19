@@ -14,9 +14,19 @@ const MediaList = ({ media }) => {
             {media.length && 
             media.map((trait) => (
                 <article key={trait._id}>
-                    <a href={trait.media} target="_blank" className="sans-serif subpara">Check out my stuff!</a>
-                    <p>Genre: {trait.genre}</p>
-                    <p>Instruments: {trait.instruments.map((instrument) => (instrument))}</p>
+                    {trait.media ? 
+                    <>
+                        <a href={trait.media} target="_blank" className="sans-serif subpara">Check out my stuff!</a>
+                        <p>Genre: {trait.genre}</p>
+                        <p>Instruments: {trait.instruments.map((instrument) => instrument)}</p>
+                    </>
+                        : 
+                    <>
+                        <p className="sans-serif subpara">No Media Link available</p>
+                        <p>Genre: {trait.genre}</p>
+                        <p>Instruments: {trait.instruments.map((instrument) => (instrument))}</p>
+                    </>
+                    }
                 </article>
             ))}
         </div>

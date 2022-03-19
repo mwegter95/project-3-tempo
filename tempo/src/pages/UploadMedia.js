@@ -28,7 +28,7 @@ const UploadMedia = () => {
 
     const validateInstruments = (instruments) => {
         if (typeof instruments === "undefined") {
-            return false;
+            return {result: false, arr: []};
         }
 
         let instrumentArr = [];
@@ -45,33 +45,30 @@ const UploadMedia = () => {
             return instrument.toLowerCase().trim();
         });
 
-        changeState(newArr);
-
         var instrumentCheck = false;
         for (var i = 0; i < newArr.length; i++) {
             instrumentCheck = InstrumentListArray.includes(newArr[i]);
             if (instrumentCheck === false) {
-                return false;
+                return {result: false, arr: []};
             }
         }
 
-        return true;
-    };
-
-    const changeState = (validArray) => {
-        setMusicState({
-            ...musicState,
-            instruments: validArray
-        });
+        return {result: true, arr: newArr};
     };
 
     const handleAddMusic = async (event) => {
         event.preventDefault();
+        const validObject = validateInstruments(musicState.instruments);
+        const musicArray = validObject.arr;
 
-        if (validateInstruments(musicState.instruments)) {
+        if (validObject.result) {
             try {
                 await addMusic({
-                    variables: {...musicState}
+                    variables: {
+                        genre: musicState.genre,
+                        media: musicState.media,
+                        instruments: musicArray
+                    }
                 });
                 window.location.assign("/dashboard");
             } catch(e) {
