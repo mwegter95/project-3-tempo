@@ -57,7 +57,7 @@ const typeDefs = gql`
         metaUsers(metaData: [InputMeta]): [User]
         reviews: [Review]
         feedMusic(metaData: [InputMeta]): [Music]
-        userMusic(username: String): [Music]
+        userMusic(_id: ID): [Music]
         music: [Music]
         messages: [Message]
     }
@@ -67,7 +67,7 @@ const typeDefs = gql`
         addUser(username: String, email: String, password: String, type: String, biography: String, status: String): Auth
         deleteUser: User
         editUser(username: String, status: String, biography: String, type: String, meta: [InputMeta]): User
-        addMusic(media: String, meta: [InputMeta], userLink: String, title: String, description: String): Music
+        addMusic(media: String, meta: [InputMeta], userLink: ID, title: String, description: String): Music
         addReview(review_text: String, rating: Int): Review
         addMessage(message_text: String): Message        
     }

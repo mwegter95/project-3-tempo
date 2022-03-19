@@ -4,12 +4,19 @@ import { ADD_MUSIC } from "../utils/mutations";
 import InstrumentListArray from "../utils/InstrumentList";
 import { Link } from "react-router-dom";
 
+//todo: refactor instrument and genre for multiple entries and datatype match to query
+//todo: add userLink
+//todo: add title and description
+
 const UploadMedia = () => {
     const [musicState, setMusicState] = useState(
         {
-            genre: "",
+            title: "",
             media: "",
-            instruments: ""
+            description: "",
+            userLink: "",
+            meta: []
+
         }
     );
 

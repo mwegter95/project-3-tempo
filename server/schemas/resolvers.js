@@ -90,9 +90,9 @@ const resolvers = {
            }).populate("meta") 
 
         },
-        userMusic: async (parent, { username }) => {
+        userMusic: async (parent, { _id }) => {
             return Music.find({
-                userLink: username
+                userLink: _id
             }).populate("meta")
             
         },
