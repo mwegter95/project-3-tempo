@@ -32,28 +32,20 @@ const resolvers = {
             return Review.find()
         },
         feedMusic: async (parent, { metaData }) => {
+           
+            console.log(metaData);
 
-            const valueSearch = [];
-            const typeSearch =[];
-            
-            
-            metaData.forEach (element => {
-                valueSearch.push(element.value);
-                typeSearch.push(element.type);
+            valueArray = [];
+            typeArray = [];
+
+            metaData.forEach(element => {
+                valueArray.push(element.value);
+                typeArray.push(element.type)
             });
-            
-           return Music.find({
-               meta: {
-                   $elemMatch : {
-                       value : { $in : valueSearch}
-                   }
-               },
-               meta: {
-                    $elemMatch : {
-                        type : { $in : typeSearch}
-                    }
-                }
-            })
+
+           const musicData = await Music.find({
+               meta: { $elemMatch: {value: {$in: valueArray}}}
+           })
         },
         userMusic: async (parent, { username }) => {
             return Music.find({
@@ -115,7 +107,7 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in!");
         },
         addMusic: async (parent, args, context) => {
-            // if (context.user) {
+            // if (context.user) {                
                 return await Music.create(args)                
             // }
             // throw new AuthenticationError("You need to be logged in!");
