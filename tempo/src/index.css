@@ -313,3 +313,10 @@ main section:last-of-type {
   text-align: right;
   margin-right: 15px;
 }
+
+/* Pages: Dashboard */
+.list-border {
+  border-radius: 5px;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.7);
+}
