@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_MUSIC } from "../utils/mutations";
 import InstrumentListArray from "../utils/InstrumentList";
+import { Link } from "react-router-dom";
 
 const UploadMedia = () => {
     const [musicState, setMusicState] = useState(
@@ -44,10 +45,7 @@ const UploadMedia = () => {
             return instrument.toLowerCase().trim();
         });
 
-        setMusicState({
-            ...musicState,
-            instruments: newArr
-        });
+        changeState(newArr);
 
         var instrumentCheck = false;
         for (var i = 0; i < newArr.length; i++) {
@@ -56,14 +54,21 @@ const UploadMedia = () => {
                 return false;
             }
         }
+
         return true;
+    };
+
+    const changeState = (validArray) => {
+        setMusicState({
+            ...musicState,
+            instruments: validArray
+        });
     };
 
     const handleAddMusic = async (event) => {
         event.preventDefault();
 
         if (validateInstruments(musicState.instruments)) {
-            console.log(musicState);
             try {
                 await addMusic({
                     variables: {...musicState}
@@ -87,6 +92,7 @@ const UploadMedia = () => {
 
     return (
         <section className="import-media main">
+            <Link className="serif sm" to="/dashboard">Back to Dashboard</Link>
             <form onSubmit={handleAddMusic}>
                 <div>
                     <h1 className="sans-serif para">Add Music Data to your Profile</h1>
@@ -98,7 +104,7 @@ const UploadMedia = () => {
                     <label htmlFor="instruments" className="sans-serif subpara">Instrument(s). Separate each with a comma.</label>
                     <input name="instruments" type="text" className="sans-serif sm" value={musicState.instruments || ""} onChange={handleChange} />
 
-                    <h2 className="sans-serif para">Upload an Audio or Video File to Showcase your skills!</h2>
+                    <h2 className="sans-serif para">Upload a link of you in action to Showcase your skills!</h2>
 
                     <label htmlFor="media" className="sans-serif subpara">Media File Link:</label>
                     <input name="media" type="text" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
