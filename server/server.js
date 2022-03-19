@@ -7,6 +7,8 @@ const { ApolloServer } = require("apollo-server-express");
 const { typeDefs, resolvers } = require("./schemas");
 const db = require("./config/connection");
 
+const morgan = require('morgan')
+
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -20,8 +22,10 @@ const startServer = async() => {
 
     await server.start();
     server.applyMiddleware({ app });
-
+    
     console.log(`Use GraphQl at http://localhost:${PORT}${server.graphqlPath}`);
+    
+    morgan('tiny')
     // seedData();    
 };
 

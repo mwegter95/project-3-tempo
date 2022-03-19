@@ -114,10 +114,10 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in!");
         },
         addMusic: async (parent, args, context) => {
-            if (context.user) {
+            // if (context.user) {
                 return await Music.create(args)                
-            }
-            throw new AuthenticationError("You need to be logged in!");
+            // }
+            // throw new AuthenticationError("You need to be logged in!");
         },
         addReview: async (parent, args, context) => {
             if (context.user) {

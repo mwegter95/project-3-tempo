@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/mwegter95/project-3-tempo/issues"
   },
-  "homepage": "https://github.com/mwegter95/project-3-tempo#readme"
+  "homepage": "https://github.com/mwegter95/project-3-tempo#readme",
+  "dependencies": {
+    "morgan": "^1.10.0"
+  }
 }
