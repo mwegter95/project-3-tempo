@@ -43,18 +43,16 @@ const resolvers = {
                 typeArray.push(element.type)
             });
 
-           const musicData = await Music.find({
-               meta: { $elemMatch: 
-                [{value: {$in: valueArray}},
-                 {type: {$in: typeArray}}   
-            ]}
-           })
+           return Music.find({
+               meta: { $elemMatch: {value: {$in: valueArray}}}
+           }) 
+
         },
         userMusic: async (parent, { username }) => {
             return Music.find({
                 userLink: username
             })
-
+            
         },
         music: async (parent, args) => {
             return Music.find()
