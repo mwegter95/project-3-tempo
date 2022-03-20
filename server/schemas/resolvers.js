@@ -17,16 +17,18 @@ const resolvers = {
             throw new AuthenticationError("Not logged in");
         },
         users: async() => {
-            return User.find()
+            const usersQueryData = await User.find()
                 .select("-_v -password")
                 .populate("meta")
                 .populate("reviews");
+            return usersQueryData;
         },
         user: async (parent, { _id }) => {
-            return User.findOne({ _id })
+            const singleUserQueryData = await User.findOne({ _id })
                 .select("-_v -password")
                 .populate("meta")
                 .populate("reviews");
+            return singleUserQueryData;
         },
 
         metaUsers: async (parent, { metaData }) => {
@@ -97,9 +99,7 @@ const resolvers = {
             
         },
         music: async (parent, args) => {
-            return Music.find(
-                { userLink: args }
-            ).populate("meta");
+            return Music.find().populate("meta");
         },      
         messages: async() => {
             return Message.find();

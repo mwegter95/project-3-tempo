@@ -108,8 +108,8 @@ query myReviews {
 `;
 
 export const QUERY_MUSIC = gql`
-query music($userLink: String) {
-    music(userLink: $userLink) {
+query music {
+    music {
         _id
         media
         title
@@ -123,6 +123,24 @@ query music($userLink: String) {
     }
 }
 `;
+
+export const QUERY_USERMUSIC = gql`
+query userMusic($_id: ID!) {
+    userMusic(_id: $_id) {
+        _id
+        media
+        meta {
+            _id
+            type
+            value
+        }
+        userLink
+        title
+        description
+    }
+}
+
+`
 
 export const QUERY_MESSAGES = gql`
 {

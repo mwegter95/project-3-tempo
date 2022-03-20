@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { EDIT_USER } from "../utils/mutations";
 import { ADD_MUSIC } from "../utils/mutations";
-import { QUERY_ME, QUERY_USER, QUERY_MUSIC } from "../utils/queries";
+import { QUERY_ME, QUERY_USER, QUERY_USERMUSIC } from "../utils/queries";
 
 import GenreList from "../components/GenreList"
 import InstrumentList from "../components/InstrumentList"
@@ -32,8 +32,8 @@ const Dashboard = (props) => {
     const getMyMedia = (musicRecord) => {
         return musicRecord?.music.meta;
     };
-    const { loading: mediaLoading } = useQuery(QUERY_MUSIC, {
-        variables: { user },
+    const { loading: mediaLoading } = useQuery(QUERY_USERMUSIC, {
+        variables: {_id: user },
         onCompleted: (response) => setMyMedia(getMyMedia(response))
     });
 
@@ -42,7 +42,8 @@ const Dashboard = (props) => {
     if (loadingMe || loading || mediaLoading) {
         return <div>Loading...</div>
     }
-
+        console.log(media);
+        console.log(myMedia);
         return (
             <> 
             {user ? 
