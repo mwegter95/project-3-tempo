@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
-import { FEED_MUSIC, MUSIC_FEED } from "../utils/queries";
+import { useQuery } from "@apollo/client";
+import { FEED_MUSIC } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
 
 
@@ -35,11 +35,11 @@ const Discover = () => {
     })
 
     const tempMeta = [{
-        value: "bass",
-        type: "instrument"
+        value: "country",
+        type: "genre"
     }]
 
-    const { musicFeed } = useQuery(FEED_MUSIC, {
+    const { data: musicFeed } = useQuery(FEED_MUSIC, {
         variables: { metaData: tempMeta }
     });
     
@@ -47,29 +47,31 @@ const Discover = () => {
     const handleAddMeta = async (event) => {
         event.preventDefault();
          
-        // console.log(metaCriteria);
+        console.log(metaCriteria);
 
         const newValue = document.getElementById("addMeta").value;
 
-        // const newValueList = [...metaCriteria, newValue];
+        const newValueList = [...metaCriteria, newValue];  
 
-        // const metaCriteria = [];
-
-        // newValueList.forEach(element => {
-        //     metaCriteria.push({
-        //         value: element.value,
-        //         type: 'criteria'
-        //     })
-        // });
+        newValueList.forEach(element => {
+            metaCriteria.push({
+                value: element.value,
+                type: 'criteria'
+            })
+        });
 
         console.log(newValue);
+        console.log("musicFeed")
         console.log(musicFeed);
         // console.log(newValueList);
-        // console.log(metaCriteria);
+        console.log(metaCriteria);
 
-        // setMetaCriteria(newValueList);
+        setMetaCriteria(newValueList);
     
-        setActiveMusic(musicFeed[0]);
+        console.log("musicFeed[0]")
+        console.log(musicFeed.feedMusic[0]);
+
+        setActiveMusic(musicFeed.feedMusic[0]);
 
         console.log("after running");
         
