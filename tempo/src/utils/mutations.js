@@ -51,14 +51,19 @@ mutation editUser($username: String, $status: String, $biography: String) {
     }
 }
 `;
-
 export const ADD_MUSIC = gql`
-mutation addMusic($genre: String!, $instruments: [String!], $media: String) {
-    addMusic(genre: $genre, instruments: $instruments, media: $media) {
-        _id
-        genre
+mutation addMusic($meta: [InputMeta], $userLink: ID, $media: String!, $title: String!, $description: String!) {
+    addMusic(meta: $meta, userLink: $userLink, media: $media, title: $title, description: $description) {
+        _id        
         media
-        instruments
+        title
+        description
+        userLink
+        meta {
+            _id
+            type
+            value
+        }
     }
 }
 `;

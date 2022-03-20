@@ -8,16 +8,24 @@ const typeDefs = gql`
         biography: String
         status: String
         type: String
-        music: [Music]
         reviews: [Review]
         messages: [Message]
+        meta: [MetaData]        
     }
 
     type Music {
         _id: ID
-        genre: String
         media: String
-        instruments: [String]
+        meta: [MetaData]
+        userLink: ID
+        title: String
+        description: String
+    }
+
+    type MetaData {
+        _id: ID
+        value: String
+        type: String            
     }
 
     type Review {
@@ -37,25 +45,33 @@ const typeDefs = gql`
         created_at: String
     }
 
+    input InputMeta {
+        value: String    
+        type: String       
+      }
+
     type Query {
         me: User
         users: [User]
-        user(_id: ID!): User
+        user(_id: ID): User
+        metaUsers(metaData: [InputMeta]): [User]
         reviews: [Review]
         myReviews: [Review]
-        music(genre: String, instrument: String): [Music]
+        feedMusic(metaData: [InputMeta]): [Music]
+        userMusic(_id: ID): [Music]
+        music: [Music]
+        singleUserMusic(userLink: String): [Music]
         messages: [Message]
     }
 
     type Mutation {
-        login(email: String!, password: String!): Auth
-        addUser(username: String!, email: String!, password: String!, type: String!, biography: String, status: String): Auth
+        login(email: String, password: String): Auth
+        addUser(username: String, email: String, password: String, type: String, biography: String, status: String): Auth
         deleteUser: User
-        editUser(username: String, status: String, biography: String, type: String): User
-        addMusic(genre: String!, instruments: [String!], media: String): Music
+        editUser(username: String, status: String, biography: String, type: String, meta: [InputMeta]): User
+        addMusic(media: String, meta: [InputMeta], userLink: ID, title: String, description: String): Music
         addReview(reviewBy: ID!, reviewOf: ID! review_text: String!, rating: Int): Review
-        addMessage(message_text: String!): Message
-        
+        addMessage(message_text: String): Message  
     }
 
     type Auth {

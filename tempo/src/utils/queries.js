@@ -9,11 +9,10 @@ export const QUERY_USERS = gql`
         biography
         status
         type
-        music {
+        meta {
             _id
-            genre
-            media
-            instruments
+            value
+            type            
         }
         reviews {
             _id
@@ -47,11 +46,10 @@ query user($_id: ID!) {
         biography
         status
         type
-        music {
+        meta {
             _id
-            genre
-            media
-            instruments
+            value
+            type            
         }
         reviews {
             _id
@@ -110,15 +108,39 @@ query myReviews {
 `;
 
 export const QUERY_MUSIC = gql`
-query music($genre: String, $instruments: [String]) {
-    music(genre: $genre, instruments: $instruments) {
+query music {
+    music {
         _id
-        genre
         media
-        instruments
+        title
+        description
+        meta {
+            _id
+            type
+            value
+        }
+        userLink
     }
 }
 `;
+
+export const QUERY_USERMUSIC = gql`
+query userMusic($_id: ID!) {
+    userMusic(_id: $_id) {
+        _id
+        media
+        meta {
+            _id
+            type
+            value
+        }
+        userLink
+        title
+        description
+    }
+}
+
+`
 
 export const QUERY_MESSAGES = gql`
 {
@@ -138,6 +160,8 @@ export const QUERY_ME = gql`
       _id
       username
       email
+      biography
+      status
       reviews {
         _id
         review_text
@@ -149,13 +173,7 @@ export const QUERY_ME = gql`
         }
         reviewBy
         created_at
-    }
-    music {
-        _id
-        genre
-        instruments
-        media
-    }
+        }    
     }
   }
 `;

@@ -1,6 +1,5 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { QUERY_MUSIC } from "../../utils/queries";
+import { capitalizeFirstLetter } from "../../utils/helpers";
 
 const MediaList = ({ media }) => {
     if (!media.length) {
@@ -15,8 +14,13 @@ const MediaList = ({ media }) => {
             media.map((trait) => (
                 <article key={trait._id}>
                     <a href={trait.media} target="_blank" className="sans-serif subpara">Check out my stuff!</a>
-                    <p>Genre: {trait.genre}</p>
-                    <p>Instruments: {trait.instruments.map((instrument) => (instrument))}</p>
+                    <p className="serif sm gold">Title: {trait.title}</p>
+                    <p>Description: {trait.description}</p>
+                    {trait.meta.map((meta) => (
+                        <div key={meta._id}>
+                            <p>{capitalizeFirstLetter(meta.type)}: {capitalizeFirstLetter(meta.value)}</p>
+                        </div>
+                    ))}
                 </article>
             ))}
         </div>

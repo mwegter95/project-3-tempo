@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Fade from "react-reveal/Fade";
 import { useMutation } from "@apollo/client";
 import { LOGIN_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
@@ -19,8 +20,6 @@ const Login = () => {
 
     const handleLogin = async (event) => {
         event.preventDefault();
-        console.log(formState);
-
         const email = document.getElementById("email").value.length;
         const password = document.getElementById("password").value.length;
 
@@ -37,24 +36,25 @@ const Login = () => {
                 console.error(e);
             }
         }
-
     }
 
     return (
         <section className="main sign-on">
-            <form onSubmit={handleLogin} autoComplete="off">
-                <h1 className="sans-serif white para">Welcome back.</h1>
-                {errorMessage && <p className="serif sm gold">{errorMessage}</p>}
+            <Fade>
+                <form onSubmit={handleLogin} autoComplete="off">
+                    <h1 className="sans-serif white para">Welcome back.</h1>
+                    {errorMessage && <p className="serif sm gold">{errorMessage}</p>}
+                    
+                    <label htmlFor="email" className="sans-serif white subpara">Email:</label>
+                    <input id="email" name="email" type="email" className="sans-serif sm" onChange={handleChange} />
+                    
+                    <label htmlFor="password" className="sans-serif white subpara">Password:</label>
+                    <input id="password" name="password" type="password" className="sans-serif sm" onChange={handleChange} />
                 
-                <label htmlFor="email" className="sans-serif white subpara">Email:</label>
-                <input id="email" name="email" type="email" className="sans-serif sm" onChange={handleChange} />
-                
-                <label htmlFor="password" className="sans-serif white subpara">Password:</label>
-                <input id="password" name="password" type="password" className="sans-serif sm" onChange={handleChange} />
-
-                <button type="submit" className="sans-serif sm">Submit</button>
-                {error && <div className="serif sm gold">Login failed.</div>}
-            </form>
+                    <button type="submit" className="sans-serif sm">Submit</button>
+                    {error && <div className="serif sm gold">Login failed.</div>}
+                </form>
+            </Fade>
         </section>
     )
 }

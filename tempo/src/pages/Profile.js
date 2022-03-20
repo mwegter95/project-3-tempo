@@ -51,7 +51,7 @@ const Profile = () => {
     };
 
     if(loading) {
-        return <div className="serif para">loading...</div>
+        return <div className="serif para main grey loading">loading...</div>
     };
     // checks if the id in parameters is valid
     if(!data) {
@@ -62,9 +62,9 @@ const Profile = () => {
         <div className="main profile">
             <h1 className="sans-serif white subtitle">{user.username}'s Profile</h1>
 
-            <form onSubmit={handleFormSubmit} className="profile-form">
+            <form onSubmit={handleFormSubmit} className="review-layout">
                 <h1 className="sans-serif white subpara">Write a review on {user.username}</h1>
-                <p className="serif gold regular">The reviews you write will only be seen by you.</p>
+                <p className="serif grey sm">The reviews you write will only be seen by you.</p>
 
                 
                 <label htmlFor="rating" className="sans-serif white subpara">Rating:</label>
