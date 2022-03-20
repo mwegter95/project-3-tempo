@@ -14,26 +14,34 @@ import MetaList from "../components/metaList";
 //TODO: integrate discoMedia
 
 
-//Define State to include a list of metadata values that will drive the discovery media feed
-const searchMeta = () => {
+//render page
+const Discover = () => {
+
+    //Define State to include a list of metadata values that will drive the discovery media feed
     const [metaState, setMetaState] = useState(
         {
             values: []
-        }
-    )};
+        });
 
-const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setMetaState({
-        ...metaState,
-        [name]: value
-    });
-};
-
-
-//render page
-const Discover = () => {
+    
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+    
+        setMetaState({
+            ...metaState,
+            [name]: value
+        });
+    };
+    
+    
+    const handleAddMeta = async (event) => {
+        event.preventDefault();
+    
+        setMetaState({
+            ...metaState, 
+    
+        });
+    };
         
     return (
         <div className="main">
@@ -52,7 +60,7 @@ const Discover = () => {
                 </form>
             </div>
             <div>
-                <DiscoMedia feedMedia={feedMedia} />
+                <DiscoFeed criteria={metaState.values} />
             </div>
         </div>
     )
