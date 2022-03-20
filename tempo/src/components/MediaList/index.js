@@ -1,6 +1,4 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { QUERY_MUSIC } from "../../utils/queries";
 
 const MediaList = ({ media }) => {
     if (!media.length) {
@@ -18,10 +16,10 @@ const MediaList = ({ media }) => {
                     <p className="serif sm gold">Title: {trait.title}</p>
                     <p>Description: {trait.description}</p>
                     {trait.meta.map((meta) => (
-                        <>
-                        <p key={meta._id}>Genre: {meta.type}</p>
-                        <p key={meta._id}>Instruments: {meta.value}</p>
-                        </>
+                        <div key={meta._id}>
+                            <p>Genre: {meta.type}</p>
+                            <p>Instruments: {meta.value}</p>
+                        </div>
                     ))}
                 </article>
             ))}

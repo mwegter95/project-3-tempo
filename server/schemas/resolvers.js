@@ -89,7 +89,7 @@ const resolvers = {
 
            return Music.find({
                meta: { $elemMatch: {value: {$in: valueArray}}}
-           }).populate("meta") 
+           }).populate("meta")
 
         },
         userMusic: async (parent, { _id }) => {
