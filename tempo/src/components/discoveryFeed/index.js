@@ -1,6 +1,6 @@
 import React from "react";
 import Auth from "../../utils/auth";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { QUERY_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
@@ -41,8 +41,7 @@ const DiscoveryFeed = ({activeMusic}) => {
                     </>
                 ) : (
                     <>
-                        <Link to="/signup" className="sans-serif subpara">Sign Up</Link>
-                        <Link to="/login" className="sans-serif subpara">Log In</Link>
+                        <Redirect to="/login"></Redirect>
                     </>
                 )}
             </div>
