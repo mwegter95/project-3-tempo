@@ -71,10 +71,10 @@ const Dashboard = (props) => {
                         <h1 className="sans-serif para">{userData.user.username}</h1>
                         
                         <div className="list-border">
-                            <GenreList userMusic={userData.user.meta}/>
+                            <GenreList media={media}/>
                         </div>
                         <div className="list-border">
-                            <InstrumentList userMusic={userData.user.meta}/>
+                            <InstrumentList media={media}/>
                         </div>
 
                         <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
