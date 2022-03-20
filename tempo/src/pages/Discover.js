@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { MUSIC_FEED } from "../utils/queries";
-import DiscoFeed from "../components/discoveryFeed";
-import MetaList from "../components/metaList";
+// import DiscoFeed from "../components/discoveryFeed";
+// import MetaList from "../components/metaList";
 
-//TODO: Add Meta value entry
+//DONE: Add Meta value entry
 //TODO: Add metaList component
-//TODO: Integrate metaListComponent
-//TODO: Add meta value bread crumbs
 //TODO: Add feedMusic to query
 //TODO: Call feedMusic
 //TODO: build discoMedia component
@@ -45,7 +43,7 @@ const Discover = () => {
                 </form>
             </div>
             <div>
-                <DiscoFeed criteria={discoState.values} />
+                
             </div>
         </div>
     )
