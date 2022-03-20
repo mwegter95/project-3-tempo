@@ -28,7 +28,7 @@ const Homepage = () => {
                     <p className="serif para">Whether you're a band looking for a member...</p>
                 </Fade>
                 <Fade right delay={500}>
-                    <p className="serif para">Or you're a member looking for someone to jam with...</p>
+                    <p className="serif para">Or you're a musician looking for someone to jam with...</p>
                 </Fade>
                 <h1 className="sans-serif title">Tempo has you covered.</h1>
             </section>
