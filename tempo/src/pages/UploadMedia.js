@@ -5,7 +5,7 @@ import InstrumentListArray from "../utils/InstrumentList";
 import { Link } from "react-router-dom";
 
 //todo: refactor instrument and genre for multiple entries and datatype match to query
-//todo: add userLink
+//todo: add userLink (ID of the user that is associated)
 //todo: add title and description
 
 const UploadMedia = () => {
