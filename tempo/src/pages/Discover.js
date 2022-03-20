@@ -19,6 +19,8 @@ const Discover = () => {
     //Define State to include a list of metadata values that will drive the discovery media feed
     const [metaCriteria, setMetaCriteria] = useState([]);
 
+    const [feedPosition, setFeedPosition] = useState(0);
+
     const [activeMusic, setActiveMusic] = useState({
         _id: "1234",
         title: "Whiskey Barrel Guitar • JUSTIN JOHNSON SOLO SLIDE GUITAR",
@@ -34,41 +36,47 @@ const Discover = () => {
         description: "This track is included on The Bootleg Series Vol.1"
     })
 
-    const tempMeta = [{
-        value: "country",
-        type: "genre"
-    }]
+    // const tempMeta = [{
+    //     value: "country",
+    //     type: "genre"
+    // }]
 
     const { data: musicFeed } = useQuery(FEED_MUSIC, {
-        variables: { metaData: tempMeta }
+        variables: { metaData: metaCriteria }
     });
     
     
     const handleAddMeta = async (event) => {
         event.preventDefault();
-         
+        
+        setFeedPosition(0);
+
         console.log(metaCriteria);
 
-        const newValue = document.getElementById("addMeta").value;
+        const newValue = {
+                value: document.getElementById("addMeta").value,
+                type: 'criteria'
+        }
 
         const newValueList = [...metaCriteria, newValue];  
 
-        newValueList.forEach(element => {
-            metaCriteria.push({
-                value: element.value,
-                type: 'criteria'
-            })
-        });
-
+        console.log("newValue")
         console.log(newValue);
         console.log("musicFeed")
         console.log(musicFeed);
-        // console.log(newValueList);
-        console.log(metaCriteria);
+        console.log("newValueList")
+        console.log(newValueList);
+        
 
         setMetaCriteria(newValueList);
-    
-        console.log("musicFeed[0]")
+        
+        console.log("updated metaCriteria")
+        console.log(metaCriteria);
+
+        console.log("updated musicFeed");
+        console.log(musicFeed);
+
+        console.log(`musicFeed[${feedPosition}]`)
         console.log(musicFeed.feedMusic[0]);
 
         setActiveMusic(musicFeed.feedMusic[0]);
@@ -78,6 +86,11 @@ const Discover = () => {
         console.log(activeMusic);
     };
 
+    const handleNextMusic = async (event) => {
+        const nextPosition = feedPosition + 1;
+        setFeedPosition(nextPosition);
+        setActiveMusic(musicFeed.feedMusic[feedPosition]);
+    }
     
         
     return (
@@ -102,6 +115,7 @@ const Discover = () => {
                         activeMusic={activeMusic}                        
                     />
                 </div>
+                <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
             </div>
         </div>
     )

@@ -122,7 +122,7 @@ export const FEED_MUSIC = gql`
 query feedMusic($metaData: [InputMeta!]) {
     feedMusic(metaData: $metaData) {
         _id
-        media        
+        media              
         userLink
         title
         description
