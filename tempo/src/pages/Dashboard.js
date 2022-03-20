@@ -18,7 +18,7 @@ const Dashboard = (props) => {
     const { loading: loadingMe, data: dataMe } = useQuery(QUERY_ME);
     const user = dataMe?.me._id;
     // console log the logged in user's id
-    console.log(user);
+    //console.log(user);
 
     // query the logged in user's data, then set userData = their data
     const { loading, data } = useQuery(QUERY_USER, {
@@ -26,15 +26,19 @@ const Dashboard = (props) => {
     });
     const userData = data;
     // console log their data
-    console.log(userData);
+    //console.log(userData);
  
     const [myMedia, setMyMedia] = useState(null);
     const getMyMedia = (musicRecord) => {
-        return musicRecord?.music.meta;
+        console.log("music record ", musicRecord);
+        return musicRecord?.userMusic;
     };
     const { loading: mediaLoading } = useQuery(QUERY_USERMUSIC, {
         variables: {_id: user },
-        onCompleted: (response) => setMyMedia(getMyMedia(response))
+        onCompleted: (response) => {
+            console.log("response ", response);
+            setMyMedia(getMyMedia(response))
+        }
     });
 
     let media = myMedia || [];
@@ -42,8 +46,8 @@ const Dashboard = (props) => {
     if (loadingMe || loading || mediaLoading) {
         return <div>Loading...</div>
     }
-        console.log(media);
-        console.log(myMedia);
+        //console.log(media);
+        //console.log(myMedia);
         return (
             <> 
             {user ? 
