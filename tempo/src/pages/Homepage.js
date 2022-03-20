@@ -16,7 +16,7 @@ const Homepage = () => {
 
             <section className="welcome">
                 <h1 className="sans-serif title">Welcome to Tempo.</h1>
-                <Fade right>
+                <Fade>
                     <p className="serif para white">The perfect place for musicians to find each other.</p>
                 </Fade>
             </section>

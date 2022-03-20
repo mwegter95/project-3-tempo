@@ -267,7 +267,7 @@ main section:last-of-type {
 
 .review-layout {
   background-color: black;
-  box-shadow: 10px 15px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 10px 15px 7px rgba(0, 0, 0, 0.5);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
