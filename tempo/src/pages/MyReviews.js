@@ -18,7 +18,7 @@ const MyReviews = () => {
     let reviews = myReviews || [];
 
     if(loading) {
-        return <div className="serif para">loading...</div>
+        return <div className="serif grey main para">loading...</div>
     }
 
     return (
