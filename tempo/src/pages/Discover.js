@@ -18,29 +18,14 @@ import MetaList from "../components/metaList";
 const Discover = () => {
 
     //Define State to include a list of metadata values that will drive the discovery media feed
-    const [metaState, setMetaState] = useState(
-        {
-            values: []
-        });
-
-    
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-    
-        setMetaState({
-            ...metaState,
-            [name]: value
-        });
-    };
-    
+    const [metaCriteria, setMetaCriteria] = useState([]);
     
     const handleAddMeta = async (event) => {
         event.preventDefault();
-    
-        setMetaState({
-            ...metaState, 
-    
-        });
+              
+        const newMeta = document.getElementById("addMeta").value;
+
+        setMetaCriteria([...metaCriteria, newMeta]);
     };
         
     return (
@@ -52,15 +37,15 @@ const Discover = () => {
                         <h1 className="sans-serif white para">What would you like to find?</h1>
                                                 
                         <label htmlFor="addMeta" className="sans-serif white subpara">Search For:</label>
-                        <input id="addMeta" name="addMeta" className="sans-serif sm" onBlur={handleChange} />
+                        <input id="addMeta" name="addMeta" className="sans-serif sm" />
                         
                         
-                        <button onClick={checkRadios} className="sans-serif sm">Submit</button>
+                        <button className="sans-serif sm">Submit</button>
                     </div>
                 </form>
             </div>
             <div>
-                <DiscoFeed criteria={metaState.values} />
+                <DiscoFeed criteria={discoState.values} />
             </div>
         </div>
     )
