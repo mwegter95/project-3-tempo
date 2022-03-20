@@ -44,7 +44,7 @@ const Dashboard = (props) => {
     let media = myMedia || [];
     console.log(media);
     if (loadingMe || loading || mediaLoading) {
-        return <div>Loading...</div>
+        return <div className="main serif para grey loading">Loading...</div>
     }
         //console.log(media);
         //console.log(myMedia);

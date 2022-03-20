@@ -8,7 +8,7 @@ const Discover = () => {
     const users = data?.users || [];
 
     if(loading) {
-        return <div>loading...</div>
+        return <div className="main serif para grey loading">loading...</div>
     };
 
     return (

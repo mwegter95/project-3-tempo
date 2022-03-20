@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Fade from "react-reveal/Fade";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
@@ -109,71 +110,74 @@ const Signup = () => {
     return (
         <section className="sign-on main">
             {pageState === 1 && 
-                <form onSubmit={handleUserSignup} autoComplete="off">
-                    <div>
-                        <h1 className="sans-serif white para">Start your journey here.</h1>
-                        {errorMessage && <p className="serif sm gold">{errorMessage}</p>}
-                        
-                        <label htmlFor="email" className="sans-serif white subpara">Email:</label>
-                        <input id="email" name="email" type="email" className="sans-serif sm" onBlur={handleChange} />
-                        
-                        <label htmlFor="password" className="sans-serif white subpara">Password:</label>
-                        <input id="password" name="password" type="password" className="sans-serif sm" onBlur={handleChange} />
-                    </div>
-
-                    <h1 className="sans-serif white para">Are you a...</h1>
-
-                    <div className="radio-div">
-                        <input type="radio" name="type"  value="musician" checked={radio1State} onChange={handleRadio1Change} />
-                        <label htmlFor="musician" className="sans-serif white subpara">Musician</label>
-                    </div>
+                <Fade>
+                    <form onSubmit={handleUserSignup} autoComplete="off">
+                        <div>
+                            <h1 className="sans-serif white para">Start your journey here.</h1>
+                            {errorMessage && <p className="serif sm gold">{errorMessage}</p>}
+                            
+                            <label htmlFor="email" className="sans-serif white subpara">Email:</label>
+                            <input id="email" name="email" type="email" className="sans-serif sm" onBlur={handleChange} />
+                            
+                            <label htmlFor="password" className="sans-serif white subpara">Password:</label>
+                            <input id="password" name="password" type="password" className="sans-serif sm" onBlur={handleChange} />
+                        </div>
                     
-                    <div className="radio-div">
-                        <input type="radio" name="type"  value="musician" checked={radio2State} onChange={handleRadio2Change} />
-                        <label htmlFor="band" className="sans-serif white subpara">Band</label>
-                    </div>
-
-                    <button onClick={checkRadios} className="sans-serif sm">Submit</button>
-                </form>
+                        <h1 className="sans-serif white para">Are you a...</h1>
+                    
+                        <div className="radio-div">
+                            <input type="radio" name="type"  value="musician" checked={radio1State} onChange={handleRadio1Change} />
+                            <label htmlFor="musician" className="sans-serif white subpara">Musician</label>
+                        </div>
+                        
+                        <div className="radio-div">
+                            <input type="radio" name="type"  value="musician" checked={radio2State} onChange={handleRadio2Change} />
+                            <label htmlFor="band" className="sans-serif white subpara">Band</label>
+                        </div>
+                    
+                        <button onClick={checkRadios} className="sans-serif sm">Submit</button>
+                    </form>
+                </Fade>
             }
 
             {pageState === 2 && 
-                <form onSubmit={handleUserSignup} autoComplete="off">
-                    <h1 className="sans-serif white para">Tell us about you.</h1>
-                    {errorMessage && <p className="serif sm gold">{errorMessage}</p>}
-
-                    {radio1State && <label htmlFor="username" className="sans-serif white subpara">Your stage name:</label>}
-                    {radio2State && <label htmlFor="username" className="sans-serif white subpara">Your band name:</label>}
-                    <input id="username" name="username" type="username" className="sans-serif sm" onBlur={handleChange} />
+                <Fade>
+                    <form onSubmit={handleUserSignup} autoComplete="off">
+                        <h1 className="sans-serif white para">Tell us about you.</h1>
+                        {errorMessage && <p className="serif sm gold">{errorMessage}</p>}
                     
-                    {radio1State && <label htmlFor="biography" className="sans-serif white subpara">Create your own bio:</label>}
-                    {radio2State && <label htmlFor="biography" className="sans-serif white subpara">Create your band's bio:</label>}
-                    <textarea name="biography" type="biography" className="sans-serif sm" maxLength="280" onChange={messageLimit} onBlur={handleChange}></textarea>
-                    <p className="serif gold regular">{messageState} characters left.</p>
-
-                    <label htmlFor="status" className="sans-serif white subpara">What's your current status?:</label>
-                    <select name="status" onBlur={handleChange} className="sans-serif sm" defaultValue="-- select an option --">
-                            <option disabled value="-- select an option --"> -- select an option -- </option>
-                        {radio1State &&
-                            <>
-                                <option value="Looking for collaborations">Looking for collaborations.</option>
-                                <option value="Wanting to join a band">Wanting to join a band.</option>
-                            </>
-                        }
-                        {radio2State && 
-                            <>
-                                <option value="Open for a new member">Open for a new member.</option>
-                                <option value="Wanting to network with other bands">Wanting to network with other bands.</option>
-                            </>
-                        }
-                            <option value="Just browsing">Just browsing.</option>
-
-                    </select>
+                        {radio1State && <label htmlFor="username" className="sans-serif white subpara">Your stage name:</label>}
+                        {radio2State && <label htmlFor="username" className="sans-serif white subpara">Your band name:</label>}
+                        <input id="username" name="username" type="username" className="sans-serif sm" onBlur={handleChange} />
+                        
+                        {radio1State && <label htmlFor="biography" className="sans-serif white subpara">Create your own bio:</label>}
+                        {radio2State && <label htmlFor="biography" className="sans-serif white subpara">Create your band's bio:</label>}
+                        <textarea name="biography" type="biography" className="sans-serif sm" maxLength="280" onChange={messageLimit} onBlur={handleChange}></textarea>
+                        <p className="serif gold regular" id="messageLimit">{messageState} characters left.</p>
                     
-                    <button type="submit" className="sans-serif sm">Sign up</button>
-
-                    {error && <div className="serif sm gold">Sign up failed.</div>}
-                </form>
+                        <label htmlFor="status" className="sans-serif white subpara">What's your current status?:</label>
+                        <select name="status" onBlur={handleChange} className="sans-serif sm" defaultValue="-- select an option --">
+                                <option disabled value="-- select an option --"> -- select an option -- </option>
+                            {radio1State &&
+                                <>
+                                    <option value="Looking for collaborations">Looking for collaborations.</option>
+                                    <option value="Wanting to join a band">Wanting to join a band.</option>
+                                </>
+                            }
+                            {radio2State && 
+                                <>
+                                    <option value="Open for a new member">Open for a new member.</option>
+                                    <option value="Wanting to network with other bands">Wanting to network with other bands.</option>
+                                </>
+                            }
+                                <option value="Just browsing">Just browsing.</option>
+                        </select>
+                        
+                        <button type="submit" className="sans-serif sm">Sign up</button>
+                    
+                        {error && <div className="serif sm gold">Sign up failed.</div>}
+                    </form>
+                </Fade>
             }
         </section>
     )

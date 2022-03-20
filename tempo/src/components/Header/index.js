@@ -17,14 +17,14 @@ const Header = () => {
             <nav>
                 {Auth.loggedIn() ? (
                     <>
-                        <Link to="/dashboard" className="sans-serif subpara">My Dashboard</Link>
-                        <Link to="/discover" className="sans-serif subpara">Discover</Link>
-                        <a href="/" className="sans-serif subpara" onClick={logout}>Logout</a>
+                        <Link to="/dashboard" className="sans-serif navText">My Dashboard</Link>
+                        <Link to="/discover" className="sans-serif navText">Discover</Link>
+                        <a href="/" className="sans-serif navText" onClick={logout}>Logout</a>
                     </>
                 ) : (
                     <>
-                        <Link to="/signup" className="sans-serif subpara">Sign Up</Link>
-                        <Link to="/login" className="sans-serif subpara">Log In</Link>
+                        <Link to="/signup" className="sans-serif navText">Sign Up</Link>
+                        <Link to="/login" className="sans-serif navText">Log In</Link>
                     </>
                 )}
             </nav>
