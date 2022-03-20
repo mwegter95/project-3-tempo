@@ -15,7 +15,7 @@ const MediaList = ({ media }) => {
             media.map((trait) => (
                 <article key={trait._id}>
                     <a href={trait.media} target="_blank" className="sans-serif subpara">Check out my stuff!</a>
-                    <p>Genre: {trait.genre}</p>
+                    <p>Genre: </p>
                     <p>Instruments: {trait.instruments.map((instrument) => (instrument))}</p>
                 </article>
             ))}

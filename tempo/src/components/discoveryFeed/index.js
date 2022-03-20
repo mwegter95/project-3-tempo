@@ -12,12 +12,13 @@ if (!activeMusic) {
             <nav>
                 {Auth.loggedIn() ? (
                     <>
-                        <h2>The music goes here</h2>>
-                    </h2>
+                        <h2>The music goes here: {activeMusic.title}</h2>
+                    
+                    </>
                 ) : (
                     <>
-                        <Link to="/signup" className="sans-serif subpara">Sign Up</Link>
-                        <Link to="/login" className="sans-serif subpara">Log In</Link>
+                        <div>Sign Up</div>
+                        <div>Log In</div>
                     </>
                 )}
             </nav>

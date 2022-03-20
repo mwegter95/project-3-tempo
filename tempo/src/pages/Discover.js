@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { MUSIC_FEED } from "../utils/queries";
+import { useMutation, useQuery } from "@apollo/client";
+import { FEED_MUSIC, MUSIC_FEED } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
 
 
@@ -21,7 +21,7 @@ const Discover = () => {
 
     const [activeMusic, setActiveMusic] = useState({
         _id: "1234",
-        title: "Whiskey Barrel Guitar • JUSTIN JOHNSON SOLO SLIDE GUITAR"
+        title: "Whiskey Barrel Guitar • JUSTIN JOHNSON SOLO SLIDE GUITAR",
         media: "https://www.youtube.com/watch?v=fXGErRbyv6M&t=3s",
         meta: [{
             value: "guitar",
@@ -34,33 +34,46 @@ const Discover = () => {
         description: "This track is included on The Bootleg Series Vol.1"
     })
 
-    const [musicFeed, setMusicFeed] = useState([]);
+    const tempMeta = [{
+        value: "bass",
+        type: "instrument"
+    }]
+
+    const { musicFeed } = useQuery(FEED_MUSIC, {
+        variables: { metaData: tempMeta }
+    });
+    
     
     const handleAddMeta = async (event) => {
         event.preventDefault();
-              
+         
+        // console.log(metaCriteria);
+
         const newValue = document.getElementById("addMeta").value;
 
-        const newValueList = [...metaCriteria, newValue];
+        // const newValueList = [...metaCriteria, newValue];
 
-        const metaCriteria = [];
+        // const metaCriteria = [];
 
-        newValueList.forEach(element => {
-            metaCriteria.push({
-                value: element.value,
-                type: 'criteria'
-            })
-        });
+        // newValueList.forEach(element => {
+        //     metaCriteria.push({
+        //         value: element.value,
+        //         type: 'criteria'
+        //     })
+        // });
 
         console.log(newValue);
-        console.log(newValueList);
-        console.log(metaCriteria);
+        console.log(musicFeed);
+        // console.log(newValueList);
+        // console.log(metaCriteria);
 
-        setMetaCriteria(newValueList);
+        // setMetaCriteria(newValueList);
     
-        setMusicFeed(useQuery());
-
         setActiveMusic(musicFeed[0]);
+
+        console.log("after running");
+        
+        console.log(activeMusic);
     };
 
     

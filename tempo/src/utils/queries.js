@@ -118,6 +118,18 @@ query music($genre: String, $instruments: [String]) {
 }
 `;
 
+export const FEED_MUSIC = gql`
+query feedMusic($metaData: [InputMeta!]) {
+    feedMusic(metaData: $metaData) {
+        _id
+        media        
+        userLink
+        title
+        description
+    }
+}
+`;
+
 export const QUERY_MESSAGES = gql`
 {
     messages {
