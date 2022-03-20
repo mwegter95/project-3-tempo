@@ -4,9 +4,6 @@ const GenreList = ({ media }) => {
     if (!media.length) {
         return <h3>User doesn't have any genres yet!</h3>;
     }
-    
-    console.log(media)
-    console.log(media[0].meta[0].type)
 
     return (
         <div>
