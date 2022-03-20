@@ -138,6 +138,10 @@ header h1:hover {
   color: var(--light-yellow);
 }
 
+#logo image {
+  width: 70%;
+}
+
 /* Component: Footer */
 footer {
   background-color: var(--tempo-gold);
