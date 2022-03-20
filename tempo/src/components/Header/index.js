@@ -1,4 +1,5 @@
 import React from "react";
+import { ReactComponent as TempoLogo } from "../../assets/tempo-logo.svg";
 import { Link } from "react-router-dom";
 import Auth from "../../utils/auth";
 
@@ -11,7 +12,7 @@ const Header = () => {
     return (
         <header>
             <Link to="/">
-                <h1 className="sans-serif subtitle">Tempo</h1>
+                <TempoLogo />
             </Link>
 
             <nav>
