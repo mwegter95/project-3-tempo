@@ -73,9 +73,15 @@ const resolvers = {
             //TODO: Return unique values from above
 
         },
-
         reviews: async() => {
             return Review.find()
+        },
+        myReviews: async(parent, args, context) => {
+            if(context.user) {
+                const myReview = await Review.find({ reviewBy: context.user._id })
+                    .populate("reviewOf");
+                return myReview;
+            }
         },
         feedMusic: async (parent, { metaData }) => {       
 
