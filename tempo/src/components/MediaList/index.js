@@ -1,4 +1,5 @@
 import React from "react";
+import { capitalizeFirstLetter } from "../../utils/helpers";
 
 const MediaList = ({ media }) => {
     if (!media.length) {
@@ -17,8 +18,7 @@ const MediaList = ({ media }) => {
                     <p>Description: {trait.description}</p>
                     {trait.meta.map((meta) => (
                         <div key={meta._id}>
-                            <p>Genre: {meta.type}</p>
-                            <p>Instruments: {meta.value}</p>
+                            <p>{capitalizeFirstLetter(meta.type)}: {capitalizeFirstLetter(meta.value)}</p>
                         </div>
                     ))}
                 </article>

@@ -15,10 +15,9 @@ const GenreList = ({ media }) => {
                 media.map(music => (
                     <div key={music.id}>
                         <div className="sans-serif para sm">
-                            {music.meta.map((meta) => (
-                                <div key={meta._id}>
-                                    <p>{meta.type}</p>
-                                    <p>{meta.value}</p>
+                            {music.meta.filter(meta => meta.type.includes('genre')).map(filteredMeta => (
+                                <div key={filteredMeta._id}>
+                                    <p>{filteredMeta.value}</p>
                                 </div>
                             ))}
                         </div>
