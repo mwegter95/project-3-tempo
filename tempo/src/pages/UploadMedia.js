@@ -63,16 +63,22 @@ const UploadMedia = () => {
         }
 
         const metaArray = createMetaObject(newArr);
+        //console.log("metaArray from validateInstruments line 66", metaArray)
 
         return { result: true, arr: metaArray };
     };
 
-    const createMetaObject = (validArray) => {
+    const createMetaObject = (validatedInstrumentsArray) => {
         let metaArray = [];
-        for(var i = 0; i < validArray.length; i++) {
-            metaArray.push({ type: musicState.genre, value: validArray[i] });
+        metaArray.push({ type: "genre", value: musicState.genre })
+        for(var i = 0; i < validatedInstrumentsArray.length; i++) {
+            metaArray.push(
+                 { type: "instrument", value: validatedInstrumentsArray[i]}
+                );
         }
 
+        // return the metaArray, an array of objects (populated by the front end interaction) to make into metaData objects
+        // this is made out of one metaData oject with the type: genre, value: musicState.genre, then one or more objects with the type: instrument, value: validatedInstrumentsArray[i]
         return metaArray;
     };
 
@@ -93,7 +99,7 @@ const UploadMedia = () => {
                     }
                 });
                 window.location.assign("/dashboard");
-                //console.log(data);
+                console.log(data);
             } catch(e) {
                 console.error(e);
                 setErrorState("There was an issue creating this data");
