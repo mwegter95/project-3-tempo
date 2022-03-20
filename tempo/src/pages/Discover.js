@@ -33,14 +33,37 @@ const Discover = () => {
         userLink: "1234",
         description: "This track is included on The Bootleg Series Vol.1"
     })
+
+    const [musicFeed, setMusicFeed] = useState([]);
     
     const handleAddMeta = async (event) => {
         event.preventDefault();
               
-        const newMeta = document.getElementById("addMeta").value;
+        const newValue = document.getElementById("addMeta").value;
 
-        setMetaCriteria([...metaCriteria, newMeta]);
+        const newValueList = [...metaCriteria, newValue];
+
+        const metaCriteria = [];
+
+        newValueList.forEach(element => {
+            metaCriteria.push({
+                value: element.value,
+                type: 'criteria'
+            })
+        });
+
+        console.log(newValue);
+        console.log(newValueList);
+        console.log(metaCriteria);
+
+        setMetaCriteria(newValueList);
+    
+        setMusicFeed(useQuery());
+
+        setActiveMusic(musicFeed[0]);
     };
+
+    
         
     return (
         <div className="main">
