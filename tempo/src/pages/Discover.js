@@ -5,11 +5,12 @@ import DiscoFeed from "../components/discoveryFeed";
 
 
 //DONE: Add Meta value entry
-//TODO: Add metaList component
+//DONE: integrate discoMedia
 //TODO: Add feedMusic to query
 //TODO: Call feedMusic
-//TODO: build discoMedia component
-//TODO: integrate discoMedia
+//TODO: Add metaList UI
+//MW: build discoMedia component
+
 
 
 //render page
@@ -20,6 +21,7 @@ const Discover = () => {
 
     const [activeMusic, setActiveMusic] = useState({
         _id: "1234",
+        title: "Whiskey Barrel Guitar • JUSTIN JOHNSON SOLO SLIDE GUITAR"
         media: "https://www.youtube.com/watch?v=fXGErRbyv6M&t=3s",
         meta: [{
             value: "guitar",
