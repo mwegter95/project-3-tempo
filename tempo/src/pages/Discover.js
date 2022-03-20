@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { MUSIC_FEED } from "../utils/queries";
-// import DiscoFeed from "../components/discoveryFeed";
-// import MetaList from "../components/metaList";
+import DiscoFeed from "../components/discoveryFeed";
+
 
 //DONE: Add Meta value entry
 //TODO: Add metaList component
@@ -17,6 +17,20 @@ const Discover = () => {
 
     //Define State to include a list of metadata values that will drive the discovery media feed
     const [metaCriteria, setMetaCriteria] = useState([]);
+
+    const [activeMusic, setActiveMusic] = useState({
+        _id: "1234",
+        media: "https://www.youtube.com/watch?v=fXGErRbyv6M&t=3s",
+        meta: [{
+            value: "guitar",
+            type: "instrument"    
+            },{
+                value: "blues",
+                type: "genre"        
+        }],
+        userLink: "1234",
+        description: "This track is included on The Bootleg Series Vol.1"
+    })
     
     const handleAddMeta = async (event) => {
         event.preventDefault();
@@ -43,7 +57,11 @@ const Discover = () => {
                 </form>
             </div>
             <div>
-                
+                <div className="col-12 col-lg-3 mb-3">
+                    <DiscoFeed
+                        activeMusic={activeMusic}                        
+                    />
+                </div>
             </div>
         </div>
     )

@@ -1,8 +1,10 @@
 import React from "react";
 import Auth from "../../utils/auth";
 
-const discoveryFeed = () => {
-
+const discoveryFeed = ({activeMusic}) => {
+if (!activeMusic) {
+    return <h3>Enter Search Criteria</h3>;
+}
 
     return (
         <header>
