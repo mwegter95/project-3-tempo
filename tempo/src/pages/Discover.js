@@ -21,7 +21,7 @@ const Discover = () => {
 
     const [activeMusic, setActiveMusic] = useState({
         _id: "1234",
-        title: "Whiskey Barrel Guitar • JUSTIN JOHNSON SOLO SLIDE GUITAR"
+        title: "Whiskey Barrel Guitar • JUSTIN JOHNSON SOLO SLIDE GUITAR",
         media: "https://www.youtube.com/watch?v=fXGErRbyv6M&t=3s",
         meta: [{
             value: "guitar",
@@ -30,7 +30,7 @@ const Discover = () => {
                 value: "blues",
                 type: "genre"        
         }],
-        userLink: "1234",
+        userLink: "62364c3eef73fb99cd633a2d",
         description: "This track is included on The Bootleg Series Vol.1"
     })
     
