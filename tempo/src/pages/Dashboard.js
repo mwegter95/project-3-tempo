@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 import { useQuery, useMutation } from "@apollo/client";
 import { EDIT_USER } from "../utils/mutations";
-import { ADD_MUSIC } from "../utils/mutations";
 import { QUERY_ME, QUERY_USER, QUERY_USERMUSIC } from "../utils/queries";
 
 import GenreList from "../components/GenreList"
 import InstrumentList from "../components/InstrumentList"
 import MediaList from "../components/MediaList";
-
-import Auth from "../utils/auth";
 
 const Dashboard = (props) => {
     // check that a user is logged in, then set user = logged in user's id
@@ -50,8 +46,8 @@ const Dashboard = (props) => {
         //console.log(myMedia);
         return (
             <> 
-            {user ? 
-                <section className="user-dashboard main-background">
+            {userData ? 
+                <section className="user-dashboard main">
                     {/* make a dashboard that is a mix of components */}
                     {/* div for stagename 
                         the div does not have an edit feature
