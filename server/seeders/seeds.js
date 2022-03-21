@@ -19,9 +19,10 @@ db.once("open", async() => {
         const email = faker.internet.email();
         const password = faker.internet.password();
         const status = bandStatus[randomBandStatusIndex];
+        const biography = faker.lorem.words(40);
         const type = "Band";
 
-        userBandData.push({ username, email, password, status, type });
+        userBandData.push({ username, email, password, status, biography, type });
     }
 
     const createdBandUsers = await User.collection.insertMany(userBandData);
@@ -36,22 +37,55 @@ db.once("open", async() => {
         const email = faker.internet.email();
         const password = faker.internet.password();
         const status = musicianStatus[randomMusicianStatusIndex];
+        const biography = faker.lorem.words(40);
         const type = "Musician";
 
-        userMusicianData.push( { username, email, password, status, type });
+        userMusicianData.push( { username, email, password, status, biography, type });
     }
 
     const createdMusicianUsers = await User.collection.insertMany(userMusicianData);
     
     // create Music
+    const musicData = [];
+    const metaData = [
+        {type: "rock", value: "guitar"},
+        {type: "classical", value: "cello"},
+        {type: "jazz", value: "saxophone"},
+        {type: "country", value: "banjo"},
+        {type: "pop", value: "vocal percussion"}
+    ];
+    
     for (var i = 0; i < 15; i++) {
         const randomMusicianMusicIndex = Math.floor(Math.random() * createdMusicianUsers.ops.length);
-        
+        const media = faker.internet.url;
+        const title = faker.lorem.words(10);
+        const description = faker.lorem.words(20);
+        const metaIndex = Math.floor(Math.random() * metaData.length);
+        const meta = [];
+        meta.push(metaData[metaIndex]);
+        const userLink = createdMusicianUsers[randomMusicianMusicIndex];
+
+        musicData.push({ media, title, description, meta, userLink });
     }
 
+    const createdMusic = await Music.collection.insertMany(musicData);
 
 
-    console.log("All data has been removed.");
-    console.log("Jane Doe and John Doe are now new users.");
+    // create Review data
+    for (var i = 0; i < 20; i++) {
+        const review_text = faker.lorem.words(40);
+        const rating = faker.random.number({ min:0, max: 10 });
+        const bandUserIndex = Math.floor(Math.random() * createdBandUsers.ops.length);
+        const musicianUserIndex = Math.floor(Math.random() * createdMusicianUsers.ops.length);
+        const review_by = createdBandUsers[bandUserIndex];
+        const reviewOf = createdMusicianUsers[musicianUserIndex];
+        const created_at = faker.date.recent(7);
+
+        const createdReview = await Review.create({ review_text, rating, review_by, reviewOf, created_at });
+
+    }
+
+    console.log("All old data has been removed.");
+    console.log("All new data has been added.");
     process.exit(0);
 });
