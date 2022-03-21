@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
 import { EDIT_USER } from "../utils/mutations";
 import { ADD_MUSIC } from "../utils/mutations";
-import { QUERY_ME, QUERY_USER, QUERY_USERMUSIC } from "../utils/queries";
+import { QUERY_USER } from "../utils/queries";
+import { QUERY_ME } from "../utils/queries";
 
 import GenreList from "../components/GenreList"
 import InstrumentList from "../components/InstrumentList"
@@ -18,7 +19,7 @@ const Dashboard = (props) => {
     const { loading: loadingMe, data: dataMe } = useQuery(QUERY_ME);
     const user = dataMe?.me._id;
     // console log the logged in user's id
-    //console.log(user);
+    console.log(user);
 
     // query the logged in user's data, then set userData = their data
     const { loading, data } = useQuery(QUERY_USER, {
@@ -26,28 +27,22 @@ const Dashboard = (props) => {
     });
     const userData = data;
     // console log their data
-    //console.log(userData);
+    console.log(userData);
  
     const [myMedia, setMyMedia] = useState(null);
-    const getMyMedia = (musicRecord) => {
-        console.log("music record ", musicRecord);
-        return musicRecord?.userMusic;
+    const getMyMedia = (userToGetMediaOf) => {
+        return userToGetMediaOf?.me.meta;
     };
-    const { loading: mediaLoading } = useQuery(QUERY_USERMUSIC, {
-        variables: {_id: user },
-        onCompleted: (response) => {
-            console.log("response ", response);
-            setMyMedia(getMyMedia(response))
-        }
+    const { loading: mediaLoading } = useQuery(QUERY_ME, {
+        onCompleted: (response) => setMyMedia(getMyMedia(response))
     });
 
     let media = myMedia || [];
-    console.log(media);
+
     if (loadingMe || loading || mediaLoading) {
         return <div>Loading...</div>
     }
-        //console.log(media);
-        //console.log(myMedia);
+
         return (
             <> 
             {user ? 

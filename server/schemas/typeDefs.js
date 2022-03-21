@@ -56,11 +56,9 @@ const typeDefs = gql`
         user(_id: ID): User
         metaUsers(metaData: [InputMeta]): [User]
         reviews: [Review]
-        myReviews: [Review]
         feedMusic(metaData: [InputMeta]): [Music]
         userMusic(_id: ID): [Music]
         music: [Music]
-        singleUserMusic(userLink: String): [Music]
         messages: [Message]
     }
 
@@ -70,8 +68,8 @@ const typeDefs = gql`
         deleteUser: User
         editUser(username: String, status: String, biography: String, type: String, meta: [InputMeta]): User
         addMusic(media: String, meta: [InputMeta], userLink: ID, title: String, description: String): Music
-        addReview(reviewBy: ID!, reviewOf: ID! review_text: String!, rating: Int): Review
-        addMessage(message_text: String): Message  
+        addReview(review_text: String, rating: Int): Review
+        addMessage(message_text: String): Message        
     }
 
     type Auth {

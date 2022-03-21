@@ -14,11 +14,15 @@ const DiscoveryFeed = ({activeMusic}) => {
         return <h3>Enter Search Criteria</h3>;
     }
 
+const discoveryFeed = ({activeMusic}) => {
+if (!activeMusic) {
+    return <h3>Enter Search Criteria</h3>;
+}
 
     return (
-        <article>
+        <header>
 
-            <div>
+            <nav>
                 {Auth.loggedIn() ? (
                     <>
                         <h2 className="serif sm gold">{activeMusic.title}</h2>
@@ -41,12 +45,13 @@ const DiscoveryFeed = ({activeMusic}) => {
                     </>
                 ) : (
                     <>
-                        <Redirect to="/login"></Redirect>
+                        <div>Sign Up</div>
+                        <div>Log In</div>
                     </>
                 )}
-            </div>
-        </article>
+            </nav>
+        </header>
     )
 };
 
-export default DiscoveryFeed;
+export default discoveryFeed;

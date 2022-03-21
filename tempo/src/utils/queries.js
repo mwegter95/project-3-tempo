@@ -108,39 +108,27 @@ query myReviews {
 `;
 
 export const QUERY_MUSIC = gql`
-query music {
-    music {
+query music($genre: String, $instruments: [String]) {
+    music(genre: $genre, instruments: $instruments) {
         _id
+        genre
         media
-        title
-        description
-        meta {
-            _id
-            type
-            value
-        }
-        userLink
+        instruments
     }
 }
 `;
 
-export const QUERY_USERMUSIC = gql`
-query userMusic($_id: ID!) {
-    userMusic(_id: $_id) {
+export const FEED_MUSIC = gql`
+query feedMusic($metaData: [InputMeta!]) {
+    feedMusic(metaData: $metaData) {
         _id
-        media
-        meta {
-            _id
-            type
-            value
-        }
+        media              
         userLink
         title
         description
     }
 }
-
-`
+`;
 
 export const QUERY_MESSAGES = gql`
 {

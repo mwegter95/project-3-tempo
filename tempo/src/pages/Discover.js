@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { MUSIC_FEED } from "../utils/queries";
+import { FEED_MUSIC } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
 
 
@@ -19,6 +19,8 @@ const Discover = () => {
     //Define State to include a list of metadata values that will drive the discovery media feed
     const [metaCriteria, setMetaCriteria] = useState([]);
 
+    const [feedPosition, setFeedPosition] = useState(0);
+
     const [activeMusic, setActiveMusic] = useState({
         _id: "1234",
         title: "Whiskey Barrel Guitar • JUSTIN JOHNSON SOLO SLIDE GUITAR",
@@ -33,14 +35,63 @@ const Discover = () => {
         userLink: "6235f05aeaf94cb37b1e1edf",
         description: "This track is included on The Bootleg Series Vol.1"
     })
+
+    // const tempMeta = [{
+    //     value: "country",
+    //     type: "genre"
+    // }]
+
+    const { data: musicFeed } = useQuery(FEED_MUSIC, {
+        variables: { metaData: metaCriteria }
+    });
+    
     
     const handleAddMeta = async (event) => {
         event.preventDefault();
-              
-        const newMeta = document.getElementById("addMeta").value;
+        
+        setFeedPosition(0);
 
-        setMetaCriteria([...metaCriteria, newMeta]);
+        console.log(metaCriteria);
+
+        const newValue = {
+                value: document.getElementById("addMeta").value,
+                type: 'criteria'
+        }
+
+        const newValueList = [...metaCriteria, newValue];  
+
+        console.log("newValue")
+        console.log(newValue);
+        console.log("musicFeed")
+        console.log(musicFeed);
+        console.log("newValueList")
+        console.log(newValueList);
+        
+
+        setMetaCriteria(newValueList);
+        
+        console.log("updated metaCriteria")
+        console.log(metaCriteria);
+
+        console.log("updated musicFeed");
+        console.log(musicFeed);
+
+        console.log(`musicFeed[${feedPosition}]`)
+        console.log(musicFeed.feedMusic[0]);
+
+        setActiveMusic(musicFeed.feedMusic[0]);
+
+        console.log("after running");
+        
+        console.log(activeMusic);
     };
+
+    const handleNextMusic = async (event) => {
+        const nextPosition = feedPosition + 1;
+        setFeedPosition(nextPosition);
+        setActiveMusic(musicFeed.feedMusic[feedPosition]);
+    }
+    
         
     return (
         <div className="main">
@@ -64,6 +115,7 @@ const Discover = () => {
                         activeMusic={activeMusic}                        
                     />
                 </div>
+                <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
             </div>
         </div>
     )
