@@ -10,7 +10,7 @@ const DiscoveryFeed = ({activeMusic}) => {
         skip: !activeMusic
     });
 
-    if (!activeMusic) {
+    if (!activeMusic._id) {
         return <h3>Enter Search Criteria</h3>;
     }
 
@@ -22,7 +22,7 @@ const DiscoveryFeed = ({activeMusic}) => {
                 {Auth.loggedIn() ? (
                     <>
                         <h2 className="serif sm gold">{activeMusic.title}</h2>
-                        <a href={activeMusic} target="_blank" className="sans-serif subpara">Watch Video!</a>
+                        <a href={activeMusic.media} target="_blank" className="sans-serif subpara">Watch Video!</a>
                         <p>Description - {activeMusic.description}</p>
                         <div>Music Summary - {activeMusic.meta.map((meta) => (
                             <div key={meta._id}>
