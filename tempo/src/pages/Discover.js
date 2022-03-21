@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { FEED_MUSIC } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
@@ -15,9 +15,12 @@ import DiscoFeed from "../components/discoveryFeed";
 
 //render page
 const Discover = () => {
-
+    console.log('Discover start')
     //Define State to include a list of metadata values that will drive the discovery media feed
-    const [metaCriteria, setMetaCriteria] = useState([]);
+    const [metaCriteria, setMetaCriteria] = useState([{
+            value: "country",
+            type: "genre"
+        }]);
 
     const [feedPosition, setFeedPosition] = useState(0);
 
@@ -36,6 +39,9 @@ const Discover = () => {
         description: "This track is included on The Bootleg Series Vol.1"
     })
 
+    console.log('State Defined')
+    console.log(activeMusic);
+
     // const tempMeta = [{
     //     value: "country",
     //     type: "genre"
@@ -45,14 +51,11 @@ const Discover = () => {
         variables: { metaData: metaCriteria }
     });
     
-    
+    console.log('musicFeed populated')
+
     const handleAddMeta = async (event) => {
-        event.preventDefault();
-        
-        setFeedPosition(0);
-
-        console.log(metaCriteria);
-
+        event.preventDefault();  
+         
         const newValue = {
                 value: document.getElementById("addMeta").value,
                 type: 'criteria'
@@ -60,37 +63,22 @@ const Discover = () => {
 
         const newValueList = [...metaCriteria, newValue];  
 
-        console.log("newValue")
-        console.log(newValue);
-        console.log("musicFeed")
-        console.log(musicFeed);
-        console.log("newValueList")
-        console.log(newValueList);
-        
-
-        setMetaCriteria(newValueList);
-        
-        console.log("updated metaCriteria")
-        console.log(metaCriteria);
-
-        console.log("updated musicFeed");
-        console.log(musicFeed);
-
-        console.log(`musicFeed[${feedPosition}]`)
-        console.log(musicFeed.feedMusic[0]);
-
-        setActiveMusic(musicFeed.feedMusic[0]);
-
-        console.log("after running");
-        
-        console.log(activeMusic);
+        setFeedPosition(0);
+        setMetaCriteria(newValueList);       
     };
 
     const handleNextMusic = async (event) => {
         const nextPosition = feedPosition + 1;
         setFeedPosition(nextPosition);
-        setActiveMusic(musicFeed.feedMusic[feedPosition]);
+        
     }
+
+    useEffect(() => {
+        console.log('useEffect');
+        console.log(musicFeed.feedMusic);
+        console.log(feedPosition);        
+        // setActiveMusic(musicFeed.feedMusic[feedPosition]);
+    })
     
         
     return (

@@ -22,7 +22,7 @@ const resolvers = {
                 .populate("meta")
                 .populate("reviews");
         },
-        user: async (parent, { _id }) => {
+        user: async (parent, { _id }) => {            
             return User.findOne({ _id })
                 .select("-_v -password")
                 .populate("meta")
@@ -75,7 +75,7 @@ const resolvers = {
         reviews: async() => {
             return Review.find()
         },
-        feedMusic: async (parent, { metaData }) => {       
+        feedMusic: async (parent, { metaData }) => {         
 
             valueArray = [];
             typeArray = [];
