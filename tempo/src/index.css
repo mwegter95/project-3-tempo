@@ -114,9 +114,25 @@ textarea, input {
   min-height: 75vh;
 }
 
+.main-gold {
+  background-color: var(--tempo-gold);
+  margin: 0px 140px;
+  padding: 20px 50px 40px;
+  min-height: 75vh;
+}
+
+.main-background {
+  background-image: url("./assets/band-room.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 110%;
+  background-position: right;
+}
+
 /* Component: Header */
 header {
-  margin: 0px 140px;
+  padding: 0px 140px;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -144,7 +160,8 @@ header h1:hover {
 
 /* Component: Footer */
 footer {
-  background-color: var(--tempo-gold);
+  background-color: black;
+  color: white;
   text-align: center;
   width: 100%;
   padding: 30px 0px;
@@ -158,6 +175,10 @@ footer {
 /* Page: Homepage */
 main {
   text-align: center;
+}
+
+main .white-bg {
+  background-color: white;
 }
 
 main section:first-of-type {

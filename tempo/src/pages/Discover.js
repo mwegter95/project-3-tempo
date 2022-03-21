@@ -94,7 +94,8 @@ const Discover = () => {
     }    
 
     return (
-        <div className="main">
+      <section className="main-background">
+        <div className="main-gold">
             <h1 className="sans-serif para">Discover Page</h1>
             <div>
                 <form onSubmit={handleAddMeta} autoComplete="off">
@@ -116,8 +117,10 @@ const Discover = () => {
                     />
                 </div>
                 <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
+
             </div>
-        </div>
+          </div>
+        </section>
     )
 }
 
