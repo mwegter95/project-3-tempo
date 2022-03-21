@@ -4,12 +4,10 @@ import { FEED_MUSIC } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
 
 
-//DONE: Add Meta value entry
-//DONE: integrate discoMedia
-//TODO: Add feedMusic to query
-//TODO: Call feedMusic
-//TODO: Add metaList UI
-//MW: build discoMedia component
+//TODO: Add no returned feedMusic catch to resolve blank page (Likely in discoFeed component)
+//TODO: Add contact/message button (Need to call user query)
+//TODO: Add metalist/remove meta functionality
+//TODO: Add styling
 
 
 
@@ -17,41 +15,21 @@ import DiscoFeed from "../components/discoveryFeed";
 const Discover = () => {
     console.log('Discover start')
     //Define State to include a list of metadata values that will drive the discovery media feed
-    const [metaCriteria, setMetaCriteria] = useState([{
-            value: "drums",
-            type: "genre"
-        }]);
+    const [metaCriteria, setMetaCriteria] = useState([{}]);
 
     const [feedPosition, setFeedPosition] = useState(0);
 
-    const [activeMusic, setActiveMusic] = useState({
-        _id: "1234",
-        title: "Whiskey Barrel Guitar • JUSTIN JOHNSON SOLO SLIDE GUITAR",
-        media: "https://www.youtube.com/watch?v=fXGErRbyv6M&t=3s",
-        meta: [{
-            value: "guitar",
-            type: "instrument"    
-            },{
-                value: "blues",
-                type: "genre"        
-        }],
-        userLink: "6235f05aeaf94cb37b1e1edf",
-        description: "This track is included on The Bootleg Series Vol.1"
-    })
+    const [activeMusic, setActiveMusic] = useState({})
 
     console.log('State Defined')
     console.log(activeMusic);
     console.log(metaCriteria);
 
-    // const tempMeta = [{
-    //     value: "country",
-    //     type: "genre"
-    // }]
-
     const { loading, data } = useQuery(FEED_MUSIC, {
         variables: { metaData: metaCriteria }
     });
-        console.log('musicFeed queried');
+
+    console.log('musicFeed queried');
     console.log(data);
 
     const handleAddMeta = async (event) => {
@@ -91,7 +69,32 @@ const Discover = () => {
     
     if (loading) {
         return <h3>Loading</h3>
-    }    
+    } else if (!activeMusic.userLink) {
+        return (
+            <div className="main">
+            <h1 className="sans-serif para">Discover Page</h1>
+            <div>
+                <form onSubmit={handleAddMeta} autoComplete="off">
+                    <div>
+                        <h1 className="sans-serif white para">What would you like to find?</h1>
+                                                
+                        <label htmlFor="addMeta" className="sans-serif white subpara">Search For:</label>
+                        <input id="addMeta" name="addMeta" className="sans-serif sm" />
+                        
+                        
+                        <button className="sans-serif sm">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <div className="col-12 col-lg-3 mb-3">
+                    <h3>no results match search critera</h3>
+                </div>
+                <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
+            </div>
+        </div>
+        )
+    }
 
     return (
         <div className="main">
