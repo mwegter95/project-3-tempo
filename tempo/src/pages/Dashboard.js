@@ -51,7 +51,7 @@ const Dashboard = (props) => {
         return (
             <> 
             {user ? 
-                <section className="user-dashboard main">
+                <section className="user-dashboard main-background">
                     {/* make a dashboard that is a mix of components */}
                     {/* div for stagename 
                         the div does not have an edit feature
@@ -67,25 +67,27 @@ const Dashboard = (props) => {
                         optional: div for social media links
 
                     */}
-                    <form >
-                        <h1 className="sans-serif para">{userData.user.username}</h1>
+                    <div className="main-gold">
+                        <form >
+                            <h1 className="sans-serif para">{userData.user.username}</h1>
+                            
+                            <div className="list-border">
+                                <GenreList media={media}/>
+                            </div>
+                            <div className="list-border">
+                                <InstrumentList media={media}/>
+                            </div>
                         
-                        <div className="list-border">
-                            <GenreList media={media}/>
-                        </div>
-                        <div className="list-border">
-                            <InstrumentList media={media}/>
-                        </div>
-
-                        <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
-                        <Link className="serif sm" to="/media">Add to your Profile!</Link>
-
-                        <div>
-                            <MediaList media={media}></MediaList>
-                        </div>
-                    </form>
+                            <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
+                            <Link className="serif sm" to="/media">Add to your Profile!</Link>
+                        
+                            <div>
+                                <MediaList media={media}></MediaList>
+                            </div>
+                        </form>
+                    </div>
                 </section>
-                :   <div className="main">
+                :   <div className="main-background">
                       <h4>You need to be logged in to see this. Sign up or log in using the navigation above!</h4>
                     </div>
             }

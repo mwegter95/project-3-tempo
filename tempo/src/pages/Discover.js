@@ -12,12 +12,14 @@ const Discover = () => {
     };
 
     return (
-        <div className="main">
-            <h1 className="sans-serif para">Discover Page</h1>
-            <div>
-                <UserList users={users} />
+        <section className="main-background">
+            <div className="main-gold">
+                <h1 className="sans-serif para">Discover Page</h1>
+                <div>
+                    <UserList users={users} />
+                </div>
             </div>
-        </div>
+        </section>
     )
 }
 

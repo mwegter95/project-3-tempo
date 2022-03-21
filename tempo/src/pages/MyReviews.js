@@ -22,9 +22,11 @@ const MyReviews = () => {
     }
 
     return (
-        <div className="main myreviews">
-            <h1 className="sans-serif para white">Your Reviews.</h1>
-            <ReviewList reviews={reviews} />
+        <div className="main-background myreviews">
+            <div className="main-gold"> 
+                <h1 className="sans-serif para white">Your Reviews.</h1>
+                <ReviewList reviews={reviews} />
+            </div>
         </div>
     )
 }
