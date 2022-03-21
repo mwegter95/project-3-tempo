@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import { QUERY_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
-const DiscoveryFeed = ({activeMusic}) => {
+const DiscoveryFeed = (activeMusic) => {
     console.log(activeMusic);
     console.log(activeMusic.userLink);
 

@@ -41,17 +41,19 @@ const Discover = () => {
 
     console.log('State Defined')
     console.log(activeMusic);
+    console.log(metaCriteria);
 
     // const tempMeta = [{
     //     value: "country",
     //     type: "genre"
     // }]
 
-    const { data: musicFeed } = useQuery(FEED_MUSIC, {
+    const { loading, data } = useQuery(FEED_MUSIC, {
         variables: { metaData: metaCriteria }
     });
     
-    console.log('musicFeed populated')
+    console.log('musicFeed queried');
+    console.log(data);
 
     const handleAddMeta = async (event) => {
         event.preventDefault();  
@@ -75,12 +77,17 @@ const Discover = () => {
 
     useEffect(() => {
         console.log('useEffect');
-        console.log(musicFeed.feedMusic);
-        console.log(feedPosition);        
-        // setActiveMusic(musicFeed.feedMusic[feedPosition]);
-    })
+        if(data) {            
+            console.log(data.feedMusic);
+            console.log(feedPosition);        
+            setActiveMusic(data.feedMusic[feedPosition]);
+        }
+    }, [feedPosition, data])
     
-        
+    if (!activeMusic.userLink) {
+        return <h3>Loading</h3>
+    }    
+
     return (
         <div className="main">
             <h1 className="sans-serif para">Discover Page</h1>

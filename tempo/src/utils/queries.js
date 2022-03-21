@@ -126,6 +126,11 @@ query feedMusic($metaData: [InputMeta!]) {
         userLink
         title
         description
+        meta {
+            _id
+            value
+            type
+          }
     }
 }
 `;
