@@ -5,7 +5,7 @@ import InstrumentListArray from "../utils/InstrumentList";
 import { Link } from "react-router-dom";
 
 //todo: refactor instrument and genre for multiple entries and datatype match to query
-//todo: add userLink
+//todo: add userLink (ID of the user that is associated)
 //todo: add title and description
 
 const UploadMedia = () => {
@@ -15,9 +15,7 @@ const UploadMedia = () => {
             media: "",
             description: "",
             userLink: "",
-            meta: "",
-            genre: "",
-            instruments: ""
+            meta: []
 
         }
     );
@@ -37,7 +35,7 @@ const UploadMedia = () => {
 
     const validateInstruments = (instruments) => {
         if (typeof instruments === "undefined") {
-            return { result: false, arr: [] };
+            return false;
         }
 
         let instrumentArr = [];
@@ -54,11 +52,13 @@ const UploadMedia = () => {
             return instrument.toLowerCase().trim();
         });
 
+        changeState(newArr);
+
         var instrumentCheck = false;
         for (var i = 0; i < newArr.length; i++) {
             instrumentCheck = InstrumentListArray.includes(newArr[i]);
             if (instrumentCheck === false) {
-                return { result: false, arr: [] };
+                return false;
             }
         }
 
@@ -85,18 +85,10 @@ const UploadMedia = () => {
     const handleAddMusic = async (event) => {
         event.preventDefault();
 
-        const validateObj = validateInstruments(musicState.instruments);
-
-        if (validateObj.result) {
+        if (validateInstruments(musicState.instruments)) {
             try {
-                const data = await addMusic({
-                    variables: {
-                        title: musicState.title,
-                        media: musicState.media,
-                        description: musicState.description,
-                        userLink: "",
-                        meta: validateObj.arr
-                    }
+                await addMusic({
+                    variables: {...musicState}
                 });
                 window.location.assign("/dashboard");
                 console.log(data);
@@ -109,15 +101,10 @@ const UploadMedia = () => {
         }
 
         setMusicState({
-            title: "",
-            media: "",
-            description: "",
-            userLink: "",
-            meta: "",
             genre: "",
+            music: "",
             instruments: ""
         });
-
 
     };
 
