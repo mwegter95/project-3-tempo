@@ -5,6 +5,8 @@ import { QUERY_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
 const DiscoveryFeed = ({activeMusic}) => {
+    console.log(activeMusic);
+    
     const { loading, data } = useQuery(QUERY_USER, {
         variables: {_id: activeMusic.userLink},
         skip: !activeMusic
@@ -13,11 +15,6 @@ const DiscoveryFeed = ({activeMusic}) => {
     if (!activeMusic._id) {
         return <h3>Enter Search Criteria</h3>;
     }
-
-const discoveryFeed = ({activeMusic}) => {
-if (!activeMusic) {
-    return <h3>Enter Search Criteria</h3>;
-}
 
     return (
         <header>
@@ -54,4 +51,4 @@ if (!activeMusic) {
     )
 };
 
-export default discoveryFeed;
+export default DiscoveryFeed;
