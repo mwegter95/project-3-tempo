@@ -23,7 +23,7 @@ const Homepage = () => {
 
             <div></div>
 
-            <section>
+            <section className="white-bg">
                 <Fade left>
                     <p className="serif para">Whether you're a band looking for a member...</p>
                 </Fade>
