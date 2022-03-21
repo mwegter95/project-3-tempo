@@ -1,4 +1,4 @@
-const faker = require("faker");
+const { faker } = require("@faker-js/faker");
 
 const db = require("../config/connection");
 const { User, Review, Music, Message } = require("../models");
@@ -32,7 +32,7 @@ db.once("open", async() => {
     const musicianStatus = ["Looking for collaborations", "Wanting to join a band", "Just browsing"];
 
     for (var i = 0; i < 10; i++) {
-        const randomMusicianStatusIndex = Math.floor(Math.random() * bandStatus.length);
+        const randomMusicianStatusIndex = Math.floor(Math.random() * musicianStatus.length);
         const username = faker.internet.userName();
         const email = faker.internet.email();
         const password = faker.internet.password();
@@ -56,14 +56,14 @@ db.once("open", async() => {
     ];
     
     for (var i = 0; i < 15; i++) {
-        const randomMusicianMusicIndex = Math.floor(Math.random() * createdMusicianUsers.ops.length);
+        const randomMusicianMusicIndex = Math.floor(Math.random() * createdMusicianUsers.insertedCount);
         const media = faker.internet.url;
         const title = faker.lorem.words(10);
         const description = faker.lorem.words(20);
         const metaIndex = Math.floor(Math.random() * metaData.length);
         const meta = [];
         meta.push(metaData[metaIndex]);
-        const userLink = createdMusicianUsers[randomMusicianMusicIndex];
+        const userLink = createdMusicianUsers.insertedIds[randomMusicianMusicIndex];
 
         musicData.push({ media, title, description, meta, userLink });
     }
@@ -74,14 +74,14 @@ db.once("open", async() => {
     // create Review data
     for (var i = 0; i < 20; i++) {
         const review_text = faker.lorem.words(40);
-        const rating = faker.random.number({ min:0, max: 10 });
-        const bandUserIndex = Math.floor(Math.random() * createdBandUsers.ops.length);
-        const musicianUserIndex = Math.floor(Math.random() * createdMusicianUsers.ops.length);
-        const review_by = createdBandUsers[bandUserIndex];
-        const reviewOf = createdMusicianUsers[musicianUserIndex];
+        const rating = faker.datatype.number({ min:0, max: 10 });
+        const bandUserIndex = Math.floor(Math.random() * createdBandUsers.insertedCount);
+        const musicianUserIndex = Math.floor(Math.random() * createdMusicianUsers.insertedCount);
+        const reviewBy = createdBandUsers.insertedIds[bandUserIndex];
+        const reviewOf = createdMusicianUsers.insertedIds[musicianUserIndex];
         const created_at = faker.date.recent(7);
 
-        const createdReview = await Review.create({ review_text, rating, review_by, reviewOf, created_at });
+        const createdReview = await Review.create({ review_text, rating, reviewBy, reviewOf, created_at });
 
     }
 
