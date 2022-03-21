@@ -1,20 +1,23 @@
 import React from 'react';
 
-const GenreList = ({ userMusic }) => {
-    if (!userMusic.length) {
+const GenreList = ({ media }) => {
+    if (!media.length) {
         return <h3>User doesn't have any genres yet!</h3>;
     }
-    
 
     return (
         <div>
             <h3 className='sm'>Genres:</h3>
-            {userMusic.length &&
-                userMusic.map(music => (
+            {media.length &&
+                media.map(music => (
                     <div key={music.id}>
-                        <p className="sans-serif para sm">
-                            {music.genre}
-                        </p>
+                        <div className="sans-serif para sm">
+                            {music.meta.filter(meta => meta.type.includes('genre')).map(filteredMeta => (
+                                <div key={filteredMeta._id}>
+                                    <p>{filteredMeta.value}</p>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 ))}
         </div>

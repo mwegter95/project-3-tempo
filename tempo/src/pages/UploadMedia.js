@@ -62,14 +62,24 @@ const UploadMedia = () => {
             }
         }
 
-        return true;
+        const metaArray = createMetaObject(newArr);
+        //console.log("metaArray from validateInstruments line 66", metaArray)
+
+        return { result: true, arr: metaArray };
     };
 
-    const changeState = (validArray) => {
-        setMusicState({
-            ...musicState,
-            instruments: validArray
-        });
+    const createMetaObject = (validatedInstrumentsArray) => {
+        let metaArray = [];
+        metaArray.push({ type: "genre", value: musicState.genre })
+        for(var i = 0; i < validatedInstrumentsArray.length; i++) {
+            metaArray.push(
+                 { type: "instrument", value: validatedInstrumentsArray[i]}
+                );
+        }
+
+        // return the metaArray, an array of objects (populated by the front end interaction) to make into metaData objects
+        // this is made out of one metaData oject with the type: genre, value: musicState.genre, then one or more objects with the type: instrument, value: validatedInstrumentsArray[i]
+        return metaArray;
     };
 
     const handleAddMusic = async (event) => {
@@ -81,6 +91,7 @@ const UploadMedia = () => {
                     variables: {...musicState}
                 });
                 window.location.assign("/dashboard");
+                console.log(data);
             } catch(e) {
                 console.error(e);
                 setErrorState("There was an issue creating this data");

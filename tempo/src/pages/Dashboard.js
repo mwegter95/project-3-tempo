@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Redirect, useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 
 import { useQuery, useMutation } from "@apollo/client";
@@ -11,8 +10,6 @@ import { QUERY_ME } from "../utils/queries";
 import GenreList from "../components/GenreList"
 import InstrumentList from "../components/InstrumentList"
 import MediaList from "../components/MediaList";
-
-import Auth from "../utils/auth";
 
 const Dashboard = (props) => {
     // check that a user is logged in, then set user = logged in user's id
@@ -40,12 +37,12 @@ const Dashboard = (props) => {
     let media = myMedia || [];
 
     if (loadingMe || loading || mediaLoading) {
-        return <div>Loading...</div>
+        return <div className="main serif para grey loading">Loading...</div>
     }
 
         return (
             <> 
-            {user ? 
+            {userData ? 
                 <section className="user-dashboard main">
                     {/* make a dashboard that is a mix of components */}
                     {/* div for stagename 
@@ -66,10 +63,10 @@ const Dashboard = (props) => {
                         <h1 className="sans-serif para">{userData.user.username}</h1>
                         
                         <div className="list-border">
-                            <GenreList userMusic={userData.user.meta}/>
+                            <GenreList media={media}/>
                         </div>
                         <div className="list-border">
-                            <InstrumentList userMusic={userData.user.meta}/>
+                            <InstrumentList media={media}/>
                         </div>
 
                         <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
