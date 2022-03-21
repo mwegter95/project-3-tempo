@@ -69,33 +69,8 @@ const Discover = () => {
     
     if (loading) {
         return <h3>Loading</h3>
-    } else if (!activeMusic.userLink) {
-        return (
-            <div className="main">
-            <h1 className="sans-serif para">Discover Page</h1>
-            <div>
-                <form onSubmit={handleAddMeta} autoComplete="off">
-                    <div>
-                        <h1 className="sans-serif white para">What would you like to find?</h1>
-                                                
-                        <label htmlFor="addMeta" className="sans-serif white subpara">Search For:</label>
-                        <input id="addMeta" name="addMeta" className="sans-serif sm" />
-                        
-                        
-                        <button className="sans-serif sm">Submit</button>
-                    </div>
-                </form>
-            </div>
-            <div>
-                <div className="col-12 col-lg-3 mb-3">
-                    <h3>no results match search critera</h3>
-                </div>
-                <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
-            </div>
-        </div>
-        )
-    }
-
+    } 
+      
     return (
         <div className="main">
             <h1 className="sans-serif para">Discover Page</h1>
@@ -113,11 +88,12 @@ const Discover = () => {
                 </form>
             </div>
             <div>
+                {activeMusic?.userLink ?                 
                 <div className="col-12 col-lg-3 mb-3">
                     <DiscoFeed
                         activeMusic={activeMusic}                        
                     />
-                </div>
+                </div> : <div><h3>No results returned based on search criteria</h3></div>}
                 <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
             </div>
         </div>
