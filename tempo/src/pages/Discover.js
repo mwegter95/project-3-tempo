@@ -18,7 +18,7 @@ const Discover = () => {
     console.log('Discover start')
     //Define State to include a list of metadata values that will drive the discovery media feed
     const [metaCriteria, setMetaCriteria] = useState([{
-            value: "country",
+            value: "drums",
             type: "genre"
         }]);
 
@@ -51,8 +51,7 @@ const Discover = () => {
     const { loading, data } = useQuery(FEED_MUSIC, {
         variables: { metaData: metaCriteria }
     });
-    
-    console.log('musicFeed queried');
+        console.log('musicFeed queried');
     console.log(data);
 
     const handleAddMeta = async (event) => {
@@ -70,21 +69,27 @@ const Discover = () => {
     };
 
     const handleNextMusic = async (event) => {
+        console.log("handleNextMusic");
+        console.log(feedPosition);
         const nextPosition = feedPosition + 1;
+        console.log(nextPosition);
         setFeedPosition(nextPosition);
         
     }
 
     useEffect(() => {
         console.log('useEffect');
-        if(data) {            
+        console.log(loading);
+        console.log(data);
+                
+        if(!loading) {
             console.log(data.feedMusic);
             console.log(feedPosition);        
             setActiveMusic(data.feedMusic[feedPosition]);
         }
-    }, [feedPosition, data])
+    }, [data, feedPosition])
     
-    if (!activeMusic.userLink) {
+    if (loading) {
         return <h3>Loading</h3>
     }    
 

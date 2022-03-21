@@ -1,10 +1,11 @@
 import React from "react";
 import Auth from "../../utils/auth";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import { QUERY_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
-const DiscoveryFeed = (activeMusic) => {
+const DiscoveryFeed = ({activeMusic}) => {
+    console.log('discoFeed')
     console.log(activeMusic);
     console.log(activeMusic.userLink);
 
@@ -17,9 +18,9 @@ const DiscoveryFeed = (activeMusic) => {
     console.log('discoFeed/index.js data');
     console.log(data);    
 
-    if (!activeMusic._id) {
+    if (loading) {
         return <h3>Enter Search Criteria</h3>;
-    } else if (!loading) {
+    } else if (!data) {
         return <h3>Loading</h3>;
     }
 
@@ -30,7 +31,7 @@ const DiscoveryFeed = (activeMusic) => {
                 {Auth.loggedIn() ? (
                     <>
                         <h2 className="serif sm gold">{activeMusic.title}</h2>
-                        <a href={activeMusic.media} target="_blank" className="sans-serif subpara">Watch Video!</a>
+                        <a href={activeMusic.media} className="sans-serif subpara">Watch Video!</a>
                         <p>Description - {activeMusic.description}</p>
                         <div>Music Summary - {activeMusic.meta.map((meta) => (
                             <div key={meta._id}>
