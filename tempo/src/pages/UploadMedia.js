@@ -86,6 +86,7 @@ const UploadMedia = () => {
         event.preventDefault();
 
         const validateObj = validateInstruments(musicState.instruments);
+        console.log(validateObj.arr);
 
         if (validateObj.result) {
             try {
@@ -99,7 +100,6 @@ const UploadMedia = () => {
                     }
                 });
                 window.location.assign("/dashboard");
-                console.log(data);
             } catch(e) {
                 console.error(e);
                 setErrorState("There was an issue creating this data");
