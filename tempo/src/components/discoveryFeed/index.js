@@ -49,8 +49,9 @@ const DiscoveryFeed = ({activeMusic}) => {
             <div>
                 {Auth.loggedIn() ? (
                     <section className="black-card profile-preview">
-                        <div>
+                        <div className="avatar">
                             {/* this will be the avatar div */}
+                            <h2 className="sans-serif para white">(Avatar)</h2>
                         </div>
                         <div>
                             <a href={`/profile/${data.user._id}`}>
@@ -62,7 +63,7 @@ const DiscoveryFeed = ({activeMusic}) => {
                         <div>
                             <article>
                                 <a href={activeMusic.media}>
-                                    <h1 className="sans-serif subpara white">{activeMusic.title}</h1>
+                                    <h1 className="sans-serif para white">{activeMusic.title}</h1>
                                 </a>
                                 <p className="serif sm white">{activeMusic.description}</p>
                             </article>

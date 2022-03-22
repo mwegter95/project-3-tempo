@@ -512,7 +512,7 @@ article .media-card p {
 .profile-preview {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
   padding-right: 100px;
   padding-left: 40px 100px;
   margin-bottom: 50px;
@@ -534,4 +534,9 @@ article .media-card p {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+}
+
+.avatar {
+  justify-self: center;
+  align-self: center;
 }
