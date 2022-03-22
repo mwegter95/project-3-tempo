@@ -6,25 +6,6 @@ const MediaList = ({ media }) => {
         return <p className="serif sm gold">You haven't added any music traits to your profile yet!</p>
     }
 
-    const metaArrays = (musicRecord) => {
-        let genreArray = musicRecord.meta.filter((meta) => {
-            if (meta.type === "genre") {
-                return meta.value;
-            }
-        }).map((meta) => {
-            return meta.value;
-        });
-        let instrumentArray = musicRecord.meta.filter((meta) => {
-            if (meta.type === "instrument") {
-                return meta.value;
-            }
-        }).map((meta) => {
-            return meta.value;
-        });
-
-        return {genreArray, instrumentArray};
-    };
-
 
 
     return (
