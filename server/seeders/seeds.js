@@ -47,22 +47,32 @@ db.once("open", async() => {
     
     // create Music
     const musicData = [];
-    const metaData = [
-        {type: "rock", value: "guitar"},
-        {type: "classical", value: "cello"},
-        {type: "jazz", value: "saxophone"},
-        {type: "country", value: "banjo"},
-        {type: "pop", value: "vocal percussion"}
+    const instrumentMeta = [
+        {type: "instrument", value: "guitar"},
+        {type: "instrument", value: "cello"},
+        {type: "instrument", value: "saxophone"},
+        {type: "instrument", value: "banjo"},
+        {type: "instrument", value: "vocal percussion"}
+    ];
+
+    const genreMeta = [
+        {type: "genre", value: "rock"},
+        {type: "genre", value: "classical"},
+        {type: "genre", value: "jazz"},
+        {type: "genre", value: "country"},
+        {type: "genre", value: "pop"}
     ];
     
     for (var i = 0; i < 15; i++) {
         const randomMusicianMusicIndex = Math.floor(Math.random() * createdMusicianUsers.insertedCount);
-        const media = faker.internet.url;
+        const media = faker.internet.url();
         const title = faker.lorem.words(10);
         const description = faker.lorem.words(20);
-        const metaIndex = Math.floor(Math.random() * metaData.length);
+        const instrumentIndex = Math.floor(Math.random() * instrumentMeta.length);
+        const genreIndex = Math.floor(Math.random() * genreMeta.length);
         const meta = [];
-        meta.push(metaData[metaIndex]);
+        meta.push(instrumentMeta[instrumentIndex]);
+        meta.push(genreMeta[genreIndex]);
         const userLink = createdMusicianUsers.insertedIds[randomMusicianMusicIndex];
 
         musicData.push({ media, title, description, meta, userLink });
