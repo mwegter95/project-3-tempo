@@ -99,7 +99,6 @@ const UploadMedia = () => {
                     }
                 });
                 window.location.assign("/dashboard");
-                console.log(data);
             } catch(e) {
                 console.error(e);
                 setErrorState("There was an issue creating this data");

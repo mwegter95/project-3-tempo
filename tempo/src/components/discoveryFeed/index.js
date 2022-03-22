@@ -1,22 +1,37 @@
 import React from "react";
 import Auth from "../../utils/auth";
-// import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { QUERY_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
 const DiscoveryFeed = ({activeMusic}) => {
-    console.log('discoFeed')
-    console.log(activeMusic);
-    console.log(activeMusic.userLink);
-
 
     const { loading, data } = useQuery(QUERY_USER, {
         variables: {_id: activeMusic.userLink},
         skip: !activeMusic
     });
 
-    console.log('discoFeed/index.js data');
-    console.log(data);    
+    const metaArrays = (musicRecord) => {
+        let genreArray = musicRecord.meta.filter((meta) => {
+            if (meta.type === "genre") {
+                return meta.value;
+            }
+        }).map((meta) => {
+            return meta.value;
+        });
+        let instrumentArray = musicRecord.meta.filter((meta) => {
+            if (meta.type === "instrument") {
+                return meta.value;
+            }
+        }).map((meta) => {
+            return meta.value;
+        });
+
+        return {genreArray, instrumentArray};
+    };
+
+    const { genreArray, instrumentArray } = metaArrays(activeMusic);
+
 
     if (loading) {
         return <h3>Enter Search Criteria</h3>;
@@ -25,37 +40,35 @@ const DiscoveryFeed = ({activeMusic}) => {
     }
 
     return (
-        <header>
+        <article>
 
-            <nav>
+            <div>
                 {Auth.loggedIn() ? (
                     <>
                         <h2 className="serif sm gold">{activeMusic.title}</h2>
-                        <a href={activeMusic.media} className="sans-serif subpara">Watch Video!</a>
+                        <a href={activeMusic} target="_blank" className="sans-serif subpara">Watch Video!</a>
                         <p>Description - {activeMusic.description}</p>
-                        <div>Music Summary - {activeMusic.meta.map((meta) => (
-                            <div key={meta._id}>
-                            {meta.type === "genre" ? (
-                                    <p>Genre: {meta.value}</p>
-                            ) : (
-                                    <p>Instrument(s): {meta.value}</p>
-                            )}
+                        <div>Music Summary -
+                            <div>
+                                <p>Genre: {genreArray.join()}</p>
+                                <p>Instrument(s): {instrumentArray.join(", ")}</p>
                             </div>
-                        ))}</div>
+                        </div>
                         <div>
                             <p>Artist: <a href={`/profile/${data.user._id}`}>{data.user.username}</a></p>
                             <p>Bio: {data.user.biography}</p>
+                            <p>Type: {data.user.type}</p>
+                            <p>Status: {data.user.status}</p>
                         </div>
 
                     </>
                 ) : (
                     <>
-                        <div>Sign Up</div>
-                        <div>Log In</div>
+                        <Redirect to="/login"></Redirect>
                     </>
                 )}
-            </nav>
-        </header>
+            </div>
+        </article>
     )
 };
 
