@@ -58,6 +58,7 @@ mutation addMusic($meta: [InputMeta], $userLink: ID, $media: String!, $title: St
         media
         title
         description
+        userLink
         meta {
             _id
             type
