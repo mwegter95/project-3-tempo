@@ -44,7 +44,7 @@ const Dashboard = (props) => {
     if (loadingMe || loading || mediaLoading) {
         return <section className="main-background">
             <div className="main-gold">
-                <h1 className="serif-bold sm loading">Loading...</h1>
+                <h1 className="serif-bold sm white loading">Loading...</h1>
             </div>
         </section>
     }
@@ -126,12 +126,12 @@ const Dashboard = (props) => {
                                     <Fade delay={300}> 
                                         <h1 className="sans-serif subpara">Media:</h1>
                                     </Fade>
-                                    
+
                                     <div className="sans-serif subpara">
                                         <MediaList media={media}></MediaList>
                                     </div>
                                 
-                                    <Fade delay={1100}>
+                                    <Fade delay={300}>
                                         <div className="dash-buttons">
                                             <Link className="sans-serif sm" to="/media">+ Add to your music</Link>
                                             <Link className="sans-serif sm" to="/dashboard/myreviews">View your reviews</Link>

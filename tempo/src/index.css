@@ -299,7 +299,7 @@ main section:last-of-type {
 
 .black-card {
   background-color: black;
-  box-shadow: 10px 15px 7px rgba(0, 0, 0, 0.5);
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -458,6 +458,10 @@ article .media-card p {
   display: flex;
 }
 
+.media-layout h1 {
+    margin-bottom: 30px;
+}
+
 .media-layout button {
   width: 15%;
   align-self: flex-end;
@@ -478,4 +482,56 @@ article .media-card p {
   margin-right: 80px;
 }
 
+/* Pages: Discover */
+.disco-search-div {
+  margin-top: 15px;
+}
+.disco-search-div input {
+  width: 100%;
+  margin-top: 10px;
+}
 
+.disco-tag-div ul {
+  padding-left: 0px;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin-bottom: 40px;
+}
+
+.disco-tag-div ul li button {
+  margin-right: 20px;
+  border-radius: 30px;
+  padding: 5px 15px 10px;
+}
+
+.disco-tag-div ul li span {
+  margin-right: 15px;
+}
+
+.profile-preview {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 100px;
+  padding-left: 40px 100px;
+  margin-bottom: 50px;
+}
+
+.profile-preview div {
+  max-width: 30%;
+}
+
+.profile-preview div h1 {
+  text-decoration: underline;
+}
+
+.profile-preview a h1, .profile-preview p {
+  margin-bottom: 20px;
+}
+
+.next-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}

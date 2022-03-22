@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Fade from "react-reveal/Fade";
 import { useQuery } from "@apollo/client";
 import { QUERY_MY_REVIEWS } from "../utils/queries";
 import ReviewList from "../components/ReviewList";
@@ -29,10 +30,12 @@ const MyReviews = () => {
     return (
         <div className="main-background myreviews">
             <div className="main-gold"> 
-                <div className="back-to-dash">
-                    <h1 className="sans-serif para white">Your Reviews.</h1>
-                    <Link to="/dashboard"><button className="sans-serif regular">Back to dashboard</button></Link>
-                </div>
+                <Fade>
+                    <div className="back-to-dash">
+                        <h1 className="sans-serif para white">Your Reviews.</h1>
+                        <Link to="/dashboard"><button className="sans-serif regular">Back to dashboard</button></Link>
+                    </div>
+                </Fade>
                 <ReviewList reviews={reviews} />
             </div>
         </div>

@@ -6,7 +6,6 @@ import { useQuery } from "@apollo/client";
 import { capitalizeFirstLetter } from "../../utils/helpers";
 
 const DiscoveryFeed = ({activeMusic}) => {
-
     const { loading, data } = useQuery(QUERY_USER, {
         variables: {_id: activeMusic.userLink},
         skip: !activeMusic
@@ -37,32 +36,43 @@ const DiscoveryFeed = ({activeMusic}) => {
     if (loading) {
         return <h3>Enter Search Criteria</h3>;
     } else if (!data) {
-        return <h3>Loading</h3>;
+        return <section className="main-background">
+            <div className="main-gold">
+                <h1 className="serif-bold sm white loading">Loading...</h1>
+            </div>
+        </section>
     }
+    console.log(activeMusic);
 
     return (
         <article>
-
             <div>
                 {Auth.loggedIn() ? (
-                    <>
-                        <h2 className="serif sm gold">{activeMusic.title}</h2>
-                        <a href={activeMusic.media} target="_blank" className="sans-serif subpara">Watch Video!</a>
-                        <p>Description - {activeMusic.description}</p>
-                        <div>Music Summary -
-                            <div>
-                                <p>Genre: {genreArray.join()}</p>
-                                <p>Instrument(s): {instrumentArray.join(", ")}</p>
-                            </div>
+                    <section className="black-card profile-preview">
+                        <div>
+                            {/* this will be the avatar div */}
                         </div>
                         <div>
-                            <p>Artist: <a href={`/profile/${data.user._id}`}>{data.user.username}</a></p>
-                            <p>Bio: {data.user.biography}</p>
-                            <p>Type: {data.user.type}</p>
-                            <p>Status: {data.user.status}</p>
+                            <a href={`/profile/${data.user._id}`}>
+                                <h1 className="sans-serif para white">{data.user.username}</h1>
+                            </a>
+                            <p className="serif sm grey">{data.user.status}</p>
+                            <p className="serif sm white">{data.user.biography}</p>
                         </div>
+                        <div>
+                            <article>
+                                <a href={activeMusic.media}>
+                                    <h1 className="sans-serif subpara white">{activeMusic.title}</h1>
+                                </a>
+                                <p className="serif sm white">{activeMusic.description}</p>
+                            </article>
 
-                    </>
+                            <article>
+                                <p className="sans-serif sm white">Genre: {genreArray.join()}</p>
+                                <p className="sans-serif sm white">Instrument: {instrumentArray.join(", ")}</p>
+                            </article>
+                        </div>
+                    </section>
                 ) : (
                     <>
                         <Redirect to="/login"></Redirect>
