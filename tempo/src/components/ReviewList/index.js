@@ -13,14 +13,14 @@ const ReviewList = ({ reviews }) => {
     });
 
     if(!reviews.length) {
-        return <p className="serif subpara">You haven't posted any reviews yet.</p>
+        return <p className="serif-bold subpara">You haven't posted any reviews yet.</p>
     };
 
     return (
         <div>
             {reviews.length && 
                 trail.map((animation, index) => (
-                    <animated.article key={index} style={animation} className="review-layout">
+                    <animated.article key={index} style={animation} className="black-card review-layout">
                         <div>
                             <p className="serif sm grey">Review for: <a className="sans-serif sm white" href={`/profile/${reviews[index].reviewOf._id}`}>{reviews[index].reviewOf.username}</a></p>
                             <p className="serif sm grey">Rating: <span className="sans-serif sm white">{reviews[index].rating}/10</span></p>

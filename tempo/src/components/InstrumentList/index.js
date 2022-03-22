@@ -2,25 +2,20 @@ import React from 'react';
 
 const InstrumentList = ({ media }) => {
     if (!media.length) {
-        return <h3>User doesn't have any instruments yet!</h3>;
+        return <p>No instruments added.</p>;
     }
 
     return (
-        <div>
-            <h3 className='sm'>Instruments:</h3>
+        <>
             {media.length &&
                 media.map(music => (
-                    <div key={music.id}>
-                        <div className="sans-serif para sm">
+                    <p key={music.id}>
                             {music.meta.filter(meta => meta.type.includes('instrument')).map(filteredMeta => (
-                                <div key={filteredMeta._id}>
-                                    <p>{filteredMeta.value}</p>
-                                </div>
+                               <span className="dash-media-list">{filteredMeta.value}</span>
                             ))}
-                        </div>
-                    </div>
+                    </p>
                 ))}
-        </div>
+        </>
     )
 }
 
