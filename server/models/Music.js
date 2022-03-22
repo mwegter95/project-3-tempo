@@ -6,11 +6,11 @@ const musicSchema = new Schema (
     {
         media: {
             type: String,
-            // required: true,
+            required: true,
         },
         title: {
             type: String,
-            // required: true,
+            required: true,
         },
         description: {
             type: String,
@@ -18,7 +18,7 @@ const musicSchema = new Schema (
         meta: [metaDataSchema],        
         userLink: {
             type: Schema.Types.ObjectId,
-            // required: true,
+            required: true,
         }
     },
     {
