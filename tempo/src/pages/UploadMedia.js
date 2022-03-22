@@ -86,7 +86,6 @@ const UploadMedia = () => {
         event.preventDefault();
 
         const validateObj = validateInstruments(musicState.instruments);
-        console.log(validateObj.arr);
 
         if (validateObj.result) {
             try {
