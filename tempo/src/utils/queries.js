@@ -139,8 +139,26 @@ query userMusic($_id: ID!) {
         description
     }
 }
+`;
 
-`
+export const FEED_MUSIC = gql`
+query feedMusic($metaData: [InputMeta!]) {
+    feedMusic(metaData: $metaData) {
+        _id
+        media              
+        userLink
+        title
+        description
+        meta {
+            _id
+            value
+            type
+          }
+    }
+}
+`;
+
+
 
 export const QUERY_MESSAGES = gql`
 {
