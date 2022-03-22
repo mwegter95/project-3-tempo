@@ -62,6 +62,10 @@ const Discover = () => {
 
     }
 
+    const handleMessage = async (event) => {
+        // add functionality
+    }
+
     useEffect(() => {
         console.log('useEffect');
         console.log(loading);
@@ -107,8 +111,14 @@ const Discover = () => {
                         activeMusic={activeMusic}                        
                     />
                 </div> : <div><h3>No results returned based on search criteria</h3></div>}
-                <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
-
+                <div>
+                    <div>
+                        <button onClick={handleMessage} className="sans-serif sm">Message</button>
+                    </div>
+                    <div>
+                        <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
+                    </div>
+                </div>
             </div>
           </div>
         </section>
