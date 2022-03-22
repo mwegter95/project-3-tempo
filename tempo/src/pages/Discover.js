@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { FEED_MUSIC } from "../utils/queries";
+import { FEED_MUSIC, QUERY_USER } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
-
-
-//TODO: Add metalist/remove meta functionality
-//TODO: Add contact/message button (Need to call user query)
 
 
 //render page
@@ -18,16 +14,22 @@ const Discover = () => {
 
     const [activeMusic, setActiveMusic] = useState({})
 
+    const [activeUser, setActiveUser] = useState();
+
     console.log('State Defined')
     console.log(activeMusic);
     console.log(metaCriteria);
 
-    const { loading, data } = useQuery(FEED_MUSIC, {
+    const { loading: musicLoading, data : musicData } = useQuery(FEED_MUSIC, {
         variables: { metaData: metaCriteria }
     });
 
-    console.log('musicFeed queried');
-    console.log(data);
+    const { loading: userLoading, data : userData } = useQuery(QUERY_USER, {
+        variables: { _id : activeUser }
+    });
+
+    console.log(' musicData queried');
+    console.log( musicData);
 
     const handleAddMeta = async (event) => {
         event.preventDefault();  
@@ -63,22 +65,34 @@ const Discover = () => {
     }
 
     const handleMessage = async (event) => {
-        // add functionality
+        console.log('userData')
+        console.log(userData)
+        document.location.href = `mailto:${userData.user.email}`
     }
 
+    //Update the music record viewed in the DiscoFeed component
     useEffect(() => {
         console.log('useEffect');
-        console.log(loading);
-        console.log(data);
+        console.log(musicLoading);
+        console.log( musicData);
                 
-        if(!loading) {
-            console.log(data.feedMusic);
+        if(!musicLoading) {
+            console.log( musicData.feedMusic);
             console.log(feedPosition);        
-            setActiveMusic(data.feedMusic[feedPosition]);
+            setActiveMusic( musicData.feedMusic[feedPosition]);
+
         }
-    }, [data, feedPosition])
+    }, [ musicData, feedPosition])
+
+    useEffect(() => {
+                        
+        if(activeMusic) {
+            setActiveUser(activeMusic.userLink);
+        }
+    }, [ activeMusic ])
+
     
-    if (loading) {
+    if (musicLoading) {
         return <h3>Loading</h3>
     } 
       
@@ -104,13 +118,13 @@ const Discover = () => {
                     {metaCriteria.map((meta) => <h4>{meta.value} <button onClick={()=> handleRemoveMeta(meta.value)} className="sans-serif sm">-</button></h4>)}
                 </ul>
             </div>
-            <div>
-                {activeMusic?.userLink ?                 
+            {activeMusic?.userLink ? 
+            <div>                                
                 <div className="col-12 col-lg-3 mb-3">
                     <DiscoFeed
                         activeMusic={activeMusic}                        
                     />
-                </div> : <div><h3>No results returned based on search criteria</h3></div>}
+                </div>
                 <div>
                     <div>
                         <button onClick={handleMessage} className="sans-serif sm">Message</button>
@@ -119,7 +133,7 @@ const Discover = () => {
                         <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
                     </div>
                 </div>
-            </div>
+            </div>  : <div><h3>No results returned based on search criteria</h3></div>}
           </div>
         </section>
     )
