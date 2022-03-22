@@ -4,18 +4,15 @@ import { FEED_MUSIC } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
 
 
-//TODO: Add no returned feedMusic catch to resolve blank page (Likely in discoFeed component)
-//TODO: Add contact/message button (Need to call user query)
 //TODO: Add metalist/remove meta functionality
-//TODO: Add styling
-
+//TODO: Add contact/message button (Need to call user query)
 
 
 //render page
 const Discover = () => {
     console.log('Discover start')
     //Define State to include a list of metadata values that will drive the discovery media feed
-    const [metaCriteria, setMetaCriteria] = useState([{}]);
+    const [metaCriteria, setMetaCriteria] = useState([]);
 
     const [feedPosition, setFeedPosition] = useState(0);
 
@@ -55,6 +52,16 @@ const Discover = () => {
         
     }
 
+    const handleRemoveMeta = async (value) => {
+        console.log('handleRemoveMeta running');
+        console.log(value);
+        console.log(metaCriteria)
+        const newValueList = metaCriteria.filter(meta => meta.value !== value);
+        console.log(newValueList);
+        setMetaCriteria(newValueList);
+
+    }
+
     useEffect(() => {
         console.log('useEffect');
         console.log(loading);
@@ -87,6 +94,11 @@ const Discover = () => {
                         <button className="sans-serif sm">Submit</button>
                     </div>
                 </form>
+            </div>
+            <div>
+                <ul>
+                    {metaCriteria.map((meta) => <h4>{meta.value} <button onClick={()=> handleRemoveMeta(meta.value)} className="sans-serif sm">-</button></h4>)}
+                </ul>
             </div>
             <div>
                 {activeMusic?.userLink ?                 
