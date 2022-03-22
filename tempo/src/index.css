@@ -1,13 +1,361 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Our Colors */
+:root {
+  --tempo-gold: #FDBE00;
+  --light-yellow: #E8CC88;
+  --faded-gray: #808080;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* General Styling */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+}
+
+h1, p {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  border: none;
+  background: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  transition: .5s ease;
+}
+
+button:hover {
+  background-color: var(--light-yellow);
+  cursor: pointer
+}
+
+textarea, input {
+  padding: 5px;
+  border-radius: 5px;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 15px;
+}
+
+/* Our Adobe Fonts */
+.serif {
+  font-family: playfair-display, serif;
+  font-weight: 800 !important;
+  font-style: italic;
+  font-size: 28px;
+}
+
+.sans-serif {
+  font-family: neue-haas-unica, sans-serif;
+  font-style: normal;
+}
+
+.navText {
+  font-size: 28px;
+  font-weight: 200;
+}
+
+.title {
+  font-size: 72px;
+  font-weight: 800;
+}
+
+.subtitle {
+  font-size: 3.5vw;
+  font-weight: 600;
+}
+
+.para {
+  font-size: 56px;
+  font-weight: 500;
+}
+
+.subpara {
+  font-size: 36px;
+  font-weight: 200;
+}
+
+.sm {
+  font-size: 1.3vw;
+  font-weight: 200;
+}
+
+.regular {
+  font-size: 16px;
+}
+
+.white {
+  color: white;
+}
+
+.gold {
+  color: var(--tempo-gold);
+}
+
+.grey {
+  color: var(--faded-gray);
+}
+
+.main {
+  padding: 20px 140px 40px;
+  min-height: 75vh;
+}
+
+.main-gold {
+  background-color: var(--tempo-gold);
+  margin: 0px 140px;
+  padding: 20px 50px 40px;
+  min-height: 75vh;
+}
+
+.main-background {
+  background-image: url("./assets/band-room.png");
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: 110%;
+  background-position: right;
+}
+
+/* Component: Header */
+header {
+  padding: 0px 140px;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a:not(:last-of-type) {
+  margin-right: 50px;
+}
+
+header a, header h1 {
+  transition: .3s ease;
+}
+
+header a:hover {
+  color: var(--faded-gray);
+}
+
+header h1:hover {
+  color: var(--light-yellow);
+}
+
+#logo image {
+  width: 70%;
+}
+
+/* Component: Footer */
+footer {
+  background-color: black;
+  color: white;
+  text-align: center;
+  width: 100%;
+  padding: 30px 0px;
+  align-self: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+/* Page: Homepage */
+main {
+  text-align: center;
+}
+
+main .white-bg {
+  background-color: white;
+}
+
+main section:first-of-type {
+  padding: 250px 0px;
+  background-image: url("./assets/music-pile-hero.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+main section:first-of-type h1:first-of-type {
+  margin-right: auto;
+  margin-left: auto;
+  border-bottom: 5px solid var(--tempo-gold);
+  width: 70%;
+}
+
+main .welcome {
+  padding: 100px 0px;
+  background: var(--tempo-gold);
+}
+
+main .welcome p {
+  margin-top: 75px;
+}
+
+main div:first-of-type {
+  height: 800px;
+  background-image: url("./assets/concert-scene.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+main div:last-of-type {
+  height: 800px;
+  background-image: url("./assets/band-room.png");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+main section:last-of-type p {
+  margin-bottom: 30px;
+}
+
+main section:last-of-type {
+  padding: 85px 0px;
+}
+
+/* Pages: Signup */
+.sign-on {
+  background-image: url("./assets/sign-on-hero.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px 0px;
+}
+
+.sign-on form {
+  margin-left: 75px;
+  padding: 50px;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 35%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 10px 20px 20px 10px rgba(0, 0, 0, 0.6);
+}
+
+.sign-on form div:first-of-type input {
+  width: 90%;
+}
+
+.sign-on form h1, .sign-on form div:first-of-type, .sign-on form input, .sign-on form textarea {
+  margin-bottom: 20px;
+}
+
+.sign-on form div:last-of-type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.sign-on form .radio-div input {
+  margin-bottom: 0px;
+  margin-right: 25px;
+  height: 25px;
+  width: 25px;
+}
+
+.sign-on form button {
+  margin-top: 50px;
+  width: 35%
+}
+
+#messageLimit {
+  align-self: flex-end;
+}
+
+/* Page: My Reviews */
+.myreviews {
+  background-color: var(--tempo-gold);
+}
+
+.myreviews h1 {
+  margin-bottom: 30px;
+}
+
+.review-layout {
+  background-color: black;
+  box-shadow: 10px 15px 7px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  padding: 40px 30px;
+}
+
+.review-layout div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-layout p {
+  margin-bottom: 10px;
+}
+
+.review-layout p a {
+  text-decoration: underline;
+}
+
+.createdAt {
+  align-self: flex-end;
+  margin-top: 10px;
+}
+
+/* Pages: Profile */
+.profile {
+  background-color: var(--tempo-gold);
+}
+
+.profile form {
+  background-color: black;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  margin-bottom: 25px;
+  padding: 40px 30px;
+  width: 50%;
+}
+
+.profile form div {
+  justify-content: flex-start;
+}
+
+.profile div {
+  display: flex;
+}
+
+.profile div input {
+  width: 10%;
+  text-align: right;
+  margin-right: 15px;
+}
+
+/* Pages: Dashboard */
+.list-border {
+  border-radius: 5px;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+.loading {
+  text-align: center;
 }
