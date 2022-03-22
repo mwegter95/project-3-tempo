@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Fade from "react-reveal/Fade";
 import { useMutation } from "@apollo/client";
 import { ADD_MUSIC } from "../utils/mutations";
 import InstrumentListArray from "../utils/InstrumentList";
@@ -116,39 +117,46 @@ const UploadMedia = () => {
             genre: "",
             instruments: ""
         });
-
-
     };
 
     return (
         <section className="import-media main-background">
             <div className="main-gold">
-                <Link className="serif sm" to="/dashboard">Back to Dashboard</Link>
-                <form onSubmit={handleAddMusic}>
-                    <div>
-                        <h1 className="sans-serif para">Add Music Data to your Profile</h1>
-                        <h2 className="sans-serif para">Allow others to search for you by your music abilities!</h2>
-                
-                        <label htmlFor="meta" className="sans-serif subpara">Genre:</label>
-                        <input name="genre" type="text" className="sans-serif sm" value={musicState.genre || ""} onChange={handleChange} />
-                
-                        <label htmlFor="meta" className="sans-serif subpara">Instrument(s). Separate each with a comma.</label>
-                        <input name="instruments" type="text" className="sans-serif sm" value={musicState.instruments || ""} onChange={handleChange} />
-                
-                        <h2 className="sans-serif para">Upload a link of you in action to Showcase your skills!</h2>
-                
-                        <label htmlFor="title" className="sans-serif subpara">Title</label>
-                        <input name="title" type="text" className="sans-serif sm" value={musicState.title || ""} onChange={handleChange} />
-                
-                        <label htmlFor="description" className="sans-serif subpara">Description</label>
-                        <input name="description" type="text" className="sans-serif sm" value={musicState.description || ""} onChange={handleChange} />
-                
-                        <label htmlFor="media" className="sans-serif subpara">Media File Link:</label>
-                        <input name="media" type="text" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
-                
-                        <button className="sans-serif sm">Submit</button>
-                    </div>
-                </form>
+                <div className="back-to-dash">
+                    <Fade>
+                        <h1 className="sans-serif para white">Add to your music.</h1>
+                    </Fade>
+                    <Link to="/dashboard"><button className="sans-serif regular">Back to dashboard</button></Link>
+                </div>
+
+                <Fade delay={300}>
+                    <form onSubmit={handleAddMusic} className="black-card media-layout" autocomplete="off">
+                        <h1 className="serif subpara white">Let others find you through your skills.</h1>
+                    
+                        <section className="row-div">
+                            <div className="column-div">
+                                <label htmlFor="title" className="sans-serif sm white">Title:</label>
+                                <input type="text" name="title" className="sans-serif sm" value={musicState.title || ""} onChange={handleChange} />
+                            
+                                <label htmlFor="meta"  className="sans-serif sm white">Instrument(s) you play. Separate each with a comma.</label>
+                                <input name="instruments" type="text" className="sans-serif sm" value={musicState.instruments || ""} onChange={handleChange} />
+                    
+                                <label htmlFor="meta" className="sans-serif sm white">Genre:</label>
+                                <input name="genre" type="text" className="sans-serif sm" value={musicState.genre || ""} onChange={handleChange} />
+                            </div>
+                    
+                            <div className="column-div">
+                                <label htmlFor="media" className="sans-serif sm white">Media File Link:</label>
+                                <input name="media" type="text" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
+                    
+                                <label htmlFor="description" className="sans-serif sm white">Description (optional):</label>
+                                <textarea name="description" rows="3" type="text" className="sans-serif sm" value={musicState.description || ""} onChange={handleChange}></textarea>
+                            </div>
+                        </section>
+                    
+                        <button type="submit" className="sans-serif sm">Submit</button>
+                    </form>
+                </Fade>
                 {errorState && <div>{errorState}</div>}
             </div>
         </section>

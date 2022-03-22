@@ -6,19 +6,12 @@ import DiscoFeed from "../components/discoveryFeed";
 
 //render page
 const Discover = () => {
-    console.log('Discover start')
     //Define State to include a list of metadata values that will drive the discovery media feed
     const [metaCriteria, setMetaCriteria] = useState([]);
-
     const [feedPosition, setFeedPosition] = useState(0);
-
     const [activeMusic, setActiveMusic] = useState({})
 
     const [activeUser, setActiveUser] = useState();
-
-    console.log('State Defined')
-    console.log(activeMusic);
-    console.log(metaCriteria);
 
     const { loading: musicLoading, data : musicData } = useQuery(FEED_MUSIC, {
         variables: { metaData: metaCriteria }
@@ -28,9 +21,6 @@ const Discover = () => {
         variables: { _id : activeUser }
     });
 
-    console.log(' musicData queried');
-    console.log( musicData);
-
     const handleAddMeta = async (event) => {
         event.preventDefault();  
          
@@ -38,7 +28,6 @@ const Discover = () => {
                 value: document.getElementById("addMeta").value,
                 type: 'criteria'
         }
-
         const newValueList = [...metaCriteria, newValue];  
 
         setFeedPosition(0);
@@ -46,20 +35,13 @@ const Discover = () => {
     };
 
     const handleNextMusic = async (event) => {
-        console.log("handleNextMusic");
-        console.log(feedPosition);
         const nextPosition = feedPosition + 1;
-        console.log(nextPosition);
         setFeedPosition(nextPosition);
         
     }
 
     const handleRemoveMeta = async (value) => {
-        console.log('handleRemoveMeta running');
-        console.log(value);
-        console.log(metaCriteria)
         const newValueList = metaCriteria.filter(meta => meta.value !== value);
-        console.log(newValueList);
         setMetaCriteria(newValueList);
 
     }
@@ -71,69 +53,63 @@ const Discover = () => {
     }
 
     //Update the music record viewed in the DiscoFeed component
-    useEffect(() => {
-        console.log('useEffect');
-        console.log(musicLoading);
-        console.log( musicData);
-                
-        if(!musicLoading) {
-            console.log( musicData.feedMusic);
-            console.log(feedPosition);        
+    useEffect(() => { 
+        if(!musicLoading) {       
             setActiveMusic( musicData.feedMusic[feedPosition]);
-
         }
     }, [ musicData, feedPosition])
 
-    useEffect(() => {
-                        
+    useEffect(() => {   
         if(activeMusic) {
             setActiveUser(activeMusic.userLink);
         }
     }, [ activeMusic ])
 
     
+
     if (musicLoading) {
-        return <h3>Loading</h3>
+        return <section className="main-background">
+            <div className="main-gold">
+                <h1 className="serif-bold sm white loading">Loading...</h1>
+            </div>
+        </section>
     } 
       
     return (
       <section className="main-background">
         <div className="main-gold">
-            <h1 className="sans-serif para">Discover Page</h1>
-            <div>
+            <article className="disco-search-div">
                 <form onSubmit={handleAddMeta} autoComplete="off">
-                    <div>
-                        <h1 className="sans-serif white para">What would you like to find?</h1>
-                                                
-                        <label htmlFor="addMeta" className="sans-serif white subpara">Search For:</label>
-                        <input id="addMeta" name="addMeta" className="sans-serif sm" />
-                        
-                        
-                        <button className="sans-serif sm">Submit</button>
-                    </div>
+                    <label htmlFor="addMeta" className="serif-bold sm">Search genres and instruments:</label>
+                    <input id="addMeta" name="addMeta" className="sans-serif subpara" />
                 </form>
-            </div>
-            <div>
+            </article>
+
+            <div className="disco-tag-div">
                 <ul>
-                    {metaCriteria.map((meta) => <h4>{meta.value} <button onClick={()=> handleRemoveMeta(meta.value)} className="sans-serif sm">-</button></h4>)}
+                    {metaCriteria.map((meta, index) => 
+                        <li key={index}>
+                            <button onClick={()=> handleRemoveMeta(meta.value)} className="serif-bold regular tag"><span className="sans-serif regular">x</span>{meta.value}</button>
+                        </li>
+                    )}
                 </ul>
             </div>
-            {activeMusic?.userLink ? 
-            <div>                                
-                <div className="col-12 col-lg-3 mb-3">
-                    <DiscoFeed
-                        activeMusic={activeMusic}                        
-                    />
-                </div>
-                <div>
+
+            <article>
+                {activeMusic?.userLink ?                 
+                    <DiscoFeed activeMusic={activeMusic} />
+                    :   <div><h3>No results returned based on search criteria</h3></div>
+                }
+                <div className="next-btn">
                     <div>
-                        <button onClick={handleMessage} className="sans-serif sm">Message</button>
-                    </div>
-                    <div>
-                        <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
-                    </div>
+                      <div><button onClick={handleMessage} className="sans-serif sm">Message</button></div>
+                      <button onClick={handleNextMusic} className="sans-serif regular">Next</button>
+                      </div>
                 </div>
-            </div>  : <div><h3>No results returned based on search criteria</h3></div>}
+
+            </article>
+          : <div><h3>No results returned based on search criteria</h3></div>}
+
           </div>
         </section>
     )

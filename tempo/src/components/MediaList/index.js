@@ -1,11 +1,8 @@
 import React from "react";
 import { capitalizeFirstLetter } from "../../utils/helpers";
+import { animated, config, useTrail } from "react-spring";
 
 const MediaList = ({ media }) => {
-    if (!media.length) {
-        return <p className="serif sm gold">You haven't added any music traits to your profile yet!</p>
-    }
-
     const metaArrays = (musicRecord) => {
         let genreArray = musicRecord.meta.filter((meta) => {
             if (meta.type === "genre") {
@@ -43,18 +40,35 @@ const MediaList = ({ media }) => {
 
     const mediaRecords = newMedia(media);
 
+    const trail = useTrail(mediaRecords.length, {
+        from: {
+            opacity: 0, 
+            y: 50
+        },
+        to: {
+            opacity: 1, 
+            y: 0
+        },
+        config: config.slow,
+        delay: 900
+    });
+
+    if (!media.length) {
+        return <p className="serif-bold sm">You haven't added any music traits to your profile yet!</p>
+    }
 
     return (
-        <div>
+        <div className="media-list-div">
             {media.length && 
-            mediaRecords.map((trait) => (
-                <article key={trait._id}>
-                    <a href={trait.media} target="_blank" className="sans-serif subpara">Check out my stuff!</a>
-                    <p className="serif sm gold">Title: {trait.title}</p>
-                    <p>Description: {trait.description}</p>
-                    <p>Genre: {trait.genres.join()}</p>
-                    <p>Instrument(s): {trait.instruments.join(", ")}</p>
-                </article>
+            trail.map((animation, index) => (
+                <animated.article key={index} style={animation} className="media-card">
+                    <p className="sans-serif subpara white media-title"><a href={mediaRecords[index].media} target="_blank">{mediaRecords[index].title}</a></p>
+                    { mediaRecords[index].description && <p className="sans-serif regular white"><span className="serif regular">Description:</span> {mediaRecords[index].description}</p> }
+
+                    {mediaRecords[index].genres.length ? <p className="sans-serif regular white"><span className="serif regular">Genre:</span> {mediaRecords[index].genres.join()}</p> : "" }
+                    { mediaRecords[index].instruments.length > 1 && <p className="sans-serif regular white"><span className="serif regular">Instruments:</span> {mediaRecords[index].instruments.join(", ")}</p> }
+                    { mediaRecords[index].instruments.length === 1 && <p className="sans-serif regular white"><span className="serif regular">Instrument:</span> {mediaRecords[index].instruments.join(", ")}</p> }
+                </animated.article>
             ))}
         </div>
     );

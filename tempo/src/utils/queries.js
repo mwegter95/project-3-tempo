@@ -180,6 +180,7 @@ export const QUERY_ME = gql`
       email
       biography
       status
+      type
       reviews {
         _id
         review_text
