@@ -3,6 +3,7 @@ import Auth from "../../utils/auth";
 import { Redirect } from "react-router-dom";
 import { QUERY_USER } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
+import { capitalizeFirstLetter } from "../../utils/helpers";
 
 const DiscoveryFeed = ({activeMusic}) => {
 
@@ -17,14 +18,14 @@ const DiscoveryFeed = ({activeMusic}) => {
                 return meta.value;
             }
         }).map((meta) => {
-            return meta.value;
+            return capitalizeFirstLetter(meta.value);
         });
         let instrumentArray = musicRecord.meta.filter((meta) => {
             if (meta.type === "instrument") {
                 return meta.value;
             }
         }).map((meta) => {
-            return meta.value;
+            return capitalizeFirstLetter(meta.value);
         });
 
         return {genreArray, instrumentArray};
