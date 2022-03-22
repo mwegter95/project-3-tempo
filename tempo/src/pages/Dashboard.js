@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 
 import { useQuery, useMutation } from "@apollo/client";
@@ -14,7 +15,8 @@ const Dashboard = (props) => {
     const { loading: loadingMe, data: dataMe } = useQuery(QUERY_ME);
     const user = dataMe?.me._id;
     // console log the logged in user's id
-    //console.log(user);
+    console.log("IS ME", dataMe);
+    console.log(dataMe?.me.username);
 
     // query the logged in user's data, then set userData = their data
     const { loading, data } = useQuery(QUERY_USER, {
@@ -26,28 +28,32 @@ const Dashboard = (props) => {
  
     const [myMedia, setMyMedia] = useState(null);
     const getMyMedia = (musicRecord) => {
-        console.log("music record ", musicRecord);
+        //console.log("music record ", musicRecord);
         return musicRecord?.userMusic;
     };
     const { loading: mediaLoading } = useQuery(QUERY_USERMUSIC, {
         variables: {_id: user },
         onCompleted: (response) => {
-            console.log("response ", response);
+            //console.log("response ", response);
             setMyMedia(getMyMedia(response))
         }
     });
 
     let media = myMedia || [];
-    console.log(media);
+    //console.log(media);
     if (loadingMe || loading || mediaLoading) {
-        return <div className="main serif para grey loading">Loading...</div>
+        return <section className="main-background">
+            <div className="main-gold">
+                <h1 className="serif-bold sm loading">Loading...</h1>
+            </div>
+        </section>
     }
         //console.log(media);
         //console.log(myMedia);
         return (
             <> 
             {userData ? 
-                <section className="user-dashboard main">
+                <section className="user-dashboard main-background">
                     {/* make a dashboard that is a mix of components */}
                     {/* div for stagename 
                         the div does not have an edit feature
@@ -64,23 +70,76 @@ const Dashboard = (props) => {
 
                     */}
                     <div className="main-gold">
-                        <form >
-                            <h1 className="sans-serif para">{userData.user.username}</h1>
-                            
-                            <div className="list-border">
-                                <GenreList media={media}/>
-                            </div>
-                            <div className="list-border">
-                                <InstrumentList media={media}/>
-                            </div>
-                        
-                            <Link className="serif sm" to="/dashboard/myreviews">View your reviews</Link>
-                            <Link className="serif sm" to="/media">Add to your Profile!</Link>
-                        
-                            <div>
-                                <MediaList media={media}></MediaList>
-                            </div>
-                        </form>
+                        <section>
+                            <Fade>
+                                <h1 className="sans-serif subtitle white">Your dashboard.</h1>
+                            </Fade>
+
+                            <Fade delay={300}>
+                                <article className="dashboard-card card-top">
+                                    <Fade delay={300}>
+                                        <h1 className="sans-serif para white">General</h1>
+                                    </Fade>
+                                
+                                    <Fade delay={500}>
+                                        <div className="sans-serif subpara white">
+                                            { dataMe?.me.type === "Musician" && <p>Stagename:</p> }
+                                            { dataMe?.me.type === "Band" && <p>Band Name:</p> }
+                                            <p>{dataMe?.me.username}</p>
+                                        </div>
+                                    </Fade>
+                                
+                                    <Fade delay={700}>
+                                        <div className="sans-serif subpara white">
+                                            <p>Status:</p>
+                                            <p>{dataMe?.me.status}</p>
+                                        </div>
+                                    </Fade>
+                                
+                                    <Fade delay={900}>
+                                        <div className="sans-serif subpara white">
+                                            <p>Biography:</p>
+                                            <p>{dataMe?.me.biography}</p>
+                                        </div>
+                                    </Fade>
+                                </article>
+                                
+                                <article className="dashboard-card card-bottom">
+                                    <Fade delay={300}> 
+                                        <h1 className="sans-serif para">Music</h1>
+                                    </Fade> 
+                                    
+                                    <Fade delay={500}>
+                                        <div className="sans-serif subpara">
+                                            <p>Instruments:</p>
+                                            <InstrumentList media={media}/>
+                                        </div>
+                                    </Fade>
+                                
+                                    <Fade delay={700}>
+                                        <div className="sans-serif subpara">
+                                            <p>Genres:</p>
+                                            <GenreList media={media}/>
+                                        </div>
+                                    </Fade>
+                                
+                                    <Fade delay={300}> 
+                                        <h1 className="sans-serif subpara">Media:</h1>
+                                    </Fade>
+                                    
+                                    <div className="sans-serif subpara">
+                                        <MediaList media={media}></MediaList>
+                                    </div>
+                                
+                                    <Fade delay={1100}>
+                                        <div className="dash-buttons">
+                                            <Link className="sans-serif sm" to="/media">+ Add to your music</Link>
+                                            <Link className="sans-serif sm" to="/dashboard/myreviews">View your reviews</Link>
+                                        </div>
+                                    </Fade>
+                                </article>
+                            </Fade>
+                        </section>
                     </div>
                 </section>
                 :   <div className="main-background">
