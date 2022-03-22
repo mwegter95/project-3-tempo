@@ -5,7 +5,7 @@ import InstrumentListArray from "../utils/InstrumentList";
 import { Link } from "react-router-dom";
 
 //todo: refactor instrument and genre for multiple entries and datatype match to query
-//todo: add userLink (ID of the user that is associated)
+//todo: add userLink
 //todo: add title and description
 
 const UploadMedia = () => {
@@ -15,7 +15,9 @@ const UploadMedia = () => {
             media: "",
             description: "",
             userLink: "",
-            meta: []
+            meta: "",
+            genre: "",
+            instruments: ""
 
         }
     );
@@ -35,7 +37,7 @@ const UploadMedia = () => {
 
     const validateInstruments = (instruments) => {
         if (typeof instruments === "undefined") {
-            return false;
+            return { result: false, arr: [] };
         }
 
         let instrumentArr = [];
@@ -52,13 +54,11 @@ const UploadMedia = () => {
             return instrument.toLowerCase().trim();
         });
 
-        changeState(newArr);
-
         var instrumentCheck = false;
         for (var i = 0; i < newArr.length; i++) {
             instrumentCheck = InstrumentListArray.includes(newArr[i]);
             if (instrumentCheck === false) {
-                return false;
+                return { result: false, arr: [] };
             }
         }
 
@@ -85,10 +85,18 @@ const UploadMedia = () => {
     const handleAddMusic = async (event) => {
         event.preventDefault();
 
-        if (validateInstruments(musicState.instruments)) {
+        const validateObj = validateInstruments(musicState.instruments);
+
+        if (validateObj.result) {
             try {
-                await addMusic({
-                    variables: {...musicState}
+                const data = await addMusic({
+                    variables: {
+                        title: musicState.title,
+                        media: musicState.media,
+                        description: musicState.description,
+                        userLink: "",
+                        meta: validateObj.arr
+                    }
                 });
                 window.location.assign("/dashboard");
                 console.log(data);
@@ -101,10 +109,15 @@ const UploadMedia = () => {
         }
 
         setMusicState({
+            title: "",
+            media: "",
+            description: "",
+            userLink: "",
+            meta: "",
             genre: "",
-            music: "",
             instruments: ""
         });
+
 
     };
 
