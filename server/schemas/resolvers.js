@@ -17,16 +17,18 @@ const resolvers = {
             throw new AuthenticationError("Not logged in");
         },
         users: async() => {
-            return User.find()
+            const usersQueryData = await User.find()
                 .select("-_v -password")
                 .populate("meta")
                 .populate("reviews");
+            return usersQueryData;
         },
-        user: async (parent, { _id }) => {            
-            return User.findOne({ _id })
+        user: async (parent, { _id }) => {
+            const singleUserQueryData = await User.findOne({ _id })
                 .select("-_v -password")
                 .populate("meta")
                 .populate("reviews");
+            return singleUserQueryData;
         },
 
         metaUsers: async (parent, { metaData }) => {
@@ -71,11 +73,17 @@ const resolvers = {
             //TODO: Return unique values from above
 
         },
-
         reviews: async() => {
             return Review.find()
         },
-        feedMusic: async (parent, { metaData }) => {         
+        myReviews: async(parent, args, context) => {
+            if(context.user) {
+                const myReview = await Review.find({ reviewBy: context.user._id })
+                    .populate("reviewOf");
+                return myReview;
+            }
+        },
+        feedMusic: async (parent, { metaData }) => {       
 
             valueArray = [];
             typeArray = [];
@@ -87,7 +95,7 @@ const resolvers = {
 
            return Music.find({
                meta: { $elemMatch: {value: {$in: valueArray}}}
-           }).populate("meta") 
+           }).populate("meta")
 
         },
         userMusic: async (parent, { _id }) => {
@@ -97,7 +105,7 @@ const resolvers = {
             
         },
         music: async (parent, args) => {
-            return Music.find().populate("meta")
+            return Music.find().populate("meta");
         },      
         messages: async() => {
             return Message.find();
@@ -142,10 +150,10 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in!");
         },
         addMusic: async (parent, args, context) => {
-            // if (context.user) {                
-                return await Music.create(args)                
-            // }
-            // throw new AuthenticationError("You need to be logged in!");
+            if (context.user) {                
+                return await Music.create({...args, userLink: context.user._id });                
+            }
+            throw new AuthenticationError("You need to be logged in!");
         },
         addReview: async (parent, args, context) => {
             if (context.user) {

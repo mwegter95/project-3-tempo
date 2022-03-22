@@ -4,54 +4,29 @@ import { FEED_MUSIC } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
 
 
-//DONE: Add Meta value entry
-//DONE: integrate discoMedia
-//TODO: Add feedMusic to query
-//TODO: Call feedMusic
-//TODO: Add metaList UI
-//MW: build discoMedia component
-
+//TODO: Add metalist/remove meta functionality
+//TODO: Add contact/message button (Need to call user query)
 
 
 //render page
 const Discover = () => {
     console.log('Discover start')
     //Define State to include a list of metadata values that will drive the discovery media feed
-    const [metaCriteria, setMetaCriteria] = useState([{
-            value: "drums",
-            type: "genre"
-        }]);
+    const [metaCriteria, setMetaCriteria] = useState([]);
 
     const [feedPosition, setFeedPosition] = useState(0);
 
-    const [activeMusic, setActiveMusic] = useState({
-        _id: "1234",
-        title: "Whiskey Barrel Guitar • JUSTIN JOHNSON SOLO SLIDE GUITAR",
-        media: "https://www.youtube.com/watch?v=fXGErRbyv6M&t=3s",
-        meta: [{
-            value: "guitar",
-            type: "instrument"    
-            },{
-                value: "blues",
-                type: "genre"        
-        }],
-        userLink: "6235f05aeaf94cb37b1e1edf",
-        description: "This track is included on The Bootleg Series Vol.1"
-    })
+    const [activeMusic, setActiveMusic] = useState({})
 
     console.log('State Defined')
     console.log(activeMusic);
     console.log(metaCriteria);
 
-    // const tempMeta = [{
-    //     value: "country",
-    //     type: "genre"
-    // }]
-
     const { loading, data } = useQuery(FEED_MUSIC, {
         variables: { metaData: metaCriteria }
     });
-        console.log('musicFeed queried');
+
+    console.log('musicFeed queried');
     console.log(data);
 
     const handleAddMeta = async (event) => {
@@ -77,6 +52,20 @@ const Discover = () => {
         
     }
 
+    const handleRemoveMeta = async (value) => {
+        console.log('handleRemoveMeta running');
+        console.log(value);
+        console.log(metaCriteria)
+        const newValueList = metaCriteria.filter(meta => meta.value !== value);
+        console.log(newValueList);
+        setMetaCriteria(newValueList);
+
+    }
+
+    const handleMessage = async (event) => {
+        // add functionality
+    }
+
     useEffect(() => {
         console.log('useEffect');
         console.log(loading);
@@ -91,8 +80,8 @@ const Discover = () => {
     
     if (loading) {
         return <h3>Loading</h3>
-    }    
-
+    } 
+      
     return (
       <section className="main-background">
         <div className="main-gold">
@@ -111,13 +100,25 @@ const Discover = () => {
                 </form>
             </div>
             <div>
+                <ul>
+                    {metaCriteria.map((meta) => <h4>{meta.value} <button onClick={()=> handleRemoveMeta(meta.value)} className="sans-serif sm">-</button></h4>)}
+                </ul>
+            </div>
+            <div>
+                {activeMusic?.userLink ?                 
                 <div className="col-12 col-lg-3 mb-3">
                     <DiscoFeed
                         activeMusic={activeMusic}                        
                     />
+                </div> : <div><h3>No results returned based on search criteria</h3></div>}
+                <div>
+                    <div>
+                        <button onClick={handleMessage} className="sans-serif sm">Message</button>
+                    </div>
+                    <div>
+                        <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
+                    </div>
                 </div>
-                <button onClick={handleNextMusic} className="sans-serif sm">Next</button>
-
             </div>
           </div>
         </section>
