@@ -7,6 +7,7 @@
     "concurrently": "^7.0.0"
   },
   "scripts": {
+    "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "concurrently \"cd server && npm run dev\" \"cd tempo && npm run start \"",
     "install": "cd server && npm i && cd ../tempo && npm i",
