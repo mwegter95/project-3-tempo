@@ -9,7 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "concurrently \"cd server && npm run dev\" \"cd tempo && npm run start \"",
-    "seed": "cd server && npm run seed"
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd tempo && npm run build"
   },
   "repository": {
     "type": "git",
