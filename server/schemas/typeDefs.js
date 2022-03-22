@@ -50,6 +50,15 @@ const typeDefs = gql`
         type: String       
       }
 
+    input InputMusic {
+        _id: ID
+        media: String
+        meta: [MetaData]
+        userLink: ID
+        title: String
+        description: String
+    }
+
     type Query {
         me: User
         users: [User]
@@ -71,7 +80,9 @@ const typeDefs = gql`
         editUser(username: String, status: String, biography: String, type: String, meta: [InputMeta]): User
         addMusic(media: String, meta: [InputMeta], userLink: ID, title: String, description: String): Music
         addReview(reviewBy: ID!, reviewOf: ID! review_text: String!, rating: Int): Review
-        addMessage(message_text: String): Message  
+        addMessage(message_text: String): Message
+        removeMusic( _id: ID): music
+        modifyMusic(updatedMusic: InputMusic)
     }
 
     type Auth {
