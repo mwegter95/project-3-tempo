@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useQuery } from "@apollo/client";
-import { FEED_MUSIC } from "../utils/queries";
+import { FEED_MUSIC, QUERY_USER } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
-
-
-//TODO: Add metalist/remove meta functionality
-//TODO: Add contact/message button (Need to call user query)
 
 
 //render page
@@ -15,8 +11,14 @@ const Discover = () => {
     const [feedPosition, setFeedPosition] = useState(0);
     const [activeMusic, setActiveMusic] = useState({})
 
-    const { loading, data } = useQuery(FEED_MUSIC, {
+    const [activeUser, setActiveUser] = useState();
+
+    const { loading: musicLoading, data : musicData } = useQuery(FEED_MUSIC, {
         variables: { metaData: metaCriteria }
+    });
+
+    const { loading: userLoading, data : userData } = useQuery(QUERY_USER, {
+        variables: { _id : activeUser }
     });
 
     const handleAddMeta = async (event) => {
@@ -45,18 +47,27 @@ const Discover = () => {
     }
 
     const handleMessage = async (event) => {
-        // add functionality
+        console.log('userData')
+        console.log(userData)
+        document.location.href = `mailto:${userData.user.email}`
     }
 
-    useEffect(() => {
-        console.log('useEffect');
-                
-        if(!loading) {     
-            setActiveMusic(data.feedMusic[feedPosition]);
+    //Update the music record viewed in the DiscoFeed component
+    useEffect(() => { 
+        if(!musicLoading) {       
+            setActiveMusic( musicData.feedMusic[feedPosition]);
         }
-    }, [data, feedPosition])
+    }, [ musicData, feedPosition])
+
+    useEffect(() => {   
+        if(activeMusic) {
+            setActiveUser(activeMusic.userLink);
+        }
+    }, [ activeMusic ])
+
     
-    if (loading) {
+
+    if (musicLoading) {
         return <section className="main-background">
             <div className="main-gold">
                 <h1 className="serif-bold sm white loading">Loading...</h1>
@@ -90,12 +101,15 @@ const Discover = () => {
                     :   <div><h3>No results returned based on search criteria</h3></div>
                 }
                 <div className="next-btn">
-                    {/* <div>
-                        <button onClick={handleMessage} className="sans-serif sm">Message</button>
-                    </div> */}
-                    <button onClick={handleNextMusic} className="sans-serif regular">Next</button>
+                    <div>
+                      <div><button onClick={handleMessage} className="sans-serif sm">Message</button></div>
+                      <button onClick={handleNextMusic} className="sans-serif regular">Next</button>
+                      </div>
                 </div>
+
             </article>
+          : <div><h3>No results returned based on search criteria</h3></div>}
+
           </div>
         </section>
     )
