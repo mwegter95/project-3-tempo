@@ -1,4 +1,5 @@
 import React from "react";
+import { useTransition, animated, config } from "react-spring";
 import Auth from "../../utils/auth";
 import { Redirect } from "react-router-dom";
 import { QUERY_USER } from "../../utils/queries";
@@ -26,11 +27,18 @@ const DiscoveryFeed = ({activeMusic}) => {
         }).map((meta) => {
             return capitalizeFirstLetter(meta.value);
         });
-
         return {genreArray, instrumentArray};
     };
 
     const { genreArray, instrumentArray } = metaArrays(activeMusic);
+
+    const transition = useTransition(activeMusic, {
+        from: { x: 100, opacity: 0 },
+        enter: { x: 0, opacity: 1 },
+        config: config.gentle,
+        delay: 500,
+        expires: true
+    });
 
 
     if (loading) {
@@ -45,39 +53,44 @@ const DiscoveryFeed = ({activeMusic}) => {
 
     return (
         <>
-                {Auth.loggedIn() ? (
-                    <section className="black-card profile-preview">
-                        <div className="avatar">
-                            <img src={data.user.avatar} alt="user avatar"></img>
-                        </div>
-                        
-                        <div>
-                            <a href={`/profile/${data.user._id}`}>
-                                <h1 className="sans-serif para white">{data.user.username}</h1>
-                            </a>
-                            <p className="serif sm grey">{data.user.status}</p>
-                            <p className="serif sm white">{data.user.biography}</p>
-                        </div>
-
-                        <div>
-                            <article>
-                                <a href={activeMusic.media} target="_blank">
-                                    <h1 className="sans-serif para white">{activeMusic.title}</h1>
+            {Auth.loggedIn() ? (
+                <>
+                    {transition((style, item) =>
+                        item ?
+                        <animated.section style={style} className="black-card profile-preview">
+                            <div className="avatar">
+                                <img src={data.user.avatar} alt="user avatar"></img>
+                            </div>
+                            
+                            <div>
+                                <a href={`/profile/${data.user._id}`}>
+                                    <h1 className="sans-serif para white">{data.user.username}</h1>
                                 </a>
-                                <p className="serif sm grey">{activeMusic.description}</p>
-                            </article>
-                    
-                            <article class="meta-paragraphs">
-                                <p className="sans-serif regular white">Genre: <span className="sm">{genreArray.join()}</span></p>
-                                <p className="sans-serif regular white">Instrument: <span className="sm">{instrumentArray.join(", ")}</span></p>
-                            </article>
-                        </div>
-                    </section>
-                ) : (
-                    <>
-                        <Redirect to="/login"></Redirect>
-                    </>
-                )}
+                                <p className="serif sm grey">{data.user.status}</p>
+                                <p className="serif sm white">{data.user.biography}</p>
+                            </div>
+                        
+                            <div>
+                                <article>
+                                    <a href={activeMusic.media} target="_blank">
+                                        <h1 className="sans-serif para white">{activeMusic.title}</h1>
+                                    </a>
+                                    <p className="serif sm grey">{activeMusic.description}</p>
+                                </article>
+                        
+                                <article class="meta-paragraphs">
+                                    <p className="sans-serif regular white">Genre: <span className="sm">{genreArray.join()}</span></p>
+                                    <p className="sans-serif regular white">Instrument: <span className="sm">{instrumentArray.join(", ")}</span></p>
+                                </article>
+                            </div>
+                        </animated.section> : ""
+                        )}
+                </>
+            ) : (
+                <>
+                    <Redirect to="/login"></Redirect>
+                </>
+            )}
         </>
     )
 };

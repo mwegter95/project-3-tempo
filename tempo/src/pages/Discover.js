@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Fade from "react-reveal/Fade";
 import { useSpring, animated, config } from "react-spring";
 
 import { useQuery } from "@apollo/client";
@@ -84,7 +85,9 @@ const Discover = () => {
         <div className="main-gold">
             <article className="disco-search-div">
                 <form onSubmit={handleAddMeta} autoComplete="off">
-                    <label htmlFor="addMeta" className="serif-bold sm">Search genres and instruments:</label>
+                    <Fade>
+                        <label htmlFor="addMeta" className="serif-bold sm">Search genres and instruments:</label>
+                    </Fade>
                     <animated.input style={inputAnim} id="addMeta" name="addMeta" className="sans-serif subpara" />
                 </form>
             </article>
@@ -103,12 +106,14 @@ const Discover = () => {
                 {activeMusic?.userLink ?                 
                     <>
                         <DiscoFeed activeMusic={activeMusic} />                            
-                        <div className="next-btn">
-                            <button onClick={handleMessage} className="sans-serif regular">Message</button>
-                            <button onClick={handleNextMusic} className="sans-serif regular">Next</button>
-                        </div>
+                        <Fade delay={600}>
+                            <div className="next-btn">
+                                <button onClick={handleMessage} className="sans-serif regular">Message</button>
+                                <button onClick={handleNextMusic} className="sans-serif regular">Next</button>
+                            </div>
+                        </Fade>
                     </>
-                    :   <div><h3>No results returned based on search criteria</h3></div>
+                    :  <h3>No results returned based on search criteria</h3> 
                 }
             </article>
 
