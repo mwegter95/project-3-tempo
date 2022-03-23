@@ -10,7 +10,9 @@ const GenreList = ({ media }) => {
 
     const globalGenres = (genreArray, allGenres) => {
         for (var i = 0; i < genreArray.length; i++) {
-            allGenres.push(genreArray[i]);
+            if (!allGenres.includes(genreArray[i])) {
+                allGenres.push(genreArray[i]);
+            }
         }
         return true;
     };
