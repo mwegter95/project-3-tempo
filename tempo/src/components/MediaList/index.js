@@ -54,7 +54,7 @@ const MediaList = ({ media }) => {
     });
 
     if (!media.length) {
-        return <p className="serif-bold sm">You haven't added any music traits to your profile yet!</p>
+        return <p className="serif-bold sm">No media added.</p>
     }
 
     return (

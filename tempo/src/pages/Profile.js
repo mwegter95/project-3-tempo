@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
+
 import { useQuery, useMutation } from "@apollo/client";
-import { QUERY_USER } from "../utils/queries";
+import { QUERY_USER, QUERY_USERMUSIC } from "../utils/queries";
 import { ADD_REVIEW } from "../utils/mutations";
+
+import GenreList from "../components/GenreList"
+import InstrumentList from "../components/InstrumentList"
+import MediaList from "../components/MediaList";
 
 const Profile = () => {
     const { id: userId } = useParams();
@@ -11,6 +16,21 @@ const Profile = () => {
     });
 
     const user = data?.user || {};
+
+    const { loading: loadingMusic } = useQuery(QUERY_USERMUSIC, {
+        variables: {_id: userId},
+        onCompleted: (response) => {
+            setMyMedia(getMyMedia(response))
+        }
+    });
+
+    const [myMedia, setMyMedia] = useState(null);
+    const getMyMedia = (musicRecord) => {
+        return musicRecord?.userMusic;
+    };
+
+    let media = myMedia || [];
+    console.log(media);
 
     const [addReview, { error }] = useMutation(ADD_REVIEW);
     const [ formState, setFormState ] = useState({
@@ -50,7 +70,7 @@ const Profile = () => {
         }
     };
 
-    if(loading) {
+    if(loading || loadingMusic) {
         return <div className="serif para main grey loading">loading...</div>
     };
     // checks if the id in parameters is valid
@@ -59,28 +79,34 @@ const Profile = () => {
     };
 
     return (
-        <div className="main-background">
-            <div className="main-gold profile">
-                <h1 className="sans-serif white subtitle">{user.username}'s Profile</h1>
-                
-                <form onSubmit={handleFormSubmit} className="review-layout">
-                    <h1 className="sans-serif white subpara">Write a review on {user.username}</h1>
-                    <p className="serif grey sm">The reviews you write will only be seen by you.</p>
-                
-                    
-                    <label htmlFor="rating" className="sans-serif white subpara">Rating:</label>
+        <section className="main-background">
+            <div className="main-gold">
+                <article className="dashboard-card card-top profile-black">
                     <div>
-                        <input name="rating" type="number" className="sans-serif sm" onChange={handleChange} />
-                        <p className="sans-serif white subpara">/10</p>
+                        <section>
+                            <h1 className="sans-serif para white">{user.username}</h1>
+                            <h3 className="serif-bold sm gold">{user.status}</h3>
+                        </section>
+                        <button className="sans-serif regular"><a href={`mailto:${user.email}`}>Contact</a></button>
                     </div>
-                
-                    <label htmlFor="review_text" className="sans-serif white subpara">Review:</label>
-                    <textarea name="review_text" type="review" className="sans-serif sm" maxLength="500" onChange={handleChange}></textarea>
-                
-                    <button type="submit" className="sans-serif sm">Submit Review</button>
-                </form>
+                    <p className="sans-serif white subpara">{user.biography}</p>
+                </article>
+                <article className="dashboard-card card-bottom">
+                        <div className="sans-serif subpara media-spacing">
+                            <p>Instruments:</p>
+                            <InstrumentList media={media}/>
+                        </div>
+
+                        <div className="sans-serif subpara media-spacing">
+                            <p>Genres:</p>
+                            <GenreList media={media}/>
+                        </div>
+
+                        <h1 className="sans-serif subpara">Media:</h1>
+                        <MediaList media={media} />
+                </article>
             </div>
-        </div>
+        </section>
     )
     
 };

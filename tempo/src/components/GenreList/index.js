@@ -2,7 +2,7 @@ import React from 'react';
 
 const GenreList = ({ media }) => {
     if (!media.length) {
-        return <p>No genres added</p>;
+        return <p>No genres added.</p>;
     }
 
     return (
@@ -11,7 +11,9 @@ const GenreList = ({ media }) => {
                 media.map(music => (
                     <p key={music.id}>
                             {music.meta.filter(meta => meta.type.includes('genre')).map(filteredMeta => (
-                                <span className="dash-media-list">{filteredMeta.value}</span>
+                                <>
+                                {filteredMeta.value.length ? <span className="serif subpara media-tag">{filteredMeta.value}</span> : ""}
+                                </>
                             ))}
                     </p>
                 ))}

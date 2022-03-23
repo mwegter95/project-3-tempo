@@ -45,42 +45,40 @@ const DiscoveryFeed = ({activeMusic}) => {
     console.log(activeMusic);
 
     return (
-        <article>
-            <div>
+        <>
                 {Auth.loggedIn() ? (
-                    <section className="black-card profile-preview">
-                        <div className="avatar">
-                            {/* this will be the avatar div */}
-                            <h2 className="sans-serif para white">(Avatar)</h2>
-                        </div>
-                        <div>
-                            <a href={`/profile/${data.user._id}`}>
-                                <h1 className="sans-serif para white">{data.user.username}</h1>
-                            </a>
-                            <p className="serif sm grey">{data.user.status}</p>
-                            <p className="serif sm white">{data.user.biography}</p>
-                        </div>
-                        <div>
-                            <article>
-                                <a href={activeMusic.media}>
-                                    <h1 className="sans-serif para white">{activeMusic.title}</h1>
+                        <section className="black-card profile-preview">
+                            <div className="avatar">
+                                {/* this will be the avatar div */}
+                                <h2 className="sans-serif para white">(Avatar)</h2>
+                            </div>
+                            <div>
+                                <a href={`/profile/${data.user._id}`}>
+                                    <h1 className="sans-serif para white">{data.user.username}</h1>
                                 </a>
-                                <p className="serif sm white">{activeMusic.description}</p>
-                            </article>
-
-                            <article>
-                                <p className="sans-serif sm white">Genre: {genreArray.join()}</p>
-                                <p className="sans-serif sm white">Instrument: {instrumentArray.join(", ")}</p>
-                            </article>
-                        </div>
-                    </section>
+                                <p className="serif sm grey">{data.user.status}</p>
+                                <p className="serif sm white">{data.user.biography}</p>
+                            </div>
+                            <div>
+                                <article>
+                                    <a href={activeMusic.media} target="_blank">
+                                        <h1 className="sans-serif para white">{activeMusic.title}</h1>
+                                    </a>
+                                    <p className="serif sm white">{activeMusic.description}</p>
+                                </article>
+                        
+                                <article>
+                                    <p className="sans-serif sm white">Genre: {genreArray.join()}</p>
+                                    <p className="sans-serif sm white">Instrument: {instrumentArray.join(", ")}</p>
+                                </article>
+                            </div>
+                        </section>
                 ) : (
                     <>
                         <Redirect to="/login"></Redirect>
                     </>
                 )}
-            </div>
-        </article>
+        </>
     )
 };
 

@@ -336,8 +336,29 @@ main section:last-of-type {
   padding: 10px 20px;
 }
 /* Pages: Profile */
-.profile {
-  background-color: var(--tempo-gold);
+.profile-black {
+  display: flex;
+  flex-direction: row !important;
+}
+
+.profile-black div, .profile-black section {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}
+
+.profile-black div {
+  justify-content: space-evenly;
+}
+
+.profile-black p:last-of-type {
+  margin-left: 100px;
+}
+
+.profile-black button {
+  width: 20%;
+  padding: 5px 10px;
+  margin-top: 15px;
 }
 
 .profile form {
@@ -363,6 +384,18 @@ main section:last-of-type {
   width: 10%;
   text-align: right;
   margin-right: 15px;
+}
+
+.media-spacing {
+  margin-bottom: 15px;
+}
+
+.media-tag {
+  margin-right: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+  padding: 10px 15px;
+  border-radius: 15px;
 }
 
 /* Pages: Dashboard */
@@ -406,10 +439,6 @@ main section:last-of-type {
 
 .dashboard-card div p:first-of-type {
   width: 300px;
-}
-
-.dash-media-list {
-  margin-right: 20px;
 }
 
 .media-list-div {
@@ -532,11 +561,13 @@ article .media-card p {
 
 .next-btn {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  width: 50%;
+  margin-left: auto;
+  justify-content: space-between;
 }
 
 .avatar {
   justify-self: center;
   align-self: center;
 }
+
