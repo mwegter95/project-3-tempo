@@ -110,7 +110,7 @@ const Dashboard = (props) => {
                                 </Fade>
 
                                 <div className="sans-serif subpara">
-                                    <MediaList media={media} />
+                                    <MediaList media={media} setMyMedia={setMyMedia} />
                                 </div>
                             
                                 <Fade delay={300}>
