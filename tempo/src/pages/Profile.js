@@ -132,7 +132,7 @@ const Profile = () => {
                         </div>
 
                         <h1 className="sans-serif subpara">Media:</h1>
-                        <MediaList media={media} />
+                        <MediaList media={media} delButton={"none"} />
                 </article>
             
                 <Fade delay={300}>
