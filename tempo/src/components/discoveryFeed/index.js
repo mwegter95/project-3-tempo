@@ -42,7 +42,6 @@ const DiscoveryFeed = ({activeMusic}) => {
             </div>
         </section>
     }
-    console.log(activeMusic);
 
     return (
         <article>
@@ -51,7 +50,7 @@ const DiscoveryFeed = ({activeMusic}) => {
                     <section className="black-card profile-preview">
                         <div className="avatar">
                             {/* this will be the avatar div */}
-                            <h2 className="sans-serif para white">(Avatar)</h2>
+                            <img src={data.user.avatar} alt="user avatar"></img>
                         </div>
                         <div>
                             <a href={`/profile/${data.user._id}`}>
