@@ -80,6 +80,10 @@ const Dashboard = (props) => {
                                     <Fade delay={300}>
                                         <h1 className="sans-serif para white">General</h1>
                                     </Fade>
+
+                                    <Fade delay={300}>
+                                        <img src={dataMe?.me.avatar} alt="user avatar"></img>
+                                    </Fade>
                                 
                                     <Fade delay={500}>
                                         <div className="sans-serif subpara white">

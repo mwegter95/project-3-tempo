@@ -33,6 +33,9 @@ const userSchema = new Schema(
             enum: ['Band', 'Musician'],
             required: true
         },
+        avatar: {
+            type: String
+        },
         reviews: [
             {
                 type: Schema.Types.ObjectId,
