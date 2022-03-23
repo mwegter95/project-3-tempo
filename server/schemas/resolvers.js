@@ -178,6 +178,21 @@ const resolvers = {
                 return message;
             }
             throw new AuthenticationError("You need to be logged in!");
+        },
+        deleteMusic: async (parent, args, context) => {
+            if (context.user) {
+                const deleted = await Music.deleteOne( {_id: args._id} );
+                const remainingMusic = await Music.find( {userLink: context.user._id} );
+                return remainingMusic;
+                
+            }
+            throw new AuthenticationError("You need to be logged in!");
+        },
+        editMusic: async (parent, args, context) => {
+            if (context.user) {
+                return await Music.findByIdAndUpdate(args.updatedMusic._id, args.updatedMusic, {new: true})                    
+            }
+            throw new AuthenticationError("You need to be logged in!");
         }
     }
 };

@@ -3,7 +3,7 @@ import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 
 import { useQuery, useMutation } from "@apollo/client";
-import { EDIT_USER } from "../utils/mutations";
+import { EDIT_USER, EDIT_MUSIC, DELETE_MUSIC } from "../utils/mutations";
 import { QUERY_ME, QUERY_USER, QUERY_USERMUSIC } from "../utils/queries";
 
 import GenreList from "../components/GenreList"
@@ -32,7 +32,9 @@ const Dashboard = (props) => {
         }
     });
 
-    let media = myMedia || [];
+
+
+    const media = myMedia || [];
     if (loadingMe || loading || mediaLoading) {
         return <section className="main-background">
             <div className="main-gold">
@@ -40,6 +42,7 @@ const Dashboard = (props) => {
             </div>
         </section>
     }
+  
     return (
         <> 
         {userData ? 
@@ -59,7 +62,6 @@ const Dashboard = (props) => {
                                         </div>
                                     </div>
                                 </Fade>
-
 
                                 <Fade delay={500}>
                                     <div className="sans-serif subpara white">

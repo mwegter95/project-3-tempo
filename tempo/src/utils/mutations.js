@@ -97,3 +97,28 @@ mutation addMessage($message_text: String!) {
     }
 }
 `;
+
+export const DELETE_MUSIC = gql`
+mutation deleteMusic($_id: ID!) {
+    deleteMusic(_id: $_id) {
+            _id
+        }    
+}
+`;
+
+export const EDIT_MUSIC = gql`
+mutation editMusic($updatedMusic: InputMusic) {
+    editMusic(updatedMusic: $updatedMusic) {
+        _id        
+        media
+        title
+        description
+        userLink
+        meta {
+            _id
+            type
+            value
+        }
+    }
+}
+`;
