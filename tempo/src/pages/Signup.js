@@ -4,6 +4,7 @@ import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations";
 import Auth from "../utils/auth";
 import { validateEmail } from "../utils/helpers";
+const { faker } = require("@faker-js/faker");
 
 const Signup = () => {
     const [formState, setFormState] = useState(
@@ -13,7 +14,8 @@ const Signup = () => {
             username: "",
             biography: "",
             status: "",
-            type: ""
+            type: "",
+            avatar: faker.image.avatar()
         }
     );
     const [addUser, { error }] = useMutation(ADD_USER);

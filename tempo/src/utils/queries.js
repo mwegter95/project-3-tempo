@@ -9,6 +9,7 @@ export const QUERY_USERS = gql`
         biography
         status
         type
+        avatar
         meta {
             _id
             value
@@ -46,6 +47,7 @@ query user($_id: ID!) {
         biography
         status
         type
+        avatar
         meta {
             _id
             value
@@ -181,6 +183,7 @@ export const QUERY_ME = gql`
       biography
       status
       type
+      avatar
       reviews {
         _id
         review_text

@@ -15,7 +15,9 @@ const Homepage = () => {
             </section>
 
             <section className="welcome">
-                <h1 className="sans-serif title">Welcome to Tempo.</h1>
+                <Fade>
+                    <h1 className="sans-serif title">Welcome to Tempo.</h1>
+                </Fade>
                 <Fade>
                     <p className="serif para white">The perfect place for musicians to find each other.</p>
                 </Fade>
@@ -25,12 +27,14 @@ const Homepage = () => {
 
             <section className="white-bg">
                 <Fade left>
-                    <p className="serif para">Whether you're a band looking for a member...</p>
+                    <p className="serif-bold para">Whether you're a band looking for a member...</p>
                 </Fade>
                 <Fade right delay={500}>
-                    <p className="serif para">Or you're a musician looking for someone to jam with...</p>
+                    <p className="serif-bold para">Or you're a musician looking for someone to jam with...</p>
                 </Fade>
-                <h1 className="sans-serif title">Tempo has you covered.</h1>
+                <Fade delay={600}>
+                    <h1 className="sans-serif title">Tempo has you covered.</h1>
+                </Fade>
             </section>
 
             <div>

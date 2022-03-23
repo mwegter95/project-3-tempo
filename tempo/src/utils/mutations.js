@@ -12,14 +12,15 @@ mutation login($email: String!, $password: String!) {
             biography
             status
             type
+            avatar
         }
     }
 }
 `;
 
 export const ADD_USER = gql`
-mutation addUser($username: String!, $password: String!, $email: String!, $type: String!, $biography: String, $status: String) {
-    addUser(username: $username, password: $password, email: $email, type: $type, biography: $biography, status: $status) {
+mutation addUser($username: String!, $password: String!, $email: String!, $type: String!, $biography: String, $status: String, $avatar: String) {
+    addUser(username: $username, password: $password, email: $email, type: $type, biography: $biography, status: $status, avatar: $avatar) {
         token
         user {
             _id

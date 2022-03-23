@@ -1,4 +1,5 @@
 import React from "react";
+import Fade from "react-reveal/Fade";
 import { capitalizeFirstLetter } from "../../utils/helpers";
 import { animated, config, useTrail } from "react-spring";
 import { EDIT_MUSIC, DELETE_MUSIC } from "../../utils/mutations";
@@ -56,7 +57,7 @@ const MediaList = ({ media, setMyMedia}) => {
             y: 0
         },
         config: config.slow,
-        delay: 900
+        delay: 1000
     });
 
     const handleRemoveMusic = async (value) => {
@@ -76,7 +77,9 @@ const MediaList = ({ media, setMyMedia}) => {
     }
 
     if (!media.length) {
-        return <p className="serif-bold sm">You haven't added any music traits to your profile yet!</p>
+        return <Fade delay={900}>
+            <p className="serif-bold sm">No media added.</p>
+        </Fade>
     }
 
     return (
@@ -84,10 +87,12 @@ const MediaList = ({ media, setMyMedia}) => {
             {media.length && 
             trail.map((animation, index) => (
                 <animated.article key={index} style={animation} className="media-card">
+
                     <p className="sans-serif subpara white media-title"><a href={mediaRecords[index].media} target="_blank" rel="noreferrer">{mediaRecords[index].title}</a></p>
-                    { mediaRecords[index].description && <p className="sans-serif regular white"><span className="serif regular">Description:</span> {mediaRecords[index].description}</p> }
+                    { mediaRecords[index].description && <p className="serif sm white"> {mediaRecords[index].description}</p> }
 
                     {mediaRecords[index].genres.length ? <p className="sans-serif regular white"><span className="serif regular">Genre:</span> {mediaRecords[index].genres.join()}</p> : "" }
+                    
                     { mediaRecords[index].instruments.length > 1 && <p className="sans-serif regular white"><span className="serif regular">Instruments:</span> {mediaRecords[index].instruments.join(", ")}</p> }
                     { mediaRecords[index].instruments.length === 1 && <p className="sans-serif regular white"><span className="serif regular">Instrument:</span> {mediaRecords[index].instruments.join(", ")}</p> }
                     <div>

@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "cd server && npm i && cd ../tempo && npm i",
     "develop": "concurrently \"cd server && npm run dev\" \"cd tempo && npm run start \"",
     "seed": "cd server && npm run seed"
   },

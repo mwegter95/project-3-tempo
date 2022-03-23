@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import Fade from "react-reveal/Fade";
+import { useSpring, animated, config } from "react-spring";
+
 import { useQuery } from "@apollo/client";
 import { FEED_MUSIC, QUERY_USER } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
-
 
 //render page
 const Discover = () => {
@@ -47,6 +49,7 @@ const Discover = () => {
     }
 
     const handleMessage = async (event) => {
+        console.log(userData.user.email);
         document.location.href = `mailto:${userData.user.email}`
     }
 
@@ -62,8 +65,12 @@ const Discover = () => {
             setActiveUser(activeMusic.userLink);
         }
     }, [ activeMusic ])
-
-    
+      
+    const inputAnim = useSpring({
+        from: { opacity: 0, y: 20 },
+        to: { opacity: 1, y: 0 },
+        config: config.slow
+    });
 
     if (musicLoading) {
         return <section className="main-background">
@@ -71,15 +78,17 @@ const Discover = () => {
                 <h1 className="serif-bold sm white loading">Loading...</h1>
             </div>
         </section>
-    } 
-      
+    };
+
     return (
       <section className="main-background">
         <div className="main-gold">
             <article className="disco-search-div">
                 <form onSubmit={handleAddMeta} autoComplete="off">
-                    <label htmlFor="addMeta" className="serif-bold sm">Search genres and instruments:</label>
-                    <input id="addMeta" name="addMeta" className="sans-serif subpara" />
+                    <Fade>
+                        <label htmlFor="addMeta" className="serif-bold sm">Search genres and instruments:</label>
+                    </Fade>
+                    <animated.input style={inputAnim} id="addMeta" name="addMeta" className="sans-serif subpara" />
                 </form>
             </article>
 
@@ -95,15 +104,17 @@ const Discover = () => {
 
             <article>
                 {activeMusic?.userLink ?                 
-                    <DiscoFeed activeMusic={activeMusic} />
-                    :   <div><h3>No results returned based on search criteria</h3></div>
+                    <>
+                        <DiscoFeed activeMusic={activeMusic} />                            
+                        <Fade delay={600}>
+                            <div className="next-btn">
+                                <button onClick={handleMessage} className="sans-serif regular">Message</button>
+                                <button onClick={handleNextMusic} className="sans-serif regular">Next</button>
+                            </div>
+                        </Fade>
+                    </>
+                    :  <h3>No results returned based on search criteria</h3> 
                 }
-                <div className="next-btn">
-                    <div>
-                      <div><button onClick={handleMessage} className="sans-serif sm">Message</button></div>
-                      <button onClick={handleNextMusic} className="sans-serif regular">Next</button>
-                      </div>
-                </div>
             </article>
 
           </div>
