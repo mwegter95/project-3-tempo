@@ -81,8 +81,8 @@ const typeDefs = gql`
         addMusic(media: String, meta: [InputMeta], userLink: ID, title: String, description: String): Music
         addReview(reviewBy: ID!, reviewOf: ID! review_text: String!, rating: Int): Review
         addMessage(message_text: String): Message
-        deleteMusic( _id: ID!): ID!
-        editMusic(updatedMusic: InputMusic): Music
+        deleteMusic( _id: ID! ): Music
+        editMusic( editMe: InputMusic): Music
     }
 
     type Auth {

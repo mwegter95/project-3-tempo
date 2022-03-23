@@ -60,9 +60,9 @@ const MediaList = ({ media }) => {
     });
 
     const handleRemoveMusic = async (value) => {
-        console.log('deleteMusic');
-        console.log(value);
-        deleteMusic({ variables: { _id: value } });        
+
+        deleteMusic({ variables: {_id: value }});
+       
     }
 
     const handleUpdateMusic = async (value) => {
