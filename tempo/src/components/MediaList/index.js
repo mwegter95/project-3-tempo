@@ -5,7 +5,7 @@ import { animated, config, useTrail } from "react-spring";
 import { EDIT_MUSIC, DELETE_MUSIC } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 
-const MediaList = ({ media, setMyMedia}) => {
+const MediaList = ({ media, setMyMedia, delButton}) => {
     
     const [deleteMusic, { data, loading, error }] = useMutation(DELETE_MUSIC);
     
@@ -95,9 +95,10 @@ const MediaList = ({ media, setMyMedia}) => {
                     
                     { mediaRecords[index].instruments.length > 1 && <p className="sans-serif regular white"><span className="serif regular">Instruments:</span> {mediaRecords[index].instruments.join(", ")}</p> }
                     { mediaRecords[index].instruments.length === 1 && <p className="sans-serif regular white"><span className="serif regular">Instrument:</span> {mediaRecords[index].instruments.join(", ")}</p> }
-                    <div>
-                        <button onClick={()=> handleRemoveMusic(mediaRecords[index]._id)} className="serif-bold regular tag"><span className="sans-serif regular">🗑️</span></button>                        
-                    </div>
+                    {delButton !== "none" &&
+                        <div>
+                            <button onClick={()=> handleRemoveMusic(mediaRecords[index]._id)} className="serif-bold regular tag"><span className="sans-serif regular">🗑️</span></button>                        
+                        </div>}
                 </animated.article>
             ))}
         </div>

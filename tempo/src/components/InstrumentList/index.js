@@ -10,7 +10,9 @@ const InstrumentList = ({ media }) => {
 
     const globalInstruments = (instrumentArray, allInstruments) => {
         for (var i = 0; i < instrumentArray.length; i++) {
-            allInstruments.push(instrumentArray[i]);
+            if (!allInstruments.includes(instrumentArray[i])) {
+                allInstruments.push(instrumentArray[i]);
+            }
         }
         return true;
     };
