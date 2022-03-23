@@ -336,6 +336,10 @@ main section:last-of-type {
   padding: 10px 20px;
 }
 
+.bio {
+  margin-left: 115px;
+}
+
 /* Pages: Profile */
 .profile-black {
   display: flex;
