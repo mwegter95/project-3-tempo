@@ -21,8 +21,9 @@ db.once("open", async() => {
         const status = bandStatus[randomBandStatusIndex];
         const biography = faker.lorem.words(40);
         const type = "Band";
+        const avatar = faker.image.avatar();
 
-        userBandData.push({ username, email, password, status, biography, type });
+        userBandData.push({ username, email, password, status, biography, type, avatar });
     }
 
     const createdBandUsers = await User.collection.insertMany(userBandData);
@@ -39,8 +40,9 @@ db.once("open", async() => {
         const status = musicianStatus[randomMusicianStatusIndex];
         const biography = faker.lorem.words(40);
         const type = "Musician";
+        const avatar = faker.image.avatar();
 
-        userMusicianData.push( { username, email, password, status, biography, type });
+        userMusicianData.push( { username, email, password, status, biography, type, avatar });
     }
 
     const createdMusicianUsers = await User.collection.insertMany(userMusicianData);

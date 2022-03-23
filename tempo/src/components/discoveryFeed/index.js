@@ -42,19 +42,25 @@ const DiscoveryFeed = ({activeMusic}) => {
             </div>
         </section>
     }
-    console.log(activeMusic);
 
     return (
         <>
                 {Auth.loggedIn() ? (
-                        <section className="black-card profile-preview">
-                            <div className="avatar">
-                                {/* this will be the avatar div */}
-                                <h2 className="sans-serif para white">(Avatar)</h2>
-                            </div>
-                            <div>
-                                <a href={`/profile/${data.user._id}`}>
-                                    <h1 className="sans-serif para white">{data.user.username}</h1>
+                    <section className="black-card profile-preview">
+                        <div className="avatar">
+                            <img src={data.user.avatar} alt="user avatar"></img>
+                        </div>
+                        <div>
+                            <a href={`/profile/${data.user._id}`}>
+                                <h1 className="sans-serif para white">{data.user.username}</h1>
+                            </a>
+                            <p className="serif sm grey">{data.user.status}</p>
+                            <p className="serif sm white">{data.user.biography}</p>
+                        </div>
+                        <div>
+                            <article>
+                                <a href={activeMusic.media}>
+                                    <h1 className="sans-serif para white">{activeMusic.title}</h1>
                                 </a>
                                 <p className="serif sm grey">{data.user.status}</p>
                                 <p className="serif sm white">{data.user.biography}</p>
