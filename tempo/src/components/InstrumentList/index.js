@@ -1,21 +1,48 @@
 import React from 'react';
+import { capitalizeFirstLetter } from "../../utils/helpers";
 
 const InstrumentList = ({ media }) => {
     if (!media.length) {
         return <p>No instruments added.</p>;
     }
 
+    const metaArrays = (musicRecord) => {
+        let instrumentArray = musicRecord.meta.filter((meta) => {
+            if (meta.type === "instrument") {
+                return meta.value;
+            }
+        }).map((meta) => {
+            return capitalizeFirstLetter(meta.value);
+        });
+
+        return instrumentArray;
+    };
+
+    const newMedia = (curMedia) => {
+        let newMediaArray = [];
+        for (var i = 0; i < curMedia.length; i++) {
+            const instrumentArray = metaArrays(curMedia[i]);
+            const mediaObj = {};
+            mediaObj.id = curMedia[i]._id;
+            mediaObj.title = curMedia[i].title;
+            mediaObj.description = curMedia[i].description;
+            mediaObj.media = curMedia[i].media;
+            mediaObj.instruments = instrumentArray;
+            newMediaArray.push(mediaObj);
+        }
+
+        return newMediaArray;
+    };
+
+    const mediaRecords = newMedia(media);
+
     return (
         <>
             {media.length &&
-                media.map(music => (
-                    <p key={music.id}>
-                            {music.meta.filter(meta => meta.type.includes('instrument')).map(filteredMeta => (
-                               <>
-                                  {filteredMeta.value.length ? <span className="serif subpara media-tag">{filteredMeta.value}</span> : ""} 
-                               </>
-                            ))}
-                    </p>
+                mediaRecords.map(music => (
+                    <div key={music.id}>
+                        <p>{music.instruments.join(" ")}</p>
+                    </div>
                 ))}
         </>
     )
