@@ -6,7 +6,16 @@ const InstrumentList = ({ media }) => {
         return <p>No instruments added.</p>;
     }
 
-    const metaArrays = (musicRecord) => {
+    const allMusicInstruments = [];
+
+    const globalInstruments = (instrumentArray, allInstruments) => {
+        for (var i = 0; i < instrumentArray.length; i++) {
+            allInstruments.push(instrumentArray[i]);
+        }
+        return true;
+    };
+
+    const metaArrays = (musicRecord, allInstruments) => {
         let instrumentArray = musicRecord.meta.filter((meta) => {
             if (meta.type === "instrument") {
                 return meta.value;
@@ -15,13 +24,15 @@ const InstrumentList = ({ media }) => {
             return capitalizeFirstLetter(meta.value);
         });
 
+        let pushGlobal = globalInstruments(instrumentArray, allInstruments);
+
         return instrumentArray;
     };
 
-    const newMedia = (curMedia) => {
+    const newMedia = (curMedia, allInstruments) => {
         let newMediaArray = [];
         for (var i = 0; i < curMedia.length; i++) {
-            const instrumentArray = metaArrays(curMedia[i]);
+            const instrumentArray = metaArrays(curMedia[i], allInstruments);
             const mediaObj = {};
             mediaObj.id = curMedia[i]._id;
             mediaObj.title = curMedia[i].title;
@@ -34,16 +45,13 @@ const InstrumentList = ({ media }) => {
         return newMediaArray;
     };
 
-    const mediaRecords = newMedia(media);
+    const mediaRecords = newMedia(media, allMusicInstruments);
 
     return (
         <>
             {media.length &&
-                mediaRecords.map(music => (
-                    <div key={music.id}>
-                        <p>{music.instruments.join(" ")}</p>
-                    </div>
-                ))}
+                <p>{allMusicInstruments.length ? <span className="serif subpara media-tag">{allMusicInstruments.join(", ")}</span>: ""}</p>    
+            }
         </>
     )
 }
