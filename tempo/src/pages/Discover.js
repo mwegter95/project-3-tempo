@@ -47,6 +47,7 @@ const Discover = () => {
     }
 
     const handleMessage = async (event) => {
+        console.log(userData.user.email);
         document.location.href = `mailto:${userData.user.email}`
     }
 
@@ -62,8 +63,6 @@ const Discover = () => {
             setActiveUser(activeMusic.userLink);
         }
     }, [ activeMusic ])
-
-    
 
     if (musicLoading) {
         return <section className="main-background">
@@ -95,15 +94,15 @@ const Discover = () => {
 
             <article>
                 {activeMusic?.userLink ?                 
-                    <DiscoFeed activeMusic={activeMusic} />
+                    <>
+                        <DiscoFeed activeMusic={activeMusic} />                            
+                        <div className="next-btn">
+                            <button onClick={handleMessage} className="sans-serif regular">Message</button>
+                            <button onClick={handleNextMusic} className="sans-serif regular">Next</button>
+                        </div>
+                    </>
                     :   <div><h3>No results returned based on search criteria</h3></div>
                 }
-                <div className="next-btn">
-                    <div>
-                      <div><button onClick={handleMessage} className="sans-serif sm">Message</button></div>
-                      <button onClick={handleNextMusic} className="sans-serif regular">Next</button>
-                      </div>
-                </div>
             </article>
 
           </div>
