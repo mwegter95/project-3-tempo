@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useSpring, animated, config } from "react-spring";
+
 import { useQuery } from "@apollo/client";
 import { FEED_MUSIC, QUERY_USER } from "../utils/queries";
 import DiscoFeed from "../components/discoveryFeed";
-
 
 //render page
 const Discover = () => {
@@ -63,6 +64,12 @@ const Discover = () => {
             setActiveUser(activeMusic.userLink);
         }
     }, [ activeMusic ])
+      
+    const inputAnim = useSpring({
+        from: { opacity: 0, y: 20 },
+        to: { opacity: 1, y: 0 },
+        config: config.slow
+    });
 
     if (musicLoading) {
         return <section className="main-background">
@@ -70,15 +77,15 @@ const Discover = () => {
                 <h1 className="serif-bold sm white loading">Loading...</h1>
             </div>
         </section>
-    } 
-      
+    };
+
     return (
       <section className="main-background">
         <div className="main-gold">
             <article className="disco-search-div">
                 <form onSubmit={handleAddMeta} autoComplete="off">
                     <label htmlFor="addMeta" className="serif-bold sm">Search genres and instruments:</label>
-                    <input id="addMeta" name="addMeta" className="sans-serif subpara" />
+                    <animated.input style={inputAnim} id="addMeta" name="addMeta" className="sans-serif subpara" />
                 </form>
             </article>
 

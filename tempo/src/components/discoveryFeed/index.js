@@ -50,6 +50,7 @@ const DiscoveryFeed = ({activeMusic}) => {
                         <div className="avatar">
                             <img src={data.user.avatar} alt="user avatar"></img>
                         </div>
+                        
                         <div>
                             <a href={`/profile/${data.user._id}`}>
                                 <h1 className="sans-serif para white">{data.user.username}</h1>
@@ -57,26 +58,18 @@ const DiscoveryFeed = ({activeMusic}) => {
                             <p className="serif sm grey">{data.user.status}</p>
                             <p className="serif sm white">{data.user.biography}</p>
                         </div>
-                        <div>
-                            <article>
-                                <a href={activeMusic.media}>
-                                    <h1 className="sans-serif para white">{activeMusic.title}</h1>
-                                </a>
-                                <p className="serif sm grey">{data.user.status}</p>
-                                <p className="serif sm white">{data.user.biography}</p>
-                            </article>
-                        </div>
+
                         <div>
                             <article>
                                 <a href={activeMusic.media} target="_blank">
                                     <h1 className="sans-serif para white">{activeMusic.title}</h1>
                                 </a>
-                                <p className="serif sm white">{activeMusic.description}</p>
+                                <p className="serif sm grey">{activeMusic.description}</p>
                             </article>
                     
-                            <article>
-                                <p className="sans-serif sm white">Genre: {genreArray.join()}</p>
-                                <p className="sans-serif sm white">Instrument: {instrumentArray.join(", ")}</p>
+                            <article class="meta-paragraphs">
+                                <p className="sans-serif regular white">Genre: <span className="sm">{genreArray.join()}</span></p>
+                                <p className="sans-serif regular white">Instrument: <span className="sm">{instrumentArray.join(", ")}</span></p>
                             </article>
                         </div>
                     </section>

@@ -335,6 +335,11 @@ main section:last-of-type {
   height: 50%;
   padding: 10px 20px;
 }
+
+.bio {
+  margin-left: 115px;
+}
+
 /* Pages: Profile */
 .profile-black {
   display: flex;
@@ -344,7 +349,7 @@ main section:last-of-type {
 .profile-black div, .profile-black section {
   display: flex;
   flex-direction: column;
-  flex-grow: 2;
+  flex-grow: 3;
 }
 
 .profile-black div {
@@ -353,10 +358,11 @@ main section:last-of-type {
 
 .profile-black p:last-of-type {
   margin-left: 100px;
+  align-self: center;
 }
 
 .profile-black button {
-  width: 20%;
+  width: 50%;
   padding: 5px 10px;
   margin-top: 15px;
 }
@@ -457,6 +463,7 @@ article .media-card {
 
 article .media-card p {
   width: inherit !important;
+  margin-bottom: 5px;
 }
 
 .media-title {
@@ -479,6 +486,11 @@ article .media-card p {
 
 .dash-buttons a:hover {
   background-color: var(--faded-gray);
+}
+
+.avatar-right {
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Pages: Upload Media */
@@ -547,6 +559,10 @@ article .media-card p {
   margin-bottom: 50px;
 }
 
+.profile-preview .avatar {
+  align-self: center;
+}
+
 .profile-preview div {
   max-width: 30%;
 }
@@ -559,6 +575,13 @@ article .media-card p {
   margin-bottom: 20px;
 }
 
+.meta-paragraphs {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 .next-btn {
   display: flex;
   width: 50%;
@@ -566,8 +589,8 @@ article .media-card p {
   justify-content: space-between;
 }
 
-.avatar {
-  justify-self: center;
-  align-self: center;
+.avatar, .avatar img {
+  width: 100px;
+  border-radius: 50%;
 }
 
