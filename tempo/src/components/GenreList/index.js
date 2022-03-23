@@ -48,12 +48,12 @@ const GenreList = ({ media }) => {
     const mediaRecords = newMedia(media, allMusicGenres);
 
     return (
-        <div>
+        <>
             {media.length &&
                 <p>{allMusicGenres.length ? <span className="serif subpara media-tag">{allMusicGenres.join(", ")}</span>: ""}</p>
             }
 
-        </div>
+        </>
     )
 }
 
