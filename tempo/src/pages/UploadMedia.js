@@ -71,7 +71,7 @@ const UploadMedia = () => {
 
     const createMetaObject = (validatedInstrumentsArray) => {
         let metaArray = [];
-        metaArray.push({ type: "genre", value: musicState.genre })
+        metaArray.push({ type: "genre", value: musicState.genre.toLowerCase() })
         for(var i = 0; i < validatedInstrumentsArray.length; i++) {
             metaArray.push(
                  { type: "instrument", value: validatedInstrumentsArray[i]}
