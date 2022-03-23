@@ -1,19 +1,24 @@
 import React from "react";
+import Fade from "react-reveal/Fade";
 import { animated, config, useTrail } from "react-spring";
 
 const ReviewList = ({ reviews }) => {
     const trail = useTrail(reviews.length, {
         from: {
-            opacity: 0
+            opacity: 0,
+            y: 50
         },
         to: {
-            opacity: 1
+            opacity: 1,
+            y: 0
         },
-        config: config.slow
+        config: config.gentle
     });
 
     if(!reviews.length) {
-        return <p className="serif-bold subpara">You haven't posted any reviews yet.</p>
+        return  <Fade>
+                    <p className="serif-bold subpara">You haven't posted any reviews yet.</p>
+                </Fade>
     };
 
     return (
