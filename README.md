@@ -2,14 +2,51 @@
   # Tempo - Music Application
   [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+  ## Screenshots
+  Homepage section
+
+  ![homepage_tempo](https://user-images.githubusercontent.com/90287696/159793287-f5601eee-c508-4c29-888e-f476f409943d.png)
+
+  Homepage section
+
+  ![tempo_homepage2](https://user-images.githubusercontent.com/90287696/159793286-d7d59ad8-1dd7-4960-a1e2-8cde43b7419b.png)
+
+  Signup
+
+  ![tempo_signup](https://user-images.githubusercontent.com/90287696/159793285-1706036a-a356-4b34-b6a1-dfc81584d5b7.png)
+
+  Musician Status
+
+  ![signup_musician_status](https://user-images.githubusercontent.com/90287696/159793284-ac823871-de66-406a-bd71-c166d27ba4d5.png)
+
+  Band Status
+
+  ![band_signup_status](https://user-images.githubusercontent.com/90287696/159793282-77ed789d-a919-441a-bfdc-b3bce8da7c3d.png)
+
+  Dashboard
+
+  ![dashboard_page_temo](https://user-images.githubusercontent.com/90287696/159793280-5afada61-bed2-495a-8421-ef6fa98f7509.png)
+
+  Dashboard Music Section
+
+  ![dashbord_music_section](https://user-images.githubusercontent.com/90287696/159793276-64266451-3b6a-45f5-a512-5a90df035b63.png)
+
+  Discover Page
+
+  ![discover_page](https://user-images.githubusercontent.com/90287696/159793290-3474c1c7-1f5b-4529-8b0e-7c32ea0a633f.png)
+
+  Personal Review
+
+  ![personal_review](https://user-images.githubusercontent.com/90287696/159793289-5247722d-ac5d-46f8-a2b1-bf8c3c906ed7.png)
+
   ## Description
-  Application aimed at connecting bands and musicians together through media sharing. Users can signup or login into the site and select whether they are a 'Band' or a 'Musician'. They will also indicate their status, either browing or open to collaborations or looking for a new band member. Musicians will post links of their performances on the site, adding a title, description and most importantly metadata such as instruments and genres. This allows other users to use the Discover page and search for criteria they are looking for (i.e. electric bass guitarists). Once a user is filtered then you can click into their profile, see all their linked performances, and review them. Reviews are personal only and will not be shared with the users being reviewed. This provides bands a way to track who they like and why. When you are interested in someone you can contact them via email from the site.
+  Tempo is aimed at connecting bands and musicians together through media sharing. Users can signup or login into the site and select whether they are a 'Band' or a 'Musician'. They set their status, options include just browsing or open to collaborations or looking for a new band member. Musicians will post links of their performances on the site, adding a title, description and most importantly metadata such as instruments and genres. This allows other users to use the Discover page and search for criteria they are looking for (i.e. electric bass guitarists). Once a user is filtered then you can click into their profile, see all their linked performances, and review them. Reviews are for personal use only and will not be shared with the users being reviewed. This provides bands a way to track who they like and why. When you are interested in someone you can contact them via email from the site.
 
   ## Table of Contents
   1. [Installation](#installation)
   2. [Usage](#usage)
   3. [Contributing](#contributing)
-  4. [Tests](#tests)
+  4. [Deployed](#deployed)
   5. [License](#license)
   6. [Questions](#questions)
 
@@ -20,15 +57,20 @@
   Connect Bands and Musicians!
 
   ## Contributing
-  Reach out to the people below for contribution guidelines.
+  Submit pull requests and we will review for contribution.
 
-  ## Tests
-  NA
+  ## Deployed
+  Check out the application on [Heroku](https://tempo-musician-search.herokuapp.com/)
   
   ## License
-  Copyright (c) 2021 Max Winter. Licensed under the MIT license.
+  Copyright (c) 2022 Adair, Andrew, Michael, and Max. Licensed under the MIT license.
   
   ## Questions
-  Go to my **[GitHub profile](https://github.com/TBD)** to view other projects 
-  
-  Email me with questions at TBD
+  Check out these pages for more cool projects:
+
+  Adair - https://github.com/adairconlin
+
+  Andrew - https://github.com/GitAndrewCoffee
+
+  Max - https://github.com/mwin1201
+
