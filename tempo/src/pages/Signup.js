@@ -18,7 +18,6 @@ const Signup = () => {
             avatar: faker.image.avatar()
         }
     );
-    console.log(formState);
     const [addUser, { error }] = useMutation(ADD_USER);
     const [errorMessage, setErrorMessage] = useState("");
     const [messageState, setMessageState] = useState(280);
