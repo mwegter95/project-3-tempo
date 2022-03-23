@@ -12,14 +12,15 @@ mutation login($email: String!, $password: String!) {
             biography
             status
             type
+            avatar
         }
     }
 }
 `;
 
 export const ADD_USER = gql`
-mutation addUser($username: String!, $password: String!, $email: String!, $type: String!, $biography: String, $status: String) {
-    addUser(username: $username, password: $password, email: $email, type: $type, biography: $biography, status: $status) {
+mutation addUser($username: String!, $password: String!, $email: String!, $type: String!, $biography: String, $status: String, $avatar: String) {
+    addUser(username: $username, password: $password, email: $email, type: $type, biography: $biography, status: $status, avatar: $avatar) {
         token
         user {
             _id
@@ -93,6 +94,31 @@ mutation addMessage($message_text: String!) {
         sender
         receiver
         created_at
+    }
+}
+`;
+
+export const DELETE_MUSIC = gql`
+mutation deleteMusic($_id: ID!) {
+    deleteMusic(_id: $_id) {
+            _id
+        }    
+}
+`;
+
+export const EDIT_MUSIC = gql`
+mutation editMusic($updatedMusic: InputMusic) {
+    editMusic(updatedMusic: $updatedMusic) {
+        _id        
+        media
+        title
+        description
+        userLink
+        meta {
+            _id
+            type
+            value
+        }
     }
 }
 `;

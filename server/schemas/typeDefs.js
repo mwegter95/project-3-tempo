@@ -8,6 +8,7 @@ const typeDefs = gql`
         biography: String
         status: String
         type: String
+        avatar: String
         reviews: [Review]
         messages: [Message]
         meta: [MetaData]        
@@ -50,6 +51,15 @@ const typeDefs = gql`
         type: String       
       }
 
+    input InputMusic {
+        _id: ID
+        media: String
+        meta: [InputMeta]
+        userLink: ID
+        title: String
+        description: String
+    }
+
     type Query {
         me: User
         users: [User]
@@ -66,12 +76,14 @@ const typeDefs = gql`
 
     type Mutation {
         login(email: String, password: String): Auth
-        addUser(username: String, email: String, password: String, type: String, biography: String, status: String): Auth
+        addUser(username: String, email: String, password: String, type: String, biography: String, status: String, avatar: String): Auth
         deleteUser: User
         editUser(username: String, status: String, biography: String, type: String, meta: [InputMeta]): User
         addMusic(media: String, meta: [InputMeta], userLink: ID, title: String, description: String): Music
         addReview(reviewBy: ID!, reviewOf: ID! review_text: String!, rating: Int): Review
-        addMessage(message_text: String): Message  
+        addMessage(message_text: String): Message
+        deleteMusic( _id: ID! ): [Music]
+        editMusic( editMe: InputMusic): Music
     }
 
     type Auth {
