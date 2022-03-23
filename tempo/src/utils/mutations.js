@@ -98,9 +98,9 @@ mutation addMessage($message_text: String!) {
 `;
 
 export const DELETE_MUSIC = gql`
-{
-    deleteMusic {
-        _id        
+mutation DeleteMusic($_id: ID!) {
+    deleteMusic(_id: $_id) {
+        _id
     }
 }
 `;
