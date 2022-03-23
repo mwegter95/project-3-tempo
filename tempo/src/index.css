@@ -355,6 +355,7 @@ main section:last-of-type {
   width: 100%;
   margin-right: 100px;
   align-items: center;
+  text-align: center;
 }
 
 .profile-black section:last-of-type p {
@@ -571,8 +572,6 @@ article .media-card p {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  padding-right: 100px;
-  padding-left: 40px 100px;
   margin-bottom: 50px;
 }
 
