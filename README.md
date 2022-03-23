@@ -66,4 +66,6 @@ Signup
   Andrew - https://github.com/GitAndrewCoffee
 
   Max - https://github.com/mwin1201
+  
+  Michael - https://github.com/mwegter95
 
