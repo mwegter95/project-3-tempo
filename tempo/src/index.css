@@ -723,11 +723,7 @@ article .media-card p {
     padding: 150px 0px;
   }
 
-  main div:first-of-type {
-    height: 500px;
-  }
-
-  main div:last-of-type {
+  main div:first-of-type, main div:last-of-type {
     height: 500px;
   }
 
@@ -808,7 +804,93 @@ article .media-card p {
 }
 
 @media screen and (max-width: 768px) {
+  .title {
+    font-size: 52px;
+  }
 
+  .para {
+    font-size: 32px;
+  }
+
+  main .welcome {
+    padding: 75px 0px;
+  }
+
+  #logo image {
+    width: 40%;
+  }
+
+  header {
+    padding: 0px 35px;
+    height: 55px;
+  }
+
+  .navText {
+    font-size: 18px;
+  }
+
+  main div:first-of-type, main div:last-of-type {
+    height: 400px;
+  }
+
+  .sign-on form {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  button {
+    padding: 10px 15px;
+  }
+
+  .sm {
+    font-size: 2.5vw;
+  }
+
+  /* background change */
+  .main-background {
+    background-image: none;
+  }
+
+  .main-gold {
+    margin: 0px;
+  }
+  /*                   */
+
+  .dashboard-card:last-of-type {
+    margin-bottom: 0px;
+  }
+
+  /* profile preview change */
+  .profile-preview div:nth-of-type(2) p:last-of-type, .meta-paragraphs {
+    display: none;
+  }
+  
+  .profile-preview div {
+    justify-self: center;
+    align-self: center;
+    margin: 0 auto;
+    text-align: center
+  }
+  /*                        */
+
+  .subpara {
+    font-size: 24px;
+  }
+
+  .profile-black button {
+    width: 25%;
+    margin: 10px 0px;
+  }
+
+  .profile-form div section label, .profile-form div section input,
+  .profile-form div section textarea, .profile-form div section p {
+    font-size: 18px;
+  };
+
+  textarea, input {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+  }
 }
 
 @media screen and (max-width: 480px) {
