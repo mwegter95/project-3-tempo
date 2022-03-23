@@ -119,6 +119,7 @@ const Profile = () => {
                         <animated.p style={bioAnim} className="sans-serif white subpara">{user.biography}</animated.p>
                     </section>
                 </article>
+                
                 <article className="dashboard-card card-bottom">
                         <div className="sans-serif subpara media-spacing">
                             <p>Instruments:</p>
