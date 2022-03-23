@@ -28,7 +28,7 @@ const Dashboard = (props) => {
  
     const [myMedia, setMyMedia] = useState(null);
     const getMyMedia = (musicRecord) => {
-        //console.log("music record ", musicRecord);
+        console.log("music record ", musicRecord);
         return musicRecord?.userMusic;
     };
     const { loading: mediaLoading } = useQuery(QUERY_USERMUSIC, {
@@ -39,7 +39,7 @@ const Dashboard = (props) => {
         }
     });
 
-    let media = myMedia || [];
+    const media = myMedia || [];
     //console.log(media);
     if (loadingMe || loading || mediaLoading) {
         return <section className="main-background">
@@ -48,7 +48,7 @@ const Dashboard = (props) => {
             </div>
         </section>
     }
-        //console.log(media);
+        console.log(media);
         //console.log(myMedia);
         return (
             <> 
@@ -128,7 +128,7 @@ const Dashboard = (props) => {
                                     </Fade>
 
                                     <div className="sans-serif subpara">
-                                        <MediaList media={media}></MediaList>
+                                        <MediaList media={media} setMyMedia={setMyMedia}></MediaList>
                                     </div>
                                 
                                     <Fade delay={300}>

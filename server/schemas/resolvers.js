@@ -180,12 +180,13 @@ const resolvers = {
             throw new AuthenticationError("You need to be logged in!");
         },
         deleteMusic: async (parent, args, context) => {
-            // if (context.user) {
-                return await Music.deleteOne( {_id: args._id});               
+            if (context.user) {
+                const deleted = await Music.deleteOne( {_id: args._id} );
+                const remainingMusic = await Music.find( {userLink: context.user._id} );
+                return remainingMusic;
                 
-                
-            // }
-            // throw new AuthenticationError("You need to be logged in!");
+            }
+            throw new AuthenticationError("You need to be logged in!");
         },
         editMusic: async (parent, args, context) => {
             if (context.user) {

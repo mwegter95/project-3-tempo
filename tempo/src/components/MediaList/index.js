@@ -4,7 +4,7 @@ import { animated, config, useTrail } from "react-spring";
 import { EDIT_MUSIC, DELETE_MUSIC } from "../../utils/mutations";
 import { useMutation } from "@apollo/client";
 
-const MediaList = ({ media }) => {
+const MediaList = ({ media, setMyMedia}) => {
     
     const [deleteMusic, { data, loading, error }] = useMutation(DELETE_MUSIC);
     
@@ -12,14 +12,14 @@ const MediaList = ({ media }) => {
         let genreArray = musicRecord.meta.filter((meta) => {
             if (meta.type === "genre") {
                 return meta.value;
-            }
+            } else return null;
         }).map((meta) => {
             return capitalizeFirstLetter(meta.value);
         });
         let instrumentArray = musicRecord.meta.filter((meta) => {
             if (meta.type === "instrument") {
                 return meta.value;
-            }
+            } else return null;
         }).map((meta) => {
             return capitalizeFirstLetter(meta.value);
         });
@@ -61,7 +61,13 @@ const MediaList = ({ media }) => {
 
     const handleRemoveMusic = async (value) => {
 
-        deleteMusic({ variables: {_id: value }});
+        const response = await deleteMusic({ variables: {_id: value }});
+        const arrayForFilter = response.data.deleteMusic.map(responseItem =>  { return responseItem._id });
+        let arrayForStateAfterDelete = media.filter(mediaRecordsItem => arrayForFilter.includes(mediaRecordsItem._id))
+        console.log(arrayForStateAfterDelete)
+
+        setMyMedia(arrayForStateAfterDelete)
+
        
     }
 
@@ -78,7 +84,7 @@ const MediaList = ({ media }) => {
             {media.length && 
             trail.map((animation, index) => (
                 <animated.article key={index} style={animation} className="media-card">
-                    <p className="sans-serif subpara white media-title"><a href={mediaRecords[index].media} target="_blank">{mediaRecords[index].title}</a></p>
+                    <p className="sans-serif subpara white media-title"><a href={mediaRecords[index].media} target="_blank" rel="noreferrer">{mediaRecords[index].title}</a></p>
                     { mediaRecords[index].description && <p className="sans-serif regular white"><span className="serif regular">Description:</span> {mediaRecords[index].description}</p> }
 
                     {mediaRecords[index].genres.length ? <p className="sans-serif regular white"><span className="serif regular">Genre:</span> {mediaRecords[index].genres.join()}</p> : "" }
