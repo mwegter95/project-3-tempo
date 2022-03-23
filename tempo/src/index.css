@@ -355,6 +355,7 @@ main section:last-of-type {
   width: 100%;
   margin-right: 100px;
   align-items: center;
+  text-align: center;
 }
 
 .profile-black section:last-of-type p {
@@ -571,8 +572,6 @@ article .media-card p {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  padding-right: 100px;
-  padding-left: 40px 100px;
   margin-bottom: 50px;
 }
 
@@ -611,3 +610,207 @@ article .media-card p {
   border-radius: 50%;
 }
 
+/* MOBILE RESPONSIVENESS */
+/* Smaller screen changes */
+@media screen and (max-width: 1700px) {
+  .para {
+    font-size: 48px;
+  }
+
+  .sm {
+    font-size: 1.7vw;
+  }
+
+  .regular {
+    font-size: 24px;
+  }
+
+  /* review form */
+  .profile-form input {
+    width: 50px;
+  }
+
+  .profile-form div section:nth-of-type(2) {
+    margin-left: 35px;
+  }
+
+  /* profile */
+  article .media-card p {
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  header {
+    padding: 0px 80px;
+  }
+
+  .subtitle {
+    font-size: 4vw;
+  }
+
+  main .welcome p {
+    margin-top: 50px;
+  }
+
+  .para {
+    font-size: 45px;
+  }
+
+  /* login */
+  .sign-on form {
+    margin-left: 50px;
+    width: 45%;
+  }
+  /*        */
+
+  .sm {
+    font-size: 2vw;
+  }
+
+  .main-gold {
+    margin: 0px 80px;
+    padding: 20px 40px 50px;
+  }
+
+  .avatar, .avatar img {
+    width: 150px;
+  }
+
+  .profile-preview {
+    flex-wrap: wrap;
+  }
+
+  article .media-card {
+    max-width: 40%;
+  }
+
+  /* review form */
+  .profile-form div button {
+    padding: 5px 15px;
+    font-size: 15px;
+  }
+
+  .profile-form div label, .profile-form div input, 
+  .profile-form div p, .profile-form div textarea {
+    font-size: 24px;
+  }
+  /*             */
+}
+
+@media screen and (max-width: 1024px) {
+  #logo image {
+    width: 50%;
+  }
+
+  header nav a:not(:last-of-type) {
+    margin-right: 30px;
+  }
+
+  header {
+    padding: 0px 50px;
+  }
+
+  .navText {
+    font-size: 22px;
+  }
+
+  .main-gold {
+    margin: 0px 50px;
+  }
+
+  main section:first-of-type {
+    padding: 150px 0px;
+  }
+
+  main div:first-of-type {
+    height: 500px;
+  }
+
+  main div:last-of-type {
+    height: 500px;
+  }
+
+  .subtitle {
+    font-size: 4.5vw;
+  }
+
+  .dashboard-card:first-of-type {
+    margin: 20px 0px 0px;
+  }
+
+  .dashboard-card:last-of-type {
+    margin: 0px 0px 20px;
+  }
+
+  .dashboard-card div p:first-of-type {
+    width: 200px;
+  }
+
+  .dashboard-card {
+    padding: 20px 45px 40px 45px;
+  }
+
+  .subpara {
+    font-size: 28px;
+  }
+
+  .bio {
+    margin-left: 50px;
+  }
+
+  .avatar-right .avatar, .avatar-right .avatar img {
+    width: 100px;
+  }
+
+  article .media-card {
+    max-width: 35%;
+  }
+
+  .media-layout button {
+    font-size: 18px;
+    padding: 5px 10px;
+  }
+
+  .regular {
+    font-size: 18px;
+  }
+
+  .media-spacing {
+    margin-bottom: 25px;
+  }
+
+  .myreviews .black-card {
+    padding: 20px 20px;
+  }
+
+  .profile-black button {
+    width: 30%;
+    margin-bottom: 20px;
+  }
+
+  .profile-black section {
+    text-align: center;
+  }
+
+  .profile-form {
+    margin: 20px 0px 0px;
+    padding: 20px 20px;
+  }
+
+  .profile-black {
+    flex-direction: column !important;
+  }
+
+  .para {
+    font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 480px) {
+
+}

@@ -25,10 +25,10 @@ const Homepage = () => {
 
             <section className="white-bg">
                 <Fade left>
-                    <p className="serif para">Whether you're a band looking for a member...</p>
+                    <p className="serif-bold para">Whether you're a band looking for a member...</p>
                 </Fade>
                 <Fade right delay={500}>
-                    <p className="serif para">Or you're a musician looking for someone to jam with...</p>
+                    <p className="serif-bold para">Or you're a musician looking for someone to jam with...</p>
                 </Fade>
                 <h1 className="sans-serif title">Tempo has you covered.</h1>
             </section>
