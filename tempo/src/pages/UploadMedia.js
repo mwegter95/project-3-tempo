@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Fade from "react-reveal/Fade";
+import { useSpring, config, animated } from "react-spring";
 import { useMutation } from "@apollo/client";
 import { ADD_MUSIC } from "../utils/mutations";
 import InstrumentListArray from "../utils/InstrumentList";
@@ -64,7 +65,6 @@ const UploadMedia = () => {
         }
 
         const metaArray = createMetaObject(newArr);
-        //console.log("metaArray from validateInstruments line 66", metaArray)
 
         return { result: true, arr: metaArray };
     };
@@ -119,6 +119,13 @@ const UploadMedia = () => {
         });
     };
 
+    const inputAnim = useSpring({
+        from: { opacity: 0, y: 20 },
+        to: { opacity: 1, y: 0 },
+        config: config.slow,
+        delay: 500
+    });
+
     return (
         <section className="import-media main-background">
             <div className="main-gold">
@@ -136,21 +143,21 @@ const UploadMedia = () => {
                         <section className="row-div">
                             <div className="column-div">
                                 <label htmlFor="title" className="sans-serif sm white">Title:</label>
-                                <input type="text" name="title" className="sans-serif sm" value={musicState.title || ""} onChange={handleChange} />
+                                <animated.input style={inputAnim} type="text" name="title" className="sans-serif sm" value={musicState.title || ""} onChange={handleChange} />
                             
                                 <label htmlFor="meta"  className="sans-serif sm white">Instrument(s) you play. Separate each with a comma.</label>
-                                <input name="instruments" type="text" className="sans-serif sm" value={musicState.instruments || ""} onChange={handleChange} />
+                                <animated.input style={inputAnim} name="instruments" type="text" className="sans-serif sm" value={musicState.instruments || ""} onChange={handleChange} />
                     
                                 <label htmlFor="meta" className="sans-serif sm white">Genre:</label>
-                                <input name="genre" type="text" className="sans-serif sm" value={musicState.genre || ""} onChange={handleChange} />
+                                <animated.input style={inputAnim} name="genre" type="text" className="sans-serif sm" value={musicState.genre || ""} onChange={handleChange} />
                             </div>
                     
                             <div className="column-div">
                                 <label htmlFor="media" className="sans-serif sm white">Media File Link:</label>
-                                <input name="media" type="text" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
+                                <animated.input style={inputAnim} name="media" type="text" className="sans-serif sm" value={musicState.media || ""} onChange={handleChange} />
                     
                                 <label htmlFor="description" className="sans-serif sm white">Description (optional):</label>
-                                <textarea name="description" rows="3" type="text" className="sans-serif sm" value={musicState.description || ""} onChange={handleChange}></textarea>
+                                <animated.textarea  style={inputAnim} name="description" rows="3" type="text" className="sans-serif sm" value={musicState.description || ""} onChange={handleChange}></animated.textarea>
                             </div>
                         </section>
                     

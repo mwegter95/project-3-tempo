@@ -52,12 +52,14 @@ const Dashboard = (props) => {
                         <Fade delay={300}>
                             <article className="dashboard-card card-top">
                                 <Fade delay={300}>
-                                    <h1 className="sans-serif para white">General</h1>
+                                    <div className="avatar-right">
+                                        <h1 className="sans-serif para white">General</h1>
+                                        <div className="avatar">
+                                            <img src={dataMe?.me.avatar} alt="user avatar"></img>
+                                        </div>
+                                    </div>
                                 </Fade>
 
-                                <Fade delay={300}>
-                                    <img src={dataMe?.me.avatar} alt="user avatar"></img>
-                                </Fade>
 
                                 <Fade delay={500}>
                                     <div className="sans-serif subpara white">
@@ -77,7 +79,7 @@ const Dashboard = (props) => {
                                 <Fade delay={900}>
                                     <div className="sans-serif subpara white">
                                         <p>Biography:</p>
-                                        <p>{dataMe?.me.biography}</p>
+                                        <p  className="bio sm">{dataMe?.me.biography}</p>
                                     </div>
                                 </Fade>
                             </article>
@@ -88,34 +90,20 @@ const Dashboard = (props) => {
                                 </Fade> 
 
                                 <Fade delay={500}>
-                                    <div className="sans-serif subpara">
-                                        <p>Instruments:</p>
-                                        <InstrumentList media={media}/>
-                                    </div>
-                                </Fade>
-
-                                <Fade delay={700}>
-                                    <div className="sans-serif subpara">
-                                        <p>Genres:</p>
-                                        <GenreList media={media}/>
-                                    </div>
-                                </Fade>
-
-                                <Fade delay={500}>
                                     <div className="sans-serif subpara media-spacing">
                                         <p>Instruments:</p>
                                         <InstrumentList media={media}/>
                                     </div>
                                 </Fade>
-                            
-                                <Fade delay={700}>
+
+                                <Fade delay={600}>
                                     <div className="sans-serif subpara media-spacing">
                                         <p>Genres:</p>
                                         <GenreList media={media}/>
                                     </div>
                                 </Fade>
                             
-                                <Fade delay={300}> 
+                                <Fade delay={700}> 
                                     <h1 className="sans-serif subpara">Media:</h1>
                                 </Fade>
 
