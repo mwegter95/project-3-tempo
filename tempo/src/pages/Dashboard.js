@@ -3,7 +3,7 @@ import Fade from "react-reveal/Fade";
 import { Link } from "react-router-dom";
 
 import { useQuery, useMutation } from "@apollo/client";
-import { EDIT_USER, EDIT_MUSIC, DELETE_MUSIC } from "../utils/mutations";
+import { EDIT_USER, DELETE_USER} from "../utils/mutations";
 import { QUERY_ME, QUERY_USER, QUERY_USERMUSIC } from "../utils/queries";
 
 import GenreList from "../components/GenreList"
